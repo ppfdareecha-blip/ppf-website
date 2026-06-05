@@ -89,11 +89,11 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center md:text-left text-black text-4xl md:text-6xl font-helvetica font-bold mb-5 leading-tight"
+              className="text-center md:text-left text-black text-2xl md:text-5xl font-helvetica font-bold mb-5 leading-tight"
             >
-              Empowering Ideas. <br />
-              Strengthening <br />
-              <span className="text-mono-deep">LEADERSHIP.</span>
+              Spreading Awareness<br />
+              Building Capacity<br />
+              <span className="text-mono-deep">Promoting Resilience</span>
             </motion.h1>
 
             <motion.p 
