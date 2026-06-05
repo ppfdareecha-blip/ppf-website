@@ -1,0 +1,82 @@
+[
+  {
+    "id": "rape-victim-compensation",
+    "title": "Payment of Compensation for Rape victims: Case of Maharashtra",
+    "date": "February 23, 2024",
+    "category": "Social Justice",
+    "author": "PK Mishra",
+    "excerpt": "Analyzing the implementation and effectiveness of compensation schemes for rape victims in the state of Maharashtra, identifying systemic gaps and proposing reforms.",
+    "content": "Full content of the article would go here. For now, this is a placeholder based on the title. The article discusses the Nirbhaya Fund and its utilization across various states, focusing on Maharashtra's specific policy frameworks.",
+    "image": "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    "id": "gender-equality-india",
+    "title": "Strides and Struggles: Navigating Gender Equality in India",
+    "date": "January 15, 2024",
+    "category": "Public Policy",
+    "author": "Dr. Anjali Verma",
+    "excerpt": "An examination of India's progress toward gender equality, highlighting the dual nature of legislative success and cultural resistance.",
+    "content": "India has made significant strides in gender equality through landmark judgments and policy initiatives. However, the struggle remains deep-rooted in societal norms. This article explores the current landscape of women's rights and the path forward.",
+    "image": "/opinions/men_women.jpg"
+  },
+  {
+    "id": "chinese-economy-impact",
+    "title": "Loss of Momentum in the Chinese Economy and how it will impact India",
+    "date": "December 10, 2023",
+    "category": "International Relations",
+    "author": "Amb. Rahul Gupta",
+    "excerpt": "A strategic analysis of China's economic slowdown and the potential opportunities and risks it presents for the Indian economy.",
+    "content": "The slowing Chinese economy has far-reaching consequences for global markets. India, as a major neighbor and emerging economy, faces a complex set of challenges and opportunities in trade, manufacturing, and geopolitical influence.",
+    "image": "/opinions/shutterstock_1007915089-e1553471745268.jpg"
+  },
+  {
+    "id": "fatf-pakistan",
+    "title": "Gray Listing Of Fatf By Pakistan – What Next?",
+    "date": "November 5, 2023",
+    "category": "National Security",
+    "author": "K. Santhanam",
+    "excerpt": "Exploring the implications of Pakistan's position on the FATF gray list and the strategic choices for India's counter-terrorism policy.",
+    "content": "The FATF gray listing has been a significant pressure point for Pakistan. This article analyzes the technical and political aspects of Pakistan's compliance and what it means for regional security.",
+    "image": "https://images.unsplash.com/photo-1522199710521-72d69614c702?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    "id": "sco-presidency-india",
+    "title": "India's SCO Presidency: Gateway to Closer Ties with Central Asia",
+    "date": "September 22, 2023",
+    "category": "Diplomacy",
+    "author": "Prof. Gautam Sen",
+    "excerpt": "Reviewing India's leadership at the Shanghai Cooperation Organization and its impact on regional connectivity and energy security.",
+    "content": "India's presidency of the SCO provided a unique platform to engage with Central Asian republics. The focus on connectivity projects like the INSTC and energy cooperation was a highlight of the tenure.",
+    "image": "/opinions/SCO_India_black.jpg"
+  },
+  {
+    "id": "disaster-management-india",
+    "title": "Disaster Management in India: Preparing for Future Challenges",
+    "date": "August 18, 2023",
+    "category": "Environment",
+    "author": "Lt. Gen. (Retd.) NC Marwah",
+    "excerpt": "Assessing India's disaster response capabilities and the need for climate-resilient infrastructure development.",
+    "content": "With increasing frequency of extreme weather events, India's disaster management framework faces new challenges. The shift from reactive to proactive resilience-building is critical for future safety.",
+    "image": "https://images.unsplash.com/photo-1596464716127-f2a82984de30?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    "id": "public-health-pandemic",
+    "title": "Policy Perspectives In Public Health: One Year Into The 'pandemic'",
+    "date": "July 12, 2023",
+    "category": "Health Policy",
+    "author": "Dr. Shakti Bhan Khanna",
+    "excerpt": "Reflections on India's healthcare system performance during the COVID-19 pandemic and the lessons for future health security.",
+    "content": "The pandemic exposed vulnerabilities in the global healthcare system. This article discusses the policy responses in India and the urgent need for strengthening primary healthcare infrastructure.",
+    "image": "https://images.unsplash.com/photo-1584634731339-252c581abfc5?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    "id": "coal-energy-dilemma",
+    "title": "Coal: The Black Bone of India's Energy Dilemma",
+    "date": "June 5, 2023",
+    "category": "Energy",
+    "author": "Sanjay Baru",
+    "excerpt": "Analyzing the conflict between India's energy demands and climate commitments, focusing on the future of coal-based power.",
+    "content": "Coal Remains the primary source of energy for India. Balancing economic growth with environmental sustainability requires a nuanced approach to the energy transition and investment in renewables.",
+    "image": "https://images.unsplash.com/photo-1516937941344-00b4e0337589?q=80&w=2070&auto=format&fit=crop"
+  }
+]

@@ -1,0 +1,169 @@
+[
+  {
+    "id": 1,
+    "title": "Roundtable on Drone Regulations and National Security",
+    "date": "20 MAY 2026",
+    "time": "10:00 AM - 01:00 PM IST",
+    "location": "Bali, Indonesia",
+    "type": "Conference",
+    "image": "/images/events/event1.jpg",
+    "summary": "A focused discussion on the evolving landscape of UAV technology and its implications for airspace regulation and border security.",
+    "about": "As UAV technologies rapidly expand globally, maintaining airspace integrity and averting national security threats has become a paramount goal. This roundtable features defense analysts and policymakers discussing regulatory gaps, operational challenges, and strategic implementations for drone countermeasures.",
+    "status": "upcoming"
+  },
+  {
+    "id": 2,
+    "title": "PPF Dialogue Series (DRR) Session 3",
+    "date": "08 OCT 2026",
+    "time": "02:00 PM - 05:00 PM IST",
+    "location": "India International Centre, New Delhi",
+    "type": "Dialogue Series",
+    "image": "/images/events/event2.jpg",
+    "summary": "A focused discussion on the evolving landscape of UAV technology and its implications for airspace regulation and border security.",
+    "about": "The strategic ties between India and Nepal represent one of the deepest bilateral relationships in South Asia. This virtual dialogue will cover crucial dimensions including border cooperation, energy inter-trade, cross-border investments, and cultural diplomacy efforts mapped for the decade ahead.",
+    "status": "upcoming"
+  },
+  {
+    "id": 3,
+    "title": "PPF Dialogue Series- (DRR) Session:1, India's DRR Strategy",
+    "date": "28 AUG 2025",
+    "location": "India International Centre, New Delhi",
+    "type": "Dialogue Series",
+    "image": "/images/events/event3.jpg",
+    "summary": "A focused discussion on the evolving landscape of UAV technology and its implications for airspace regulation and border security.",
+    "about": "This dialogue focused on India's evolving Disaster Risk Reduction (DRR) strategy, highlighting the country's shift from a relief-centric approach to a comprehensive risk-management framework. It covered policy reforms, technological integration, and community-based resilience initiatives.",
+    "status": "past"
+  },
+  {
+    "id": 4,
+    "title": "Twenty-One Days in Myanmar's Conflict Zone",
+    "date": "30 JAN 2024",
+    "location": "PPF Premises",
+    "type": "Conference",
+    "image": "/images/events/event4.jpg",
+    "summary": "Analyzing industrial shifts towards circular economics, resource optimization, and sustainability.",
+    "about": "This dialogue offered a deep dive into the complexities of Myanmar’s internal conflict, drawing from firsthand experiences within the conflict zone. It examined the humanitarian crisis, the geopolitical dynamics, and the challenges of achieving sustainable peace in the region.",
+    "status": "past"
+  },
+  {
+    "id": 5,
+    "title": "Terrorism in the West African Region: Implications for Global Security",
+    "date": "29 DEC 2023",
+    "location": "On Zoom",
+    "type": "Conference",
+    "image": "/images/events/event5.jpg",
+    "summary": "A focused discussion on the evolving landscape of UAV technology and its implications for airspace regulation and border security.",
+    "about": "This dialogue explored the escalating terrorism challenges in West Africa, examining the root causes, the role of extremist groups, and the impact on regional stability. It also assessed the effectiveness of international counter-terrorism strategies and potential pathways to de-escalation.",
+    "status": "past"
+  },
+  {
+    "id": 6,
+    "title": "Panel discussion and the launch of the book Understanding Water Disputes in India Constitutional- Legal Framework and Debates",
+    "date": "27 JUNE 2023",
+    "location": "India International Centre, New Delhi",
+    "type": "Panel Discussion",
+    "image": "/images/events/event6.jpeg",
+    "summary": "Analyzing industrial shifts towards circular economics, resource optimization, and sustainability.",
+    "about": "This dialogue explored the critical need for a circular economy in India, addressing the challenges of waste management and resource optimization. It brought together policymakers, industry leaders, and sustainability experts to discuss strategies for transitioning towards a waste-to-wealth model.",
+    "status": "past"
+  },
+  {
+    "id": 7,
+    "title": "State and Society in North East: Explaining Nagaland Situation",
+    "date": "21 JUNE 2023",
+    "location": "India International Centre, New Delhi",
+    "type": "Conference",
+    "image": "/images/events/event7.jpg",
+    "summary": "Analyzing industrial shifts towards circular economics, resource optimization, and sustainability.",
+    "about": "This milestone conference brought together industry pioneers spanning manufacturing, electronics, and fast-moving consumer goods (FMCG) sectors to evaluate the hurdles in transitioning to a complete circular economy model. It focused on waste-to-wealth technologies and sustainable investment mapping.",
+    "status": "past"
+  },
+  {
+    "id": 8,
+    "title": "India-US Relations: The Road Ahead",
+    "date": "15 MAY 2023",
+    "location": "India International Centre, New Delhi",
+    "type": "Conference",
+    "image": "/images/events/event8.jpg",
+    "summary": "Analyzing industrial shifts towards circular economics, resource optimization, and sustainability.",
+    "about": "This milestone conference brought together industry pioneers spanning manufacturing, electronics, and fast-moving consumer goods (FMCG) sectors to evaluate the hurdles in transitioning to a complete circular economy model. It focused on waste-to-wealth technologies and sustainable investment mapping.",
+    "status": "past"
+  },
+  {
+    "id": 9,
+    "title": "Circular Economy Transition Strategies",
+    "date": "04 FEB 2026",
+    "location": "Mumbai",
+    "type": "Conference",
+    "image": "/images/events/event9.jpg",
+    "summary": "Analyzing industrial shifts towards circular economics, resource optimization, and sustainability.",
+    "about": "This milestone conference brought together industry pioneers spanning manufacturing, electronics, and fast-moving consumer goods (FMCG) sectors to evaluate the hurdles in transitioning to a complete circular economy model. It focused on waste-to-wealth technologies and sustainable investment mapping.",
+    "status": "upcoming"
+  },
+  {
+    "id": 10,
+    "title": "Circular Economy Transition Strategies",
+    "date": "04 FEB 2026",
+    "location": "Mumbai",
+    "type": "Conference",
+    "image": "/images/events/event10.jpg",
+    "summary": "Analyzing industrial shifts towards circular economics, resource optimization, and sustainability.",
+    "about": "This milestone conference brought together industry pioneers spanning manufacturing, electronics, and fast-moving consumer goods (FMCG) sectors to evaluate the hurdles in transitioning to a complete circular economy model. It focused on waste-to-wealth technologies and sustainable investment mapping.",
+    "status": "upcoming"
+  },
+  {
+    "id": 11,
+    "title": "Disaster Risk Reduction (DRR) Summit",
+    "date": "28 JAN 2026",
+    "location": "Headquarters",
+    "type": "Summit",
+    "image": "/images/events/event11.jpg",
+    "summary": "Strategic assembly on mitigating climate-induced disasters and strengthening infrastructure resilience.",
+    "about": "A high-impact gathering mapping out India's evolving disaster response framework in light of recurring climate events. Special focus was given to coastal resilience, urban flooding, remote sensing tools for early warnings, and capacity building at the Panchayat tier.",
+    "status": "upcoming"
+  },
+  {
+    "id": 12,
+    "title": "Gulf Geopolitics and Energy Security",
+    "date": "14 DEC 2025",
+    "location": "New Delhi",
+    "type": "Seminar",
+    "image": "/images/4.jpg",
+    "summary": "Assessing the shift in Gulf collaborations, renewable transitions, and crude oil diplomacy.",
+    "about": "With global crude routes re-aligning and the Gulf nations pouring capital into green transitions, India's energy diplomacy faces a pivotal era. The seminar analyzed the geopolitical undercurrents shaping upcoming bilateral agreements and the push toward green hydrogen cooperation.",
+    "status": "past"
+  },
+  {
+    "id": 13,
+    "title": "Myanmar Crisis: Regional Ramifications",
+    "date": "05 NOV 2025",
+    "location": "Virtual",
+    "type": "Briefing",
+    "image": "/images/events/event4.jpg",
+    "summary": "A closed-door briefing on the political crisis in Myanmar and its effects on border stability.",
+    "about": "A deep dive into the socio-political fracturing of Myanmar, looking intimately at cross-border spillover effects including refugee inflows, insurgent reorganizations, and trade route disruptions affecting Northeast India and ASEAN.",
+    "status": "past"
+  },
+  {
+    "id": 14,
+    "title": "Tehri Hydroelectric Discourse",
+    "date": "12 OCT 2025",
+    "location": "Uttarakhand",
+    "type": "Field Dialogue",
+    "image": "/images/1.jpg",
+    "summary": "Analyzing the socio-economic impacts and technical successes of the Tehri Dam project.",
+    "about": "An on-ground assessment and dialogue reviewing the long-term ecological, social, and economic footprints of the Tehri Dam. Field experts, sociologists, and engineers evaluated the metrics measuring downstream flood control and sustainable energy yield.",
+    "status": "past"
+  },
+  {
+    "id": 15,
+    "title": "Advanced DRR Frameworks Workshop",
+    "date": "01 SEP 2025",
+    "location": "Headquarters",
+    "type": "Workshop",
+    "image": "/images/events/event2.jpg",
+    "summary": "Technical workshop focused on integrating AI and predictive modeling in disaster risk reduction.",
+    "about": "Technical experts ran multi-scenario simulations showcasing the integration of AI-driven satellite imagery analysis. The workshop successfully piloted a new early-warning data pipeline for immediate state-level disaster response coordination.",
+    "status": "past"
+  }
+]
