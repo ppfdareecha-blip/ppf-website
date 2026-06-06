@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, ShieldCheck, Zap, Globe, CheckCircle2 } from 'lucide-react';
 
 export default function DonateSection() {
-  const [selectedAmount, setSelectedAmount] = useState('$50');
+
 
   const impactMetrics = [
     { icon: <Zap className="w-5 h-5" />, label: "Rapid Research", desc: "Funding urgent policy briefs" },
@@ -67,23 +67,8 @@ export default function DonateSection() {
               <div className="absolute inset-0 bg-ppf-purple rounded-[2.5rem] translate-x-4 translate-y-4 opacity-10 blur-xl" />
 
               <div className="relative bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
-                <h3 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight">Select Amount</h3>
-                <p className="text-slate-500 mb-8 text-sm font-bold uppercase tracking-wide">One-time contribution</p>
-
-                <div className="grid grid-cols-2 gap-4 mb-8">
-                  {['$25', '$50', '$100', 'Custom'].map((amt) => (
-                    <button
-                      key={amt}
-                      onClick={() => setSelectedAmount(amt)}
-                      className={`py-5 rounded-2xl font-black transition-all border-2 text-sm uppercase tracking-widest ${selectedAmount === amt
-                          ? 'border-ppf-purple bg-ppf-purple/5 text-ppf-purple shadow-lg shadow-ppf-purple/10'
-                          : 'border-slate-50 hover:border-ppf-purple/20 text-slate-400 hover:bg-slate-50'
-                        }`}
-                    >
-                      {amt}
-                    </button>
-                  ))}
-                </div>
+                <h3 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight">Support PPF</h3>
+                <p className="text-slate-500 mb-8 text-sm font-bold uppercase tracking-wide">Make a contribution today</p>
 
                 <button className="w-full group relative flex items-center justify-center gap-3 bg-slate-900 text-white py-6 rounded-[1.5rem] text-sm font-black uppercase tracking-[0.2em] shadow-xl hover:bg-ppf-purple transition-all duration-500 hover:-translate-y-1">
                   Donate Now

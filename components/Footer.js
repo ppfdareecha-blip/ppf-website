@@ -68,7 +68,7 @@ const Footer = ({ sectionWidth }) => {
   ];
 
   return (
-    <footer className="bg-mono-plum text-vibrant-offwhite border-t border-vibrant-violet/30 pt-12 pb-12 px-6 relative overflow-hidden mt-auto">
+    <footer className="bg-ppf-purple text-vibrant-offwhite border-t border-vibrant-violet/30 pt-12 pb-12 px-6 relative overflow-hidden mt-auto">
       <div className="absolute top-0 right-0 w-48 h-48 bg-vibrant-violet/10 blur-[80px] rounded-full pointer-events-none" />
 
       <div className={`${sectionWidth || 'max-w-7xl'} mx-auto relative z-10`}>
