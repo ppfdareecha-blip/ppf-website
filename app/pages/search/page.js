@@ -3,7 +3,6 @@ import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { searchGlobal } from "@/lib/search";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaFileAlt, FaCalendarAlt, FaUser, FaSearch, FaArrowRight } from "react-icons/fa";
@@ -16,9 +15,18 @@ function SearchContent() {
 
   useEffect(() => {
     if (query) {
-      // We'll pass a limit of 100 for the full search page
-      const allResults = searchGlobal(query); 
-      setResults(allResults);
+      const fetchResults = async () => {
+        try {
+          const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`);
+          const data = await res.json();
+          if (data.success) {
+            setResults(data.results);
+          }
+        } catch (error) {
+          console.error("Failed to fetch search results:", error);
+        }
+      };
+      fetchResults();
     }
   }, [query]);
 
@@ -56,12 +64,12 @@ function SearchContent() {
         </div>
 
         {/* Filters */}
-        <div className="flex gap-2 overflow-x-auto pb-4 mb-8 no-scrollbar">
+        <div className="flex flex-wrap gap-2 pb-4 mb-8">
           {filters.map(f => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
-              className={`px-6 py-2 rounded-full text-sm font-bold transition-all border ${
+              className={`px-4 sm:px-6 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold transition-all border whitespace-nowrap ${
                 activeFilter === f 
                 ? "bg-ppf-purple text-white border-ppf-purple shadow-lg shadow-purple-100" 
                 : "bg-white text-slate-600 border-slate-200 hover:border-ppf-purple hover:text-ppf-purple"

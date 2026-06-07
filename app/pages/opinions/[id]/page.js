@@ -5,7 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import opinionsData from "@/data/Opinions.json";
 import Link from "next/link";
-import { FaRegCalendarAlt, FaUser, FaChevronLeft, FaTwitter, FaLinkedin, FaFacebook, FaDownload } from "react-icons/fa";
+import { FaRegCalendarAlt, FaUser, FaChevronLeft, FaLinkedin, FaFacebook, FaDownload, FaLink } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 
 const stripHtml = (htmlString) => {
@@ -21,6 +22,32 @@ export default function OpinionDetail() {
     return opinionsData.filter((o) => o.id !== id).slice(0, 3);
   });
   const { scrollY } = useScroll();
+
+  const handleShare = (platform) => {
+    if (typeof window === "undefined" || !opinion) return;
+    const currentUrl = window.location.href;
+    const shareTitle = opinion.title;
+    let shareUrl = "";
+
+    switch (platform) {
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(shareTitle)}`;
+        break;
+      case "linkedin":
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
+        break;
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
+        break;
+      case "copy":
+        navigator.clipboard.writeText(currentUrl);
+        alert("Link copied to clipboard!");
+        return;
+      default:
+        return;
+    }
+    window.open(shareUrl, "_blank");
+  };
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -218,9 +245,10 @@ export default function OpinionDetail() {
                 <div className="flex items-center gap-3">
                   <span className="text-[11px] font-lato font-bold text-slate-400 uppercase tracking-widest">Share Article:</span>
                   <div className="flex gap-2">
-                    <button className="w-9 h-9 rounded-xl bg-white lg:bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-sky-500 hover:text-white hover:scale-105 transition-all shadow-sm border border-slate-100"><FaTwitter size={14} /></button>
-                    <button className="w-9 h-9 rounded-xl bg-white lg:bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-blue-700 hover:text-white hover:scale-105 transition-all shadow-sm border border-slate-100"><FaLinkedin size={14} /></button>
-                    <button className="w-9 h-9 rounded-xl bg-white lg:bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-blue-600 hover:text-white hover:scale-105 transition-all shadow-sm border border-slate-100"><FaFacebook size={14} /></button>
+                    <button onClick={() => handleShare("twitter")} title="Share on X" className="w-9 h-9 rounded-xl bg-white lg:bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-black hover:text-white hover:scale-105 transition-all shadow-sm border border-slate-100"><FaXTwitter size={14} /></button>
+                    <button onClick={() => handleShare("linkedin")} title="Share on LinkedIn" className="w-9 h-9 rounded-xl bg-white lg:bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-blue-700 hover:text-white hover:scale-105 transition-all shadow-sm border border-slate-100"><FaLinkedin size={14} /></button>
+                    <button onClick={() => handleShare("facebook")} title="Share on Facebook" className="w-9 h-9 rounded-xl bg-white lg:bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-blue-600 hover:text-white hover:scale-105 transition-all shadow-sm border border-slate-100"><FaFacebook size={14} /></button>
+                    <button onClick={() => handleShare("copy")} title="Copy Link" className="w-9 h-9 rounded-xl bg-white lg:bg-slate-50 flex items-center justify-center text-slate-500 hover:bg-slate-700 hover:text-white hover:scale-105 transition-all shadow-sm border border-slate-100"><FaLink size={14} /></button>
                   </div>
                 </div>
               </div>

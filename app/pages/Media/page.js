@@ -39,6 +39,7 @@ const VideoCard = ({ title, date, videoId }) => (
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
+        loading="lazy"
       ></iframe>
     </div>
     <div className="px-1">
@@ -74,6 +75,7 @@ const LinkedInEmbedCard = ({ urn }) => (
        allowFullScreen
        title="LinkedIn post"
        className="relative z-10"
+       loading="lazy"
      >
      </iframe>
   </div>
@@ -123,6 +125,7 @@ const InstagramEmbedCard = ({ postUrl, html }) => {
         className="w-full h-full absolute inset-0"
         frameBorder="0"
         allow="encrypted-media"
+        loading="lazy"
       ></iframe>
     </div>
   );

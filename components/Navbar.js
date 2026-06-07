@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaSearch, FaBars, FaTimes, FaChevronDown, FaFacebookF, FaLinkedinIn, FaInstagram, FaYoutube, FaFileAlt, FaCalendarAlt, FaUser } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import { searchGlobal } from "@/lib/search";
 import { useEffect, useRef } from "react";
 
 export default function Navbar() {
@@ -20,9 +19,19 @@ export default function Navbar() {
 
   useEffect(() => {
     if (searchQuery.length >= 2) {
-      const results = searchGlobal(searchQuery);
-      setSearchResults(results);
-      setShowResults(true);
+      const timeoutId = setTimeout(async () => {
+        try {
+          const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+          const data = await res.json();
+          if (data.success) {
+            setSearchResults(data.results.slice(0, 15));
+            setShowResults(true);
+          }
+        } catch (error) {
+          console.error("Search error:", error);
+        }
+      }, 300);
+      return () => clearTimeout(timeoutId);
     } else {
       setSearchResults([]);
       setShowResults(false);
