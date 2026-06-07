@@ -21,13 +21,6 @@ export default function ComingSoon() {
             className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-ppf-purple/10 text-ppf-purple mb-6 relative"
           >
             <Calendar className="w-8 h-8" />
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-              className="absolute -top-1 -right-1 bg-ppf-orange text-white p-1 rounded-full"
-            >
-              <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-            </motion.div>
           </motion.div>
 
           {/* Heading */}
