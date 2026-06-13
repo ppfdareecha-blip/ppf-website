@@ -6,7 +6,7 @@ import { FaBookOpen, FaGlobeAmericas, FaUsers, FaChartLine, FaAward } from "reac
 const stats = [
   { label: "Years of Policy Excellence", val: 20, suffix: "+", icon: FaAward, growth: "Est. 2005" },
   { label: "Research Papers", val: 500, suffix: "+", icon: FaBookOpen, growth: "+12% YoY" },
-  { label: "Global Partners", val: 120, suffix: "+", icon: FaGlobeAmericas, growth: "+15 New" },
+  { label: "Partners", val: 120, suffix: "+", icon: FaGlobeAmericas, growth: "+15 New" },
   { label: "Network Size", val: 15000, suffix: "+", icon: FaUsers, growth: "+2.4k Monthly" }
 ];
 

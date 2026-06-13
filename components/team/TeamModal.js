@@ -94,6 +94,12 @@ export default function TeamModal({ isOpen, onClose, member }) {
                         <p className="text-sm font-lato font-bold text-slate-300 italic">Office contact only</p>
                       )}
                     </div>
+                    {member.subjectsOfInterest && (
+                      <div className="sm:col-span-2">
+                        <p className="text-[9px] font-lato font-black text-slate-400 uppercase tracking-widest mb-3">Subjects of Interest</p>
+                        <p className="text-sm font-lato font-bold text-slate-900">{member.subjectsOfInterest}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

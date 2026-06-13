@@ -26,45 +26,39 @@ const publications = {
   ],
   annualReports: [
     {
-      id: "ppf-2025",
-      title: "PPF Annual Institutional Review 2025",
-      version: "FY 2024–25",
-      date: "April 2026",
-      year: "2026",
+      id: "annual-report-2023-24",
+      title: "Annual Report - Financial Year 2023-2024",
+      version: "FY 2023-2024",
+      date: "Financial Year 2023-2024",
+      year: "2024",
       type: "PDF",
-      category: "Institutional",
-      pages: 120,
+      category: "Audit",
+      pages: 16,
       img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=400",
-      file: "#"
+      file: "/Annual Report 2023-24.pdf"
     },
     {
-      id: "gso-2026",
-      title: "Global Security Outlook: Annual Summary",
-      version: "Vol. 14",
-      date: "Jan 2026",
-      year: "2026",
-      type: "Digital",
-      category: "Security",
-      pages: 80,
+      id: "annual-report-2022-23",
+      title: "Annual Report - Financial Year 2022-2023",
+      version: "FY 2022-2023",
+      date: "Financial Year 2022-2023",
+      year: "2023",
+      type: "PDF",
+      category: "Audit",
+      pages: 14,
       img: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=400",
-      file: "#"
+      file: "/Annual Report 2022-2023.pdf"
     }
   ],
   projectReports: [
     {
-      title: "Water Resource Management in the Himalayas",
-      source: "Himalayan Basin Project",
-      date: "March 2026",
-      link: "#",
-      status: "Completed"
-    },
-    {
-      title: "Urban Sustainability & Smart City Implementation",
-      source: "Urban Future Initiative",
-      date: "Nov 2025",
+      title: "Project Protsahan",
+      source: "Women Empowerment, Livelihood Development, and Community Resilience",
+      description: "Project Protsahan is a flagship initiative of the Policy Perspectives Foundation focused on women empowerment, livelihood generation, skill development, and community resilience. The initiative seeks to create sustainable socio-economic opportunities for women and vulnerable communities through training, capacity building, awareness programmes, and grassroots interventions.",
+      date: "Ongoing",
       link: "#",
       status: "Ongoing"
-    },
+    }
   ],
 };
 

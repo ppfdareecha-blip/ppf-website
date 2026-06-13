@@ -35,7 +35,7 @@ export default function WorkWithUsSection() {
           >
             <div className="relative overflow-hidden rounded-2xl shadow-lg border border-slate-100">
               <img
-                src="https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/Home/1.jfif"
+                src="/partners.jpeg"
                 alt="Collaborative meeting"
                 className="w-full h-[320px] object-cover transition duration-700 group-hover:scale-105"
               />

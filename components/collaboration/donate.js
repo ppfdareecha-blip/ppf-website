@@ -8,9 +8,9 @@ export default function DonateSection() {
 
 
   const impactMetrics = [
-    { icon: <Zap className="w-5 h-5" />, label: "Rapid Research", desc: "Funding urgent policy briefs" },
-    { icon: <Globe className="w-5 h-5" />, label: "Public Access", desc: "Keeping our data open-source" },
-    { icon: <ShieldCheck className="w-5 h-5" />, label: "Independence", desc: "Zero corporate influence" },
+    { icon: <Zap className="w-5 h-5" />, label: "Field Impact", desc: "Supporting research and grassroots interventions" },
+    { icon: <Globe className="w-5 h-5" />, label: "Wider Outreach", desc: "Expanding public awareness and capacity building" },
+    { icon: <ShieldCheck className="w-5 h-5" />, label: "80G Certified", desc: "Registered under the Income Tax Act, 1961" },
   ];
 
   return (
@@ -35,10 +35,13 @@ export default function DonateSection() {
                 <Heart size={12} fill="currentColor" /> Support our mission
               </div>
               <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 uppercase">
-                Your Support Fuels <span className="text-ppf-purple">Better Policy.</span>
+                Support <span className="text-ppf-purple">PPF.</span>
               </h2>
-              <p className="text-slate-600 text-lg mb-10 leading-relaxed font-medium">
-                Policy Perspective Foundation is a non-profit initiative. We rely on people like you to maintain our editorial independence and produce high-impact research.
+              <p className="text-slate-600 text-lg mb-5 leading-relaxed font-medium">
+                The Policy Perspectives Foundation welcomes collaborations and support from individuals, institutions, corporations, foundations, and government agencies who share our commitment towards inclusive development, policy engagement, social resilience, and community empowerment.
+              </p>
+              <p className="text-slate-600 text-base mb-10 leading-relaxed font-medium">
+                Your support helps strengthen initiatives in women empowerment, child rights, public awareness, skill development, sustainability, governance, and community resilience. Donations and partnerships enable us to expand outreach, undertake impactful research and field interventions, and support vulnerable communities through long-term developmental initiatives.
               </p>
 
               <div className="space-y-6">
@@ -68,12 +71,16 @@ export default function DonateSection() {
 
               <div className="relative bg-white border border-slate-100 rounded-[2.5rem] p-8 md:p-12 shadow-2xl">
                 <h3 className="text-2xl font-black text-slate-900 mb-2 uppercase tracking-tight">Support PPF</h3>
-                <p className="text-slate-500 mb-8 text-sm font-bold uppercase tracking-wide">Make a contribution today</p>
+                <p className="text-slate-500 mb-8 text-sm font-bold uppercase tracking-wide">Contribute, collaborate, or partner with us</p>
 
                 <button className="w-full group relative flex items-center justify-center gap-3 bg-slate-900 text-white py-6 rounded-[1.5rem] text-sm font-black uppercase tracking-[0.2em] shadow-xl hover:bg-ppf-purple transition-all duration-500 hover:-translate-y-1">
                   Donate Now
                   <CheckCircle2 className="w-5 h-5 text-ppf-teal group-hover:text-white transition-colors" />
                 </button>
+
+                <p className="mt-6 text-sm text-slate-500 leading-relaxed font-medium">
+                  If you would like to contribute, collaborate, partner with us, or know more about our work, our team will be happy to connect and respond to your queries.
+                </p>
 
                 <div className="mt-8 pt-8 border-t border-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
@@ -85,7 +92,7 @@ export default function DonateSection() {
                       ))}
                     </div>
                     <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">
-                      Join 2,400+<br />Supporters
+                      Join Our<br />Support Network
                     </div>
                   </div>
 

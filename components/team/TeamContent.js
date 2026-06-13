@@ -60,7 +60,7 @@ function TeamContent() {
     };
   }, [selectedMember]);
 
-  const { governingCouncil, distinguishedFellows, associates } = teamData;
+  const { governingCouncil, distinguishedFellows } = teamData;
 
   return (
     <>
@@ -83,7 +83,7 @@ function TeamContent() {
       <section className="py-8 container mx-auto px-6 max-w-7xl">
         <TeamSection title="Governing Council" members={governingCouncil} onMemberClick={setSelectedMember} />
         <TeamSection title="Distinguished Fellows" members={distinguishedFellows} onMemberClick={setSelectedMember} />
-        <TeamSection title="Associates" members={associates} onMemberClick={setSelectedMember} />
+
       </section>
 
       <TeamModal isOpen={!!selectedMember} onClose={() => setSelectedMember(null)} member={selectedMember} />

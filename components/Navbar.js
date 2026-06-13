@@ -97,7 +97,7 @@ export default function Navbar() {
       href: "/pages/publications",
       dropdown: [
         { name: "Research Reports", href: "/pages/publications/#scholars" },
-        { name: "Annual Reports", href: "/pages/publications/#annualReport" },
+        { name: "Annual Review", href: "/pages/publications/#annualReport" },
         { name: "Project Reports", href: "/pages/publications/#projects" },
       ]
     },

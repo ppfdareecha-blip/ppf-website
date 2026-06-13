@@ -38,8 +38,8 @@ export default function AnnualReportSection({ data = [] }) {
       <div className="max-w-7xl mx-auto px-6">
         <SectionHeader
           icon={FileText}
-          title="Annual Reports"
-          subtitle="Comprehensive yearly publications and institutional reviews. Filter by year or category to find specific documentation."
+          title="Annual Review"
+          subtitle="Audit reports, yearly publications, and institutional reviews. Filter by year or category to find specific documentation."
         />
 
         {/* --- FILTER BLOCK --- */}

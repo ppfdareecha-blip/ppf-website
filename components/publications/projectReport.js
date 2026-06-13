@@ -29,88 +29,171 @@ export default function ProjectReport({ projectData = [] }) {
       source: "Himalayan Basin Project",
       date: "March 2026",
       link: "#",
-      status: "Completed"
+      status: "Completed",
+      description: "Research study analyzing water sustainability and glacial melt trends in the Himalayan region."
     },
     {
       title: "Urban Sustainability & Smart City Implementation",
       source: "Urban Future Initiative",
       date: "Nov 2025",
       link: "#",
-      status: "Ongoing"
+      status: "Ongoing",
+      description: "Assessment framework for smart cities focusing on public policy and resource distribution."
     },
     {
       title: "Maritime Security & Port Resilience Analysis",
       source: "Indo-Pacific Blue Project",
       date: "Feb 2026",
       link: "#",
-      status: "Completed"
+      status: "Completed",
+      description: "Analyzing maritime trade corridor vulnerabilities and policy recommendations for regional stability."
     },
     {
       title: "AI Ethics in Public Policy Frameworks",
       source: "Digital Governance Lab",
       date: "Jan 2026",
       link: "#",
-      status: "Ongoing"
+      status: "Ongoing",
+      description: "Exploring governance structures and ethical guidelines for implementing machine learning in public sectors."
     }
   ];
 
-  return (
-    <section id="projects" className="w-full py-12 px-6 bg-white">
-      <SectionHeader
-        icon={Briefcase}
-        title="Project Reports"
-        subtitle="In-depth documentation of our ongoing and completed research initiatives across various policy domains."
-      />
+  if (displayData.length === 1) {
+    const item = displayData[0];
+    return (
+      <section id="projects" className="w-full py-20 px-6 bg-white border-t border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHeader
+            icon={Briefcase}
+            title="Project Reports"
+            subtitle="In-depth documentation of our ongoing and completed research initiatives across various policy domains."
+          />
 
-      <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-        {displayData.map((item, i) => (
           <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.1 }}
-            className="group relative flex flex-col p-6 bg-white border-2 border-slate-100 rounded-2xl hover:border-ppf-purple hover:shadow-xl transition-all duration-300"
+            transition={{ duration: 0.6 }}
+            className="group relative bg-slate-50 border border-ppf-purple/15 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-xl hover:border-ppf-purple/30 transition-all duration-500 max-w-4xl mx-auto"
           >
-            {/* Status Badge */}
-            <div className="flex justify-between items-start mb-4">
-              <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${item.status === "Completed"
+            {/* Top Bar: Status and Date */}
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-200/60">
+              <span className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest ${
+                item.status === "Completed"
                   ? "bg-ppf-teal/10 text-ppf-teal border border-ppf-teal/20"
                   : "bg-ppf-orange/10 text-ppf-orange border border-ppf-orange/20"
-                }`}>
-                {item.status === "Completed" ? <CheckCircle2 size={12} /> : <Clock size={12} />}
+              }`}>
+                {item.status === "Completed" ? <CheckCircle2 size={14} /> : <Clock size={14} />}
                 {item.status}
               </span>
 
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
-                <Calendar size={12} /> {item.date}
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
+                <Calendar size={14} /> {item.date}
               </span>
             </div>
 
-            {/* Title & Source */}
-            <div className="flex-grow">
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-ppf-purple leading-tight transition-colors mb-2">
+            {/* Content */}
+            <div className="space-y-4">
+              <span className="text-[11px] font-black text-ppf-purple uppercase tracking-[0.2em]">
+                Featured Project
+              </span>
+              
+              <h3 className="text-2xl md:text-3.5xl font-lora font-bold text-slate-900 group-hover:text-ppf-purple transition-colors leading-tight">
                 {item.title}
               </h3>
-              <p className="text-sm font-semibold text-slate-500 mb-6 flex items-center gap-2">
-                <span className="w-4 h-[2px] bg-ppf-purple/30" />
+              
+              <p className="text-sm font-semibold text-slate-500 flex items-center gap-2">
+                <span className="w-6 h-[2px] bg-ppf-purple/30" />
                 {item.source}
+              </p>
+
+              <p className="text-slate-600 text-base md:text-lg font-lato leading-relaxed pt-2">
+                {item.description}
               </p>
             </div>
 
-            {/* CTA / Footer */}
-            <div className="flex items-center justify-between pt-4 border-t border-slate-50">
-              <span className="text-xs font-bold text-slate-400">Reference: PRJ-{2025 + i}</span>
-
+            {/* Bottom Bar / CTA */}
+            <div className="flex flex-wrap items-center justify-between gap-4 mt-8 pt-8 border-t border-slate-200/60">
+              <span className="text-xs font-bold text-slate-400">Reference: PRJ-PROTSAHAN</span>
+              
               <a
                 href={item.link}
-                className="flex items-center gap-2 bg-slate-900 text-white px-5 py-2 rounded-lg font-black text-xs hover:bg-ppf-purple transition-all shadow-md active:scale-95"
+                className="flex items-center gap-2 bg-slate-900 hover:bg-ppf-purple text-white px-8 py-3.5 rounded-full font-black text-sm transition-all shadow-md hover:shadow-lg hover:shadow-ppf-purple/20 active:scale-95"
               >
-                ACCESS REPORT <Download size={14} />
+                ACCESS REPORT <Download size={16} />
               </a>
             </div>
           </motion.div>
-        ))}
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section id="projects" className="w-full py-12 px-6 bg-white border-t border-slate-100">
+      <div className="max-w-7xl mx-auto px-6">
+        <SectionHeader
+          icon={Briefcase}
+          title="Project Reports"
+          subtitle="In-depth documentation of our ongoing and completed research initiatives across various policy domains."
+        />
+
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          {displayData.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group relative flex flex-col p-6 bg-white border-2 border-slate-100 rounded-2xl hover:border-ppf-purple hover:shadow-xl transition-all duration-300"
+            >
+              {/* Status Badge */}
+              <div className="flex justify-between items-start mb-4">
+                <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
+                  item.status === "Completed"
+                    ? "bg-ppf-teal/10 text-ppf-teal border border-ppf-teal/20"
+                    : "bg-ppf-orange/10 text-ppf-orange border border-ppf-orange/20"
+                }`}>
+                  {item.status === "Completed" ? <CheckCircle2 size={12} /> : <Clock size={12} />}
+                  {item.status}
+                </span>
+
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
+                  <Calendar size={12} /> {item.date}
+                </span>
+              </div>
+
+              {/* Title & Source */}
+              <div className="flex-grow">
+                <h3 className="text-xl font-bold text-slate-900 group-hover:text-ppf-purple leading-tight transition-colors mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-xs font-semibold text-slate-500 mb-4 flex items-center gap-2">
+                  <span className="w-4 h-[2px] bg-ppf-purple/30" />
+                  {item.source}
+                </p>
+                {item.description && (
+                  <p className="text-sm text-slate-600 font-lato leading-relaxed mb-6 line-clamp-3">
+                    {item.description}
+                  </p>
+                )}
+              </div>
+
+              {/* CTA / Footer */}
+              <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+                <span className="text-xs font-bold text-slate-400">Reference: PRJ-{2025 + i}</span>
+
+                <a
+                  href={item.link}
+                  className="flex items-center gap-2 bg-slate-900 text-white px-5 py-2 rounded-lg font-black text-xs hover:bg-ppf-purple transition-all shadow-md active:scale-95"
+                >
+                  ACCESS REPORT <Download size={14} />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

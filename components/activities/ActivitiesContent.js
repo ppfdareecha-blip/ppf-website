@@ -321,19 +321,19 @@ function ActivitiesContent() {
                   onClick={() => openEventModal(latestEvent)}
                   className="group cursor-pointer block h-full"
                 >
-                  <div className="relative h-[400px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 bg-slate-50">
+                  <div className="relative h-[400px] rounded-[2.5rem] overflow-hidden shadow-2xl border border-gray-200 bg-gray-900">
                     <Image
                       src={latestEvent.image}
                       alt={latestEvent.title}
                       fill
                       sizes="(max-width: 768px) 100vw, 66vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover transition-all duration-700 group-hover:scale-105 opacity-[0.3] blur-[3px] grayscale group-hover:grayscale-0 group-hover:blur-[1px] group-hover:opacity-[0.45]"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-800/40 to-transparent" />
 
                     <div className="absolute top-6 left-8">
-                      <span className="bg-ppf-purple text-white text-[9px] font-lora font-black px-4 py-2 rounded-full uppercase tracking-[0.2em] shadow-xl border border-white/20">
-                        Upcoming
+                      <span className={`text-white text-[9px] font-lora font-black px-4 py-2 rounded-full uppercase tracking-[0.2em] shadow-xl border border-white/20 ${latestEvent.status === "upcoming" ? "bg-ppf-purple" : "bg-emerald-600"}`}>
+                        {latestEvent.status === "upcoming" ? "Upcoming" : "Concluded"}
                       </span>
                     </div>
 
