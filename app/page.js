@@ -9,6 +9,7 @@ import ImpactStats from "@/components/home/ImpactStats";
 import Activities from "@/components/home/Activites";
 import Footer from "@/components/Footer";
 import SupportQueries from "@/components/home/questions";
+import MediaSection from "@/components/home/MediaSection";
 
 export default function HomePage() {
   const [isNavHidden, setIsNavHidden] = useState(false);
@@ -43,6 +44,7 @@ export default function HomePage() {
         <Centers sectionWidth={sectionWidth} />
         <Activities sectionWidth={sectionWidth} />
         <SupportQueries sectionWidth={sectionWidth}/>
+        <MediaSection sectionWidth={sectionWidth} />
       </main>
 
       <Footer sectionWidth={sectionWidth} />

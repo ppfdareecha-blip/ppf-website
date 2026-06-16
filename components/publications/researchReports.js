@@ -72,10 +72,15 @@ const ScholarCard = ({ item, index }) => (
           </div>
         </div>
 
-        <button className="flex items-center gap-2 text-sm font-black text-ppf-purple uppercase tracking-wider group/btn">
+        <a
+          href={item.file || item.link || "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 text-sm font-black text-ppf-purple uppercase tracking-wider group/btn"
+        >
           Access
           <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-        </button>
+        </a>
       </div>
     </div>
   </motion.div>

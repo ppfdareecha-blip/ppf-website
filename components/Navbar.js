@@ -82,6 +82,16 @@ export default function Navbar() {
     }
   };
 
+  const handleMediaClick = () => {
+    if (window.location.pathname === '/') {
+      window.dispatchEvent(new Event('open-media-modal'));
+    } else {
+      // Navigate home with a flag — MediaSection listens on mount
+      sessionStorage.setItem('openMediaModal', '1');
+      window.location.href = '/';
+    }
+  };
+
   const navLinks = [
     {
       name: "Home", href: "/",
@@ -119,7 +129,7 @@ export default function Navbar() {
         { name: "Donate", href: "/pages/collaboration/#donate" },
       ]
     },
-    { name: "Media", href: "/pages/Media" },
+    { name: "Media", href: "/#media", isMediaTrigger: true },
   ];
 
   const socialIcons = [
@@ -173,28 +183,45 @@ export default function Navbar() {
             </div>
           </Link>
 
-          {/* DESKTOP NAV & PERMANENT SEARCH */}
           <div className="hidden lg:flex items-center gap-6">
             <div className="flex items-center relative" onMouseLeave={() => setHoveredIndex(null)}>
               {navLinks.map((link, index) => (
                 <div key={link.name} className="relative py-2 font-lato" onMouseEnter={() => setHoveredIndex(index)}>
-                  <Link
-                    href={link.href}
-                    className={`relative z-10 px-3 py-1.5 text-sm font-extrabold transition-colors flex items-center gap-2 ${hoveredIndex === index ? 'text-ppf-purple' : 'text-gray-700'}`}
-                  >
-                    <span className="relative flex items-center gap-2">
-                      {link.name}
-                      {link.dropdown && <FaChevronDown className={`text-[11px] transition-transform ${hoveredIndex === index ? 'rotate-180' : ''}`} />}
+                  {link.isMediaTrigger ? (
+                    <button
+                      onClick={handleMediaClick}
+                      className={`relative z-10 px-3 py-1.5 text-sm font-extrabold transition-colors flex items-center gap-2 ${hoveredIndex === index ? 'text-ppf-purple' : 'text-gray-700'}`}
+                    >
+                      <span className="relative flex items-center gap-2">
+                        {link.name}
+                        {hoveredIndex === index && (
+                          <motion.div
+                            layoutId="nav-pill"
+                            className="absolute -inset-x-3 -inset-y-1.5 bg-purple-50 rounded-lg -z-10"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                          />
+                        )}
+                      </span>
+                    </button>
+                  ) : (
+                    <Link
+                      href={link.href}
+                      className={`relative z-10 px-3 py-1.5 text-sm font-extrabold transition-colors flex items-center gap-2 ${hoveredIndex === index ? 'text-ppf-purple' : 'text-gray-700'}`}
+                    >
+                      <span className="relative flex items-center gap-2">
+                        {link.name}
+                        {link.dropdown && <FaChevronDown className={`text-[11px] transition-transform ${hoveredIndex === index ? 'rotate-180' : ''}`} />}
 
-                      {hoveredIndex === index && (
-                        <motion.div
-                          layoutId="nav-pill"
-                          className="absolute -inset-x-3 -inset-y-1.5 bg-purple-50 rounded-lg -z-10"
-                          transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                        />
-                      )}
-                    </span>
-                  </Link>
+                        {hoveredIndex === index && (
+                          <motion.div
+                            layoutId="nav-pill"
+                            className="absolute -inset-x-3 -inset-y-1.5 bg-purple-50 rounded-lg -z-10"
+                            transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                          />
+                        )}
+                      </span>
+                    </Link>
+                  )}
 
                   <AnimatePresence>
                     {link.dropdown && hoveredIndex === index && (
@@ -393,6 +420,17 @@ export default function Navbar() {
                 {navLinks.map((link, idx) => (
                   <div key={link.name} className="flex flex-col border-b border-gray-50">
                     <div className="flex justify-between items-center">
+                      {link.isMediaTrigger ? (
+                        <button
+                          className="text-gray-800 text-sm font-lora py-4 uppercase tracking-wide text-left"
+                          onClick={() => {
+                            setIsMobileMenuOpen(false);
+                            handleMediaClick();
+                          }}
+                        >
+                          {link.name}
+                        </button>
+                      ) : (
                       <Link
                         href={link.href}
                         className="text-gray-800 text-sm font-lora py-4 uppercase tracking-wide"
@@ -400,6 +438,7 @@ export default function Navbar() {
                       >
                         {link.name}
                       </Link>
+                      )}
                       {link.dropdown && (
                         <button onClick={() => setMobileSubMenuOpen(mobileSubMenuOpen === idx ? null : idx)} className="p-4 text-purple-600">
                           <FaChevronDown className={`text-sm transition-transform duration-300 ${mobileSubMenuOpen === idx ? 'rotate-180' : ''}`} />

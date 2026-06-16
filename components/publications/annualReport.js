@@ -106,15 +106,15 @@ export default function AnnualReportSection({ data = [] }) {
               className="group flex flex-col sm:flex-row bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-ppf-purple/10 transition-all duration-500"
             >
               {/* Image Container */}
-              <div className="relative w-full sm:w-48 h-56 sm:h-auto flex-shrink-0">
+              <div className="relative w-full sm:w-48 h-56 sm:h-auto flex-shrink-0 bg-slate-50 border-r border-slate-100 flex items-center justify-center p-6">
                 <Image
                   src={item.img}
                   alt={item.title}
                   fill
                   sizes="(max-width: 640px) 100vw, 192px"
-                  className="object-cover transition duration-700 group-hover:scale-105"
+                  className="object-contain p-6 transition duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-ppf-purple/10 group-hover:bg-transparent transition-colors" />
+                <div className="absolute inset-0 bg-ppf-purple/5 group-hover:bg-transparent transition-colors" />
                 <div className="absolute top-4 left-4 bg-ppf-orange text-white px-3 py-1 text-[9px] font-black uppercase rounded-full shadow-lg">
                   {item.type}
                 </div>
@@ -136,18 +136,18 @@ export default function AnnualReportSection({ data = [] }) {
                     <span className="flex items-center gap-1.5">
                       <Calendar size={14} className="text-ppf-purple" /> {item.date}
                     </span>
-                    <span className="opacity-30">|</span>
-                    <span>{item.pages} Pages</span>
                   </div>
 
-                  <a
-                    href={item.file}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-ppf-teal hover:text-ppf-purple font-black text-sm transition-colors group/btn"
-                  >
-                    PDF <Download size={16} className="group-hover/btn:translate-y-0.5 transition-transform" />
-                  </a>
+                  {item.file && (
+                    <a
+                      href={item.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 text-ppf-teal hover:text-ppf-purple font-black text-sm transition-colors group/btn"
+                    >
+                      PDF <Download size={16} className="group-hover/btn:translate-y-0.5 transition-transform" />
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

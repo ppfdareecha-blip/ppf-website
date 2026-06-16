@@ -42,7 +42,7 @@ export default function HeroSection() {
     { name: "About Foundation", href: "#about" },
     { name: "Research Centers", href: "#centers" },
     { name: "Impact", href: "#impact" },
-    { name: "Team", href: "/pages/team" },
+    { name: "Team", href: "/pages/about#team-section" },
     { name: "Activities", href: "#activities" },
   ];
 

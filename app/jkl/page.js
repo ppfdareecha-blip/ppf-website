@@ -11,6 +11,7 @@ import AuthorsTab from "@/components/admin/AuthorsTab";
 import MediaTab from "@/components/admin/MediaTab";
 import NewslettersTab from "@/components/admin/NewslettersTab";
 import CareersTab from "@/components/admin/CareersTab";
+import PublicationsTab from "@/components/admin/PublicationsTab";
 import { ExternalLink } from "lucide-react";
 import { User } from "lucide-react";
 import {
@@ -82,6 +83,7 @@ export default function AdminControlCenter() {
   const [adminOpinions, setAdminOpinions] = useState([]);
   const [authors, setAuthors] = useState([]); // State for Authors list
   const [careers, setCareers] = useState([]);
+  const [adminPublications, setAdminPublications] = useState([]);
 
   // Modal state
   const [selectedMemberOpinion, setSelectedMemberOpinion] = useState(null);
@@ -141,6 +143,13 @@ export default function AdminControlCenter() {
     } catch (e) { console.error(e); }
   };
 
+  const fetchPublications = async () => {
+    try {
+      const { data } = await fetch(`/api/admin/publications?t=${Date.now()}`).then(r => r.json());
+      if (data) setAdminPublications(data);
+    } catch (e) { console.error(e); }
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
       fetchPending();
@@ -148,6 +157,7 @@ export default function AdminControlCenter() {
       fetchAdminOpinions();
       fetchAuthors();
       fetchCareers();
+      fetchPublications();
     }
   }, [isAuthenticated]);
 
@@ -163,6 +173,13 @@ export default function AdminControlCenter() {
     try {
       await fetch(`/api/admin/careers/${id}`, { method: "DELETE" });
       fetchCareers();
+    } catch (e) { console.error(e); }
+  };
+
+  const handleDeletePublication = async (id) => {
+    try {
+      await fetch(`/api/admin/publications/${id}`, { method: "DELETE" });
+      fetchPublications();
     } catch (e) { console.error(e); }
   };
 
@@ -215,6 +232,7 @@ export default function AdminControlCenter() {
           <button onClick={() => setActiveTab("opinions")} className={TAB_BTN("opinions")}>Manage Opinions</button>
           <button onClick={() => setActiveTab("events")} className={TAB_BTN("events")}>Manage Events</button>
           <button onClick={() => setActiveTab("careers")} className={TAB_BTN("careers")}>Manage Careers</button>
+          <button onClick={() => setActiveTab("publications")} className={TAB_BTN("publications")}>Manage Publications</button>
           <button onClick={() => setActiveTab("media")} className={TAB_BTN("media")}>Manage Media</button>
           <button onClick={() => setActiveTab("newsletters")} className={TAB_BTN("newsletters")}>Newsletters</button>
         </div>
@@ -263,6 +281,14 @@ export default function AdminControlCenter() {
             careers={careers}
             onRefetch={fetchCareers}
             onDelete={handleDeleteCareer}
+          />
+        )}
+
+        {activeTab === "publications" && (
+          <PublicationsTab
+            publications={adminPublications}
+            onRefetch={fetchPublications}
+            onDelete={handleDeletePublication}
           />
         )}
 

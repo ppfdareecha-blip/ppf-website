@@ -1,22 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaUsers, FaCheckCircle, FaBalanceScale, FaTimes, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaCheckCircle, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 
 export default function About({ sectionWidth }) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  // --- SCROLL LOCK LOGIC ---
-  useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => { document.body.style.overflow = "unset"; };
-  }, [isModalOpen]);
-
   // --- CAROUSEL LOGIC ---
   const [currentIndex, setCurrentIndex] = useState(0);
   const images = [
@@ -85,18 +73,11 @@ export default function About({ sectionWidth }) {
               ))}
             </ul>
           </div>
-          <div className="flex flex-wrap gap-4">
-            <button 
-              onClick={() => setIsModalOpen(true)}
-              className="flex items-center gap-3 bg-ppf-purple text-white px-8 py-4 font-lato font-extrabold uppercase tracking-widest hover:bg-ppf-purple/90 transition-all shadow-xl text-sm rounded-full"
-            >
-              <FaBalanceScale className="text-md" />
-              Legal Status
-            </button>
-            <Link href="/pages/team">
-              <button className="flex items-center gap-3 bg-transparent border-2 border-ppf-teal text-ppf-teal px-8 py-4 uppercase tracking-widest hover:bg-ppf-purple hover:text-white transition-all shadow-md rounded-full font-lato font-extrabold text-sm">
-                <FaUsers className="font-bold text-md" />
-                Meet The Team
+          <div className="flex flex-wrap gap-3">
+            <Link href="/pages/about">
+              <button className="flex items-center gap-2 bg-transparent border-2 border-ppf-teal text-ppf-teal px-4 py-3 uppercase tracking-widest hover:bg-ppf-purple hover:text-white transition-all shadow-md rounded-full font-lato font-extrabold text-sm">
+                <FaChevronRight className="font-bold text-md" />
+                Read More
               </button>
             </Link>
           </div>
@@ -152,75 +133,6 @@ export default function About({ sectionWidth }) {
           </motion.div>
         </div>
       </div>
-
-{/* --- LEGAL STATUS MODAL --- */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-6">
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsModalOpen(false)}
-              className="absolute inset-0 bg-mono-plum/20 backdrop-blur-md"
-            />
-            
-            {/* Reduced max-w-lg to max-w-md for a smaller overall width */}
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative w-full max-w-md bg-vibrant-offwhite rounded-[1.5rem] shadow-2xl overflow-hidden border border-vibrant-violet/20"
-            >
-              <div className="bg-mono-plum p-4 flex justify-between items-center text-vibrant-offwhite">
-                <h3 className="font-helvetica font-bold uppercase tracking-widest text-[10px] flex items-center gap-2">
-                  <FaBalanceScale className="text-vibrant-violet" /> Legal Status
-                </h3>
-                <button onClick={() => setIsModalOpen(false)} className="hover:rotate-90 transition-transform">
-                  <FaTimes size={16} />
-                </button>
-              </div>
-              
-              {/* Reduced padding from p-10 to p-6 and tightened spacing */}
-              <div className="p-6 space-y-6 font-futura">
-                <div className="border-b border-vibrant-gray pb-4">
-                  <p className="text-[9px] font-helvetica font-black text-vibrant-violet uppercase mb-1 tracking-widest">Registration Authority</p>
-                  <p className="text-vibrant-charcoal font-bold text-base">
-                    Registered in Delhi under the Societies Registration Act (XXI) of 1860.
-                  </p>
-                </div>
-                
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-vibrant-gray p-4 rounded-xl">
-                    <p className="text-[8px] font-helvetica font-bold text-vibrant-charcoal/50 uppercase mb-0.5 tracking-widest">Reg Number</p>
-                    <p className="text-vibrant-violet font-black text-lg">S/54267</p>
-                  </div>
-                  <div className="bg-vibrant-gray p-4 rounded-xl">
-                    <p className="text-[8px] font-helvetica font-bold text-vibrant-charcoal/50 uppercase mb-0.5 tracking-widest">Reg Date</p>
-                    <p className="text-vibrant-charcoal font-black text-lg">29 Nov 2005</p>
-                  </div>
-                </div>
-
-                <div className="bg-mono-lilac p-4 rounded-xl border border-vibrant-violet/10">
-                  <p className="text-[9px] font-helvetica font-black text-vibrant-violet uppercase mb-1 tracking-widest">Tax Exemption Status</p>
-                  <p className="text-vibrant-charcoal text-xs leading-relaxed">
-                    Registered under <span className="font-bold text-mono-plum">Sections 12 A</span> and <span className="font-bold text-mono-plum">80G (5)(VI)</span> of the Income Tax Act, 1961.
-                  </p>
-                </div>
-              </div>
-              
-              <div className="p-6 bg-vibrant-gray/50 text-center border-t border-vibrant-gray">
-                <button 
-                  onClick={() => setIsModalOpen(false)}
-                  className="bg-vibrant-violet text-vibrant-offwhite px-8 py-2.5 rounded-full font-helvetica font-bold text-[9px] uppercase tracking-widest hover:bg-mono-plum transition-colors shadow-lg"
-                >
-                  Close Window
-                </button>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }

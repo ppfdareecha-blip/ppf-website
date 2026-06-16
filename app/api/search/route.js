@@ -44,7 +44,7 @@ export async function GET(req) {
     const staticPages = [
       { title: "Media Gallery", content: "Photos, videos and social media updates from PPF events.", href: "/pages/Media" },
       { title: "Collaboration & Careers", content: "Internships, courses, and donation opportunities.", href: "/pages/collaboration" },
-      { title: "Our Team", content: "Governing Council, Distinguished Fellows and Associates.", href: "/pages/team" },
+      { title: "Our Team", content: "Governing Council, Distinguished Fellows and Associates.", href: "/pages/about#team-section" },
       { title: "Publications", content: "Research reports, annual reports and project summaries.", href: "/pages/publications" }
     ];
 
@@ -89,7 +89,7 @@ export async function GET(req) {
           searchType: 'Team Member',
           searchTitle: m.name || '',
           searchContent: `${m.designation || ''} ${m.about || ''}`,
-          searchHref: `/pages/team#${(m.name || '').replace(/\s+/g, '-').toLowerCase()}`,
+          searchHref: `/pages/about#${(m.name || '').replace(/\s+/g, '-').toLowerCase()}`,
           id: m.name || Math.random().toString()
         }));
       }),

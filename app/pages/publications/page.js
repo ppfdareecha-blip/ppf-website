@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ParallaxBanner from "@/components/publications/banner";
@@ -26,6 +27,17 @@ const publications = {
   ],
   annualReports: [
     {
+      id: "annual-report-2024-25",
+      title: "Annual Report - Financial Year 2024-2025",
+      version: "FY 2024-2025",
+      date: "Financial Year 2024-2025",
+      year: "2025",
+      type: "PDF",
+      category: "Audit",
+      img: "/logo-circle.png",
+      file: "/Annual Report 2024-2025.pdf"
+    },
+    {
       id: "annual-report-2023-24",
       title: "Annual Report - Financial Year 2023-2024",
       version: "FY 2023-2024",
@@ -33,8 +45,7 @@ const publications = {
       year: "2024",
       type: "PDF",
       category: "Audit",
-      pages: 16,
-      img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=400",
+      img: "/logo-circle.png",
       file: "/Annual Report 2023-24.pdf"
     },
     {
@@ -45,9 +56,41 @@ const publications = {
       year: "2023",
       type: "PDF",
       category: "Audit",
-      pages: 14,
-      img: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=400",
+      img: "/logo-circle.png",
       file: "/Annual Report 2022-2023.pdf"
+    },
+    {
+      id: "annual-report-2021-22",
+      title: "Annual Report - Financial Year 2021-2022",
+      version: "FY 2021-2022",
+      date: "Financial Year 2021-2022",
+      year: "2022",
+      type: "PDF",
+      category: "Audit",
+      img: "/logo-circle.png",
+      file: "/Annual Report 2021-2022.pdf"
+    },
+    {
+      id: "annual-report-2020-21",
+      title: "Annual Report - Financial Year 2020-2021",
+      version: "FY 2020-2021",
+      date: "Financial Year 2020-2021",
+      year: "2021",
+      type: "PDF",
+      category: "Audit",
+      img: "/logo-circle.png",
+      file: "/Annual Report 2020-21.pdf"
+    },
+    {
+      id: "annual-report-2019-20",
+      title: "Annual Report - Financial Year 2019-2020",
+      version: "FY 2019-2020",
+      date: "Financial Year 2019-2020",
+      year: "2020",
+      type: "PDF",
+      category: "Audit",
+      img: "/logo-circle.png",
+      file: "/Annual Report 2019-20.pdf"
     }
   ],
   projectReports: [
@@ -63,6 +106,23 @@ const publications = {
 };
 
 export default function PublicationsPage() {
+  const [data, setData] = useState(publications);
+
+  useEffect(() => {
+    const loadPublications = async () => {
+      try {
+        const res = await fetch("/api/publications");
+        const json = await res.json();
+        if (json.success && json.data) {
+          setData(json.data);
+        }
+      } catch (e) {
+        console.error("Failed to load publications dynamically:", e);
+      }
+    };
+    loadPublications();
+  }, []);
+
   return (
     <div className="relative flex flex-col min-h-screen bg-slate-50 text-slate-900 font-lato [&_h1]:font-lora [&_h2]:font-lora [&_h3]:font-lora [&_h4]:font-lora [&_h5]:font-lora [&_h6]:font-lora overflow-x-hidden selection:bg-ppf-teal/30 selection:text-slate-900">
 
@@ -81,14 +141,14 @@ export default function PublicationsPage() {
 
           <div className="">
             {/* Section 1: Research Reports */}
-            <ScholarsSection data={publications.researchReports} />
+            <ScholarsSection data={data.researchReports} />
 
             {/* Section 2: Annual Reports */}
-            <AnnualReportSection data={publications.annualReports} />
+            <AnnualReportSection data={data.annualReports} />
 
             {/* Section 3: Project Reports */}
             <ProjectReport
-              projectData={publications.projectReports}
+              projectData={data.projectReports}
             />
           </div>
         </main>
