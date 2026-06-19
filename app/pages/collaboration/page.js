@@ -61,7 +61,7 @@ const CollaborationPage = async () => {
         <div className="absolute top-[30%] -right-[10%] w-[40rem] h-[40rem] rounded-full bg-ppf-teal/15 blur-[100px] mix-blend-multiply"></div>
         <div className="absolute -bottom-[10%] left-[20%] w-[60rem] h-[60rem] rounded-full bg-ppf-orange/15 blur-[150px] mix-blend-multiply"></div>
       </div>
-
+{/* redeploy */}
       <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar/>
         <HeroSection/>
