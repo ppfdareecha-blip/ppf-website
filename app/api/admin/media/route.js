@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Media from "@/lib/models/Media";
+import { requireAdmin } from "@/lib/adminAuth";
 
 const SLOT_LIMIT = 3;
 
@@ -40,7 +41,9 @@ const serializeMedia = (media) => {
   };
 };
 
-export async function GET() {
+export async function GET(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const media = await Media.find({}).sort({ createdAt: -1 });
@@ -51,6 +54,8 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const body = await req.json();
@@ -70,6 +75,8 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const body = await req.json();

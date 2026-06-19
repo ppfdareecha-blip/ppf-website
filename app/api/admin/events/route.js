@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Event from "@/lib/models/Event";
 import { v2 as cloudinary } from "cloudinary";
+import { requireAdmin } from "@/lib/adminAuth";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -9,7 +10,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function GET() {
+export async function GET(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const events = await Event.find({}).sort({ createdAt: -1 });
@@ -20,6 +23,8 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const {

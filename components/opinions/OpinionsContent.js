@@ -4,10 +4,65 @@ import Link from "next/link";
 import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaRegCalendarAlt, FaChevronRight, FaPen, FaTimes, FaCamera } from "react-icons/fa";
+import { FaRegCalendarAlt, FaChevronRight, FaPen, FaTimes, FaCamera, FaClock, FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import opinionsData from "@/data/Opinions.json";
 import OpinionCard from "@/components/opinions/OpinionCard";
+
+// ── Toast Popup Component ──────────────────────────────────────────────────────
+function Toast({ toast, onClose }) {
+  const icons = {
+    success: <FaCheckCircle className="text-emerald-500" size={22} />,
+    error: <FaExclamationTriangle className="text-red-500" size={22} />,
+    rateLimit: <FaClock className="text-amber-500" size={22} />,
+  };
+  const colors = {
+    success: "border-emerald-200 bg-emerald-50",
+    error: "border-red-200 bg-red-50",
+    rateLimit: "border-amber-200 bg-amber-50",
+  };
+  return (
+    <AnimatePresence>
+      {toast && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: 16 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            className={`relative z-10 w-full max-w-md rounded-3xl border-2 p-8 shadow-2xl bg-white ${colors[toast.type] || "border-slate-200"}`}
+          >
+            <button onClick={onClose} className="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition-colors">
+              <FaTimes size={16} />
+            </button>
+            <div className="flex flex-col items-center text-center gap-4">
+              <div className="w-16 h-16 rounded-2xl bg-white shadow-md flex items-center justify-center">
+                {icons[toast.type]}
+              </div>
+              <div>
+                <h3 className="font-lora font-black text-xl text-slate-900 mb-1">{toast.title}</h3>
+                <p className="font-lato text-slate-600 text-sm leading-relaxed">{toast.message}</p>
+              </div>
+              <button
+                onClick={onClose}
+                className="mt-2 bg-ppf-purple text-white font-lato font-black text-xs uppercase tracking-widest px-8 py-3 rounded-xl hover:bg-ppf-purple/90 transition-all"
+              >
+                {toast.type === "success" ? "Great, Thanks!" : "Got it"}
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -27,7 +82,11 @@ function OpinionsContent() {
   const [imageBase64, setImageBase64] = useState("");
   const [formData, setFormData] = useState({ fullName: "", email: "", title: "", analysis: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+  const [toast, setToast] = useState(null);
+
+  const showToast = (type, title, message) => setToast({ type, title, message });
+  const closeToast = () => setToast(null);
+
   // State for raw data and loading sequences
   const [opinions, setOpinions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -126,7 +185,8 @@ function OpinionsContent() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.fullName || !formData.title || !formData.analysis) {
-      return alert("Please fill the required fields.");
+      showToast("error", "Missing Fields", "Please fill in your name, title, and analysis before submitting.");
+      return;
     }
     setIsSubmitting(true);
     try {
@@ -138,21 +198,35 @@ function OpinionsContent() {
           author: formData.fullName,
           email: formData.email,
           content: formData.analysis,
-          imageBase64: imageBase64
-        })
+          imageBase64: imageBase64,
+        }),
       });
       const data = await res.json();
+      if (res.status === 429) {
+        // Rate limit hit — close the form and show the wait popup
+        setIsModalOpen(false);
+        showToast(
+          "rateLimit",
+          "Slow Down!",
+          data.error || `You've submitted too many opinions recently. Please wait ${data.waitMins || 15} minute(s) before trying again.`
+        );
+        return;
+      }
       if (data.success) {
-        alert("Opinion submitted successfully! It will be reviewed by our editors.");
         setIsModalOpen(false);
         setFormData({ fullName: "", email: "", title: "", analysis: "" });
         setSelectedFile(null);
         setImageBase64("");
+        showToast(
+          "success",
+          "Opinion Submitted!",
+          "Thank you! Your opinion has been received and will be reviewed by our editorial team."
+        );
       } else {
-        alert("Error: " + data.error);
+        showToast("error", "Submission Failed", data.error || "Something went wrong. Please try again.");
       }
-    } catch (e) {
-      alert("Submission failed.");
+    } catch {
+      showToast("error", "Network Error", "Could not reach the server. Please check your connection and try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -476,6 +550,9 @@ function OpinionsContent() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* Toast Popup — renders outside the modal stack */}
+      <Toast toast={toast} onClose={closeToast} />
     </div>
   );
 }

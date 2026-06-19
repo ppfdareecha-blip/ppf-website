@@ -65,28 +65,10 @@ function ActivitiesContent() {
     const fetchEvents = async () => {
       try {
         setLoading(true);
-        const res = await fetch("/api/admin/events");
+        const res = await fetch("/api/events");
         const json = await res.json();
         if (json.success && json.data) {
-          // Map DB events to the structure used by the frontend
-          const mapped = json.data.map(e => ({
-            id: e._id,
-            title: e.title,
-            date: e.date,
-            time: `${e.fromTime} - ${e.endTime || ""}`,
-            location: e.venue,
-            type: "Event",
-            image: e.eventPoster || "/images/events/event1.jpg",
-            summary: e.about ? (e.about.substring(0, 150) + "...") : "",
-            about: e.about || "",
-            speaker: Array.isArray(e.speakers) && e.speakers.length > 0 ? e.speakers[0] : "",
-            centerTag: e.center || "",
-            mode: e.mode || "",
-            pdfLink: e.pdfLink || "",
-            status: new Date(e.date) > new Date() ? "upcoming" : "past"
-          }));
-          // Combine with JSON data, avoiding duplicates
-          setEvents(sortDesc(mapped));
+          setEvents(sortDesc(json.data));
         }
       } catch (err) {
         console.error("Failed to fetch events:", err);

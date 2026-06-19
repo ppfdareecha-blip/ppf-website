@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Publication from "@/lib/models/Publication";
+import { requireAdmin } from "@/lib/adminAuth";
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const publications = await Publication.find({}).sort({ createdAt: -1 }).lean();
@@ -15,6 +18,8 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const body = await req.json();

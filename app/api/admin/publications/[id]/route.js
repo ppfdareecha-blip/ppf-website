@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Publication from "@/lib/models/Publication";
+import { requireAdmin } from "@/lib/adminAuth";
 
 export async function DELETE(req, { params }) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const { id } = params;
@@ -17,6 +20,8 @@ export async function DELETE(req, { params }) {
 }
 
 export async function PUT(req, { params }) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const { id } = params;

@@ -57,6 +57,7 @@ function CreateOpinionForm({ authors = [], onSwitchToAuthorsTab, onCreated }) {
       const res = await fetch("/api/admin/opinions-manage", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           title: form.title,
           description: form.description,
@@ -220,6 +221,7 @@ function OpinionsList({ opinions, onView, onEdit, onDelete, onReorder, onAddLink
       const res = await fetch("/api/admin/opinions-manage/reorder", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ orderedIds: reordered.map(op => op._id) }),
       });
       if (res.ok) { await onReorder(); setIsReorderMode(false); setReordered([]); }

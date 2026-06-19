@@ -46,7 +46,7 @@ export default function MediaTab() {
   // Fetch existing media links
   const fetchMediaLinks = useCallback(async () => {
     try {
-      const res = await fetch("/api/admin/media");
+      const res = await fetch("/api/admin/media", { credentials: "include" });
       const data = await res.json();
       if (data.success && data.data && data.data.length > 0) {
         const media = data.data[0];
@@ -117,6 +117,7 @@ export default function MediaTab() {
       const res = await fetch("/api/admin/media", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify(updateData),
       });
 

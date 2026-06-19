@@ -27,26 +27,12 @@ export default function EventDetail() {
     window.scrollTo(0, 0);
     const fetchEvent = async () => {
       try {
-        const res = await fetch('/api/admin/events');
+        const res = await fetch('/api/events');
         const json = await res.json();
         if (json.success && json.data) {
-          const dbEvent = json.data.find(e => e._id === id);
+          const dbEvent = json.data.find(e => e.id === id || e._id === id);
           if (dbEvent) {
-            setEvent({
-              id: dbEvent._id,
-              title: dbEvent.title,
-              date: dbEvent.date,
-              time: `${dbEvent.fromTime} - ${dbEvent.endTime || ''}`,
-              location: dbEvent.venue,
-              type: 'Event',
-              image: dbEvent.eventPoster || '/images/events/event1.jpg',
-              summary: dbEvent.about ? (dbEvent.about.substring(0, 150) + '...') : '',
-              about: dbEvent.about || '',
-              speaker: Array.isArray(dbEvent.speakers) && dbEvent.speakers.length > 0 ? dbEvent.speakers[0] : '',
-              centerTag: dbEvent.center || '',
-              mode: dbEvent.mode || '',
-              pdfLink: dbEvent.pdfLink || '',
-            });
+            setEvent(dbEvent);
           }
         }
       } catch (err) {

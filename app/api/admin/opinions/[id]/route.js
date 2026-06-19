@@ -3,10 +3,13 @@ import dbConnect from "@/lib/mongodb";
 import Opinion from "@/lib/models/Opinion";
 import UnApprovedOpinion from "@/lib/models/UnApprovedOpinion";
 import Author from "@/lib/models/Author";
+import { requireAdmin } from "@/lib/adminAuth";
 
 export const dynamic = 'force-dynamic';
 
 export async function PUT(req, { params }) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const { id } = params;
@@ -64,6 +67,8 @@ export async function PUT(req, { params }) {
 }
 
 export async function DELETE(req, { params }) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const { id } = params;

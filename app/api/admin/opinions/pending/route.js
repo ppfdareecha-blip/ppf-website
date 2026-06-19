@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import UnApprovedOpinion from "@/lib/models/UnApprovedOpinion";
+import { requireAdmin } from "@/lib/adminAuth";
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const pendingOpinions = await UnApprovedOpinion.find({}).sort({ createdAt: -1 });

@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Opinion from "@/lib/models/Opinion";
+import { requireAdmin } from "@/lib/adminAuth";
 
 /**
  * GET /api/admin/opinions-manage/images
  * Returns all unique cover image URLs previously used in Opinion documents.
  */
-export async function GET() {
+export async function GET(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const opinions = await Opinion.find(

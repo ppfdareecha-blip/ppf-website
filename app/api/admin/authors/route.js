@@ -3,6 +3,7 @@ import dbConnect from "@/lib/mongodb";
 import Author from "@/lib/models/Author";
 import Opinion from "@/lib/models/Opinion";
 import { v2 as cloudinary } from "cloudinary";
+import { requireAdmin } from "@/lib/adminAuth";
 
 
 cloudinary.config({
@@ -13,7 +14,9 @@ cloudinary.config({
 
 export const dynamic = 'force-dynamic';
 
-export async function GET() {
+export async function GET(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     // Fetch all authors and populate their written opinions to show titles or counts
@@ -28,6 +31,8 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const { 

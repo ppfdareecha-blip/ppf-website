@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Lock, Eye, EyeOff, X, checkCircle, XCircle } from "lucide-react";
+import { Lock, Eye, EyeOff, X } from "lucide-react";
 
 import AdminNavbar from "@/components/admin/AdminNavbar";
 import MembersTab from "@/components/admin/MembersTab";
@@ -12,8 +12,7 @@ import MediaTab from "@/components/admin/MediaTab";
 import NewslettersTab from "@/components/admin/NewslettersTab";
 import CareersTab from "@/components/admin/CareersTab";
 import PublicationsTab from "@/components/admin/PublicationsTab";
-import { ExternalLink } from "lucide-react";
-import { User } from "lucide-react";
+import SettingsTab from "@/components/admin/SettingsTab";
 import {
   MemberOpinionModal,
   EventModal,
@@ -24,47 +23,155 @@ import {
    // sddsfdfd
 // ── Login Screen ─────────────────────────────────────────────────────────────
 function LoginScreen({ onLogin }) {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [resetForm, setResetForm] = useState({ email: "", masterResetKey: "", newPassword: "" });
   const [show, setShow] = useState(false);
+  const [showReset, setShowReset] = useState(false);
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handle = (e) => {
+  const handle = async (e) => {
     e.preventDefault();
-    if (password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
-      onLogin();
-    } else {
-      setError("The password entered is incorrect. Please try again.");
+    setError("");
+    setMessage("");
+    setLoading(true);
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        onLogin(data.admin);
+      } else {
+        setError(data.error || "Incorrect email or password. Please try again.");
+      }
+    } catch {
+      setError("Network error. Please check your connection.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleReset = async (e) => {
+    e.preventDefault();
+    setError("");
+    setMessage("");
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/admin/reset-password", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(resetForm),
+      });
+      const data = await res.json();
+
+      if (!data.success) {
+        setError(data.error || "Unable to reset password.");
+        return;
+      }
+
+      setEmail(resetForm.email);
+      setPassword("");
+      setResetForm({ email: "", masterResetKey: "", newPassword: "" });
+      setShowReset(false);
+      setMessage("Password reset successfully. Please sign in with the new password.");
+    } catch {
+      setError("Network error. Please check your connection.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-mono-plum flex items-center justify-center p-6 font-sans">
-      <div className="bg-white w-full max-w-md rounded-[2.5rem] overflow-hidden shadow-2xl border-2 border-white/20">
+      <div className="bg-white w-full max-w-md rounded-[2rem] overflow-hidden shadow-2xl border-2 border-white/20">
         <div className="bg-vibrant-violet p-10 text-center">
-          <div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+          <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
             <Lock className="w-10 h-10 text-vibrant-violet" />
           </div>
           <h1 className="text-white font-futura text-2xl font-black uppercase tracking-widest">Admin Login</h1>
         </div>
-        <form onSubmit={handle} className="p-10 space-y-6">
+        <form onSubmit={showReset ? handleReset : handle} className="p-10 space-y-6">
           <div className="space-y-2">
-            <label className="text-sm text-mono-plum uppercase tracking-wider block">Access Key</label>
+            <label className="text-sm text-mono-plum uppercase tracking-wider block">Email</label>
+            <input
+              type="email"
+              className="w-full text-black bg-vibrant-offwhite border-2 border-vibrant-gray rounded-2xl px-6 py-4 outline-none focus:border-vibrant-violet transition-all text-lg"
+              value={showReset ? resetForm.email : email}
+              onChange={(e) => {
+                const value = e.target.value;
+                if (showReset) setResetForm((prev) => ({ ...prev, email: value }));
+                else setEmail(value);
+              }}
+              placeholder="admin@ppf.org"
+              autoComplete="email"
+              required
+            />
+          </div>
+
+          {showReset && (
+            <div className="space-y-2">
+              <label className="text-sm text-mono-plum uppercase tracking-wider block">Master Reset Key</label>
+              <input
+                type="password"
+                className="w-full text-black bg-vibrant-offwhite border-2 border-vibrant-gray rounded-2xl px-6 py-4 outline-none focus:border-vibrant-violet transition-all text-lg"
+                value={resetForm.masterResetKey}
+                onChange={(e) => setResetForm((prev) => ({ ...prev, masterResetKey: e.target.value }))}
+                placeholder="Enter reset key"
+                required
+              />
+            </div>
+          )}
+
+          <div className="space-y-2">
+            <label className="text-sm text-mono-plum uppercase tracking-wider block">{showReset ? "New Password" : "Password"}</label>
             <div className="relative">
               <input
                 type={show ? "text" : "password"}
                 className="w-full text-black bg-vibrant-offwhite border-2 border-vibrant-gray rounded-2xl px-6 py-4 outline-none focus:border-vibrant-violet transition-all text-lg"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter Password"
+                value={showReset ? resetForm.newPassword : password}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (showReset) setResetForm((prev) => ({ ...prev, newPassword: value }));
+                  else setPassword(value);
+                }}
+                placeholder={showReset ? "Set new password" : "Enter password"}
+                autoComplete={showReset ? "new-password" : "current-password"}
+                minLength={showReset ? 8 : undefined}
+                required
               />
               <button type="button" onClick={() => setShow(!show)} className="absolute right-4 top-1/2 -translate-y-1/2 text-vibrant-charcoal/50 hover:text-vibrant-violet p-2">
                 {show ? <EyeOff size={24} /> : <Eye size={24} />}
               </button>
             </div>
           </div>
+          {message && <p className="text-green-700 text-sm bg-green-50 p-3 rounded-lg border border-green-200">{message}</p>}
           {error && <p className="text-red-600 text-sm bg-red-50 p-3 rounded-lg border border-red-200">{error}</p>}
-          <button className="w-full bg-mono-plum text-white py-5 rounded-2xl font-black uppercase tracking-widest text-lg hover:bg-vibrant-violet transition-all active:scale-95 shadow-lg shadow-mono-plum/20">
-            Unlock Dashboard
+          <button
+            disabled={loading}
+            className="w-full bg-mono-plum text-white py-5 rounded-2xl font-black uppercase tracking-widest text-lg hover:bg-vibrant-violet transition-all active:scale-95 shadow-lg shadow-mono-plum/20 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-3"
+          >
+            {loading ? (
+              <><span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin inline-block" /> Verifying...</>
+            ) : (
+              showReset ? "Reset Password" : "Unlock Dashboard"
+            )}
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setShowReset((prev) => !prev);
+              setError("");
+              setMessage("");
+            }}
+            className="w-full text-sm font-bold text-vibrant-violet hover:text-mono-plum transition-colors"
+          >
+            {showReset ? "Back to login" : "Forgot password?"}
           </button>
         </form>
       </div>
@@ -75,7 +182,9 @@ function LoginScreen({ onLogin }) {
 // ── Admin Dashboard ──────────────────────────────────────────────────────────
 export default function AdminControlCenter() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [activeTab, setActiveTab] = useState("members");
+  const [admin, setAdmin] = useState(null);
 
   // Data State
   const [pendingOpinions, setPendingOpinions] = useState([]);
@@ -93,59 +202,70 @@ export default function AdminControlCenter() {
   const [linkOpinion, setLinkOpinion] = useState(null);
 
   // ── Auth ────────────────────────────────────────────────────────────────────
+  // Verify session on mount by pinging a protected endpoint.
   useEffect(() => {
-    if (sessionStorage.getItem("admin_auth") === "true") setIsAuthenticated(true);
+    fetch("/api/admin/verify", { credentials: "include" })
+      .then(async (res) => {
+        if (res.ok) {
+          const data = await res.json();
+          setAdmin(data.admin || null);
+          setIsAuthenticated(true);
+        }
+      })
+      .catch(() => {})
+      .finally(() => setIsCheckingAuth(false));
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = (adminData) => {
+    setAdmin(adminData || null);
     setIsAuthenticated(true);
-    sessionStorage.setItem("admin_auth", "true");
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("admin_auth");
+  const handleLogout = async () => {
+    await fetch("/api/admin/login", { method: "DELETE", credentials: "include" }).catch(() => {});
+    setAdmin(null);
     setIsAuthenticated(false);
   };
 
   // ── Data fetchers ───────────────────────────────────────────────────────────
   const fetchPending = async () => {
     try {
-      const { data } = await fetch(`/api/admin/opinions/pending?t=${Date.now()}`).then(r => r.json());
+      const { data } = await fetch(`/api/admin/opinions/pending?t=${Date.now()}`, { credentials: "include" }).then(r => r.json());
       if (data) setPendingOpinions(data);
     } catch (e) { console.error(e); }
   };
 
   const fetchEvents = async () => {
     try {
-      const { data } = await fetch(`/api/admin/events?t=${Date.now()}`).then(r => r.json());
+      const { data } = await fetch(`/api/admin/events?t=${Date.now()}`, { credentials: "include" }).then(r => r.json());
       if (data) setEvents(data);
     } catch (e) { console.error(e); }
   };
 
   const fetchAdminOpinions = async () => {
     try {
-      const { data } = await fetch(`/api/admin/opinions-manage?t=${Date.now()}`).then(r => r.json());
+      const { data } = await fetch(`/api/admin/opinions-manage?t=${Date.now()}`, { credentials: "include" }).then(r => r.json());
       if (data) setAdminOpinions(data);
     } catch (e) { console.error(e); }
   };
 
   const fetchAuthors = async () => {
     try {
-      const { data } = await fetch(`/api/admin/authors?t=${Date.now()}`).then(r => r.json());
+      const { data } = await fetch(`/api/admin/authors?t=${Date.now()}`, { credentials: "include" }).then(r => r.json());
       if (data) setAuthors(data);
     } catch (e) { console.error(e); }
   };
 
   const fetchCareers = async () => {
     try {
-      const { data } = await fetch(`/api/admin/careers?t=${Date.now()}`).then(r => r.json());
+      const { data } = await fetch(`/api/admin/careers?t=${Date.now()}`, { credentials: "include" }).then(r => r.json());
       if (data) setCareers(data);
     } catch (e) { console.error(e); }
   };
 
   const fetchPublications = async () => {
     try {
-      const { data } = await fetch(`/api/admin/publications?t=${Date.now()}`).then(r => r.json());
+      const { data } = await fetch(`/api/admin/publications?t=${Date.now()}`, { credentials: "include" }).then(r => r.json());
       if (data) setAdminPublications(data);
     } catch (e) { console.error(e); }
   };
@@ -164,28 +284,28 @@ export default function AdminControlCenter() {
   // ── Event handlers ──────────────────────────────────────────────────────────
   const handleDeleteEvent = async (id) => {
     try {
-      await fetch(`/api/admin/events/${id}`, { method: "DELETE" });
+      await fetch(`/api/admin/events/${id}`, { method: "DELETE", credentials: "include" });
       fetchEvents();
     } catch (e) { console.error(e); }
   };
 
   const handleDeleteCareer = async (id) => {
     try {
-      await fetch(`/api/admin/careers/${id}`, { method: "DELETE" });
+      await fetch(`/api/admin/careers/${id}`, { method: "DELETE", credentials: "include" });
       fetchCareers();
     } catch (e) { console.error(e); }
   };
 
   const handleDeletePublication = async (id) => {
     try {
-      await fetch(`/api/admin/publications/${id}`, { method: "DELETE" });
+      await fetch(`/api/admin/publications/${id}`, { method: "DELETE", credentials: "include" });
       fetchPublications();
     } catch (e) { console.error(e); }
   };
 
   const handleDeleteOpinion = async (id) => {
     try {
-      await fetch(`/api/admin/opinions-manage/${id}`, { method: "DELETE" });
+      await fetch(`/api/admin/opinions-manage/${id}`, { method: "DELETE", credentials: "include" });
       fetchAdminOpinions();
       fetchAuthors(); // Update author counts
     } catch (e) { console.error(e); }
@@ -193,7 +313,7 @@ export default function AdminControlCenter() {
 
   const handleApproveMember = async (id) => {
     try {
-      const res = await fetch(`/api/admin/opinions/${id}`, { method: "PUT" });
+      const res = await fetch(`/api/admin/opinions/${id}`, { method: "PUT", credentials: "include" });
       if (res.ok) {
         setSelectedMemberOpinion(null);
         fetchPending();
@@ -205,12 +325,20 @@ export default function AdminControlCenter() {
 
   const handleRejectMember = async (id) => {
     try {
-      const res = await fetch(`/api/admin/opinions/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/opinions/${id}`, { method: "DELETE", credentials: "include" });
       if (res.ok) { setSelectedMemberOpinion(null); fetchPending(); }
     } catch (e) { console.error(e); }
   };
 
   // ── Render ──────────────────────────────────────────────────────────────────
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen bg-mono-plum flex items-center justify-center">
+        <div className="w-10 h-10 border-4 border-white/30 border-t-white rounded-full animate-spin"></div>
+      </div>
+    );
+  }
+
   if (!isAuthenticated) return <LoginScreen onLogin={handleLogin} />;
 
   const TAB_BTN = (tab, label) =>
@@ -235,6 +363,7 @@ export default function AdminControlCenter() {
           <button onClick={() => setActiveTab("publications")} className={TAB_BTN("publications")}>Manage Publications</button>
           <button onClick={() => setActiveTab("media")} className={TAB_BTN("media")}>Manage Media</button>
           <button onClick={() => setActiveTab("newsletters")} className={TAB_BTN("newsletters")}>Newsletters</button>
+          <button onClick={() => setActiveTab("settings")} className={TAB_BTN("settings")}>Settings</button>
         </div>
 
         {activeTab === "members" && (
@@ -298,6 +427,10 @@ export default function AdminControlCenter() {
 
         {activeTab === "newsletters" && (
           <NewslettersTab />
+        )}
+
+        {activeTab === "settings" && (
+          <SettingsTab admin={admin} />
         )}
       </main>
 

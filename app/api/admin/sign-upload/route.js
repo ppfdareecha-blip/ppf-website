@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { requireAdmin } from "@/lib/adminAuth";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -11,6 +12,8 @@ export const dynamic = "force-dynamic";
 
 // Accepts ?resource_type=raw (for PDF) or ?resource_type=image (for images)
 export async function GET(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     const { searchParams } = new URL(req.url);
     const resourceType = searchParams.get("resource_type") || "image";

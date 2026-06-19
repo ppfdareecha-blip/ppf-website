@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Opinion from "@/lib/models/Opinion";
+import { requireAdmin } from "@/lib/adminAuth";
 
 /**
  * PUT /api/admin/opinions-manage/reorder
@@ -11,6 +12,8 @@ import Opinion from "@/lib/models/Opinion";
  * so index 0 = shown first, index 1 = shown second, etc.
  */
 export async function PUT(req) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const { orderedIds } = await req.json();

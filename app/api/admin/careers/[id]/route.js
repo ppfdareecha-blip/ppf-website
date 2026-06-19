@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/mongodb";
 import Career from "@/lib/models/Career";
 import { v2 as cloudinary } from "cloudinary";
+import { requireAdmin } from "@/lib/adminAuth";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -10,6 +11,8 @@ cloudinary.config({
 });
 
 export async function DELETE(req, { params }) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const { id } = params;
@@ -24,6 +27,8 @@ export async function DELETE(req, { params }) {
 }
 
 export async function PUT(req, { params }) {
+  const authError = requireAdmin(req);
+  if (authError) return authError;
   try {
     await dbConnect();
     const { id } = params;

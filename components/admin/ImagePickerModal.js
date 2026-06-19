@@ -26,7 +26,7 @@ export default function ImagePickerModal({ isOpen, onClose, onSelect }) {
     setSelected(null);
     setSearch("");
     setIsLoading(true);
-    fetch("/api/admin/opinions-manage/images")
+    fetch("/api/admin/opinions-manage/images", { credentials: "include" })
       .then(r => r.json())
       .then(({ data }) => setLibrary(data || []))
       .catch(console.error)

@@ -213,6 +213,7 @@ export function OpinionEditModal({ opinion, authors = [], onClose, onSaved }) {
       const res = await fetch(`/api/admin/opinions-manage/${opinion._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           title: form.title,
           description: form.description,
@@ -365,6 +366,7 @@ export function DownloadableLinkModal({ opinion, onClose, onSaved }) {
       const res = await fetch(`/api/admin/opinions-manage/${opinion._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           downloadableLink: link,
         }),

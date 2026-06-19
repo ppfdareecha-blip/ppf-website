@@ -39,6 +39,7 @@ function CreateAuthorForm({ onCreated }) {
       const res = await fetch("/api/admin/authors", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           authorName: form.authorName,
           authorPosition: form.authorPosition,
@@ -171,6 +172,7 @@ function EditAuthorModal({ author, onClose, onSaved }) {
       const res = await fetch(`/api/admin/authors/${author._id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           authorName: form.authorName,
           authorPosition: form.authorPosition,
@@ -501,7 +503,7 @@ export default function AuthorsTab({ authors, onRefetch }) {
 
   const handleDelete = async (id) => {
     try {
-      const res = await fetch(`/api/admin/authors/${id}`, { method: "DELETE" });
+      const res = await fetch(`/api/admin/authors/${id}`, { method: "DELETE", credentials: "include" });
       if (res.ok) {
         onRefetch();
       } else {

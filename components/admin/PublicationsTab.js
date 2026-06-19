@@ -41,7 +41,7 @@ export default function PublicationsTab({ publications = [], onDelete, onRefetch
 
   // Upload a file directly to Cloudinary from the browser
   const uploadToCloudinary = async (file, resourceType = "image") => {
-    const sigRes = await fetch(`/api/admin/sign-upload?resource_type=${resourceType}`);
+    const sigRes = await fetch(`/api/admin/sign-upload?resource_type=${resourceType}`, { credentials: "include" });
     const sigData = await sigRes.json();
     if (!sigData.success) throw new Error("Failed to get upload signature");
 

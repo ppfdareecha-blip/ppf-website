@@ -4,6 +4,7 @@ import Opinion from "@/lib/models/Opinion";
 import UnApprovedOpinion from "@/lib/models/UnApprovedOpinion";
 import Author from "@/lib/models/Author";
 import { v2 as cloudinary } from "cloudinary";
+import { checkRateLimit, getClientIP } from "@/lib/rateLimit";
 
 
 export const dynamic = 'force-dynamic';
@@ -71,6 +72,17 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  // Rate limit: max 5 opinion submissions per IP per 15 minutes
+  const ip = getClientIP(req);
+  const limit = checkRateLimit(ip, { maxRequests: 5, windowMs: 15 * 60 * 1000 });
+  if (!limit.allowed) {
+    const waitMins = Math.ceil(limit.resetIn / 60000);
+    return NextResponse.json(
+      { success: false, rateLimited: true, waitMins, error: `Too many submissions. Please wait ${waitMins} minute(s) before submitting again.` },
+      { status: 429 }
+    );
+  }
+
   try {
     await dbConnect();
     const { title, author, email, content, imageBase64 } = await req.json();

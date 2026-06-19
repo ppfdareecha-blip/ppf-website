@@ -23,7 +23,7 @@ export default function NewslettersTab() {
 
   const fetchNewsletters = async () => {
     try {
-      const res = await fetch("/api/admin/newsletters");
+      const res = await fetch("/api/admin/newsletters", { credentials: "include" });
       const data = await res.json();
       if (data.success) {
         setNewsletters(data.data);
@@ -72,6 +72,7 @@ export default function NewslettersTab() {
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ title, description, pdfLink, date }),
       });
 
@@ -106,7 +107,7 @@ export default function NewslettersTab() {
   const handleDelete = async (id) => {
     if (confirm("Delete this newsletter?")) {
       try {
-        const res = await fetch(`/api/admin/newsletters/${id}`, { method: "DELETE" });
+        const res = await fetch(`/api/admin/newsletters/${id}`, { method: "DELETE", credentials: "include" });
         const data = await res.json();
         if (data.success) {
           fetchNewsletters();

@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "reset-admin": "node scripts/reset-admin.mjs",
     "lint": "next lint"
   },
   "dependencies": {
