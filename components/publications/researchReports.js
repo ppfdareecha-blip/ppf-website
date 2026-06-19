@@ -36,7 +36,7 @@ const ScholarCard = ({ item, index }) => (
         alt={item.title}
         fill
         sizes="(max-width: 640px) 100vw, 160px"
-        className="object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out"
+        className="object-contain p-6 transition duration-700 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-300" />
 

@@ -96,7 +96,7 @@ export default function Navbar() {
     {
       name: "Home", href: "/",
       dropdown: [
-        { name: "About us", href: "/#about" },
+        { name: "About us", href: "/pages/about" },
         { name: "Centers", href: "/#centers" },
         { name: "Recent Activities", href: "/#activities" },
         { name: "Have a Question ?", href: "/#queries" },

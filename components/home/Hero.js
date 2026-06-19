@@ -39,7 +39,7 @@ export default function HeroSection() {
   const [isPaused, setIsPaused] = useState(false);
 
   const quickLinks = [
-    { name: "About Foundation", href: "#about" },
+    { name: "About Foundation", href: "/pages/about" },
     { name: "Research Centers", href: "#centers" },
     { name: "Impact", href: "#impact" },
     { name: "Team", href: "/pages/about#team-section" },

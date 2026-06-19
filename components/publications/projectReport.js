@@ -1,68 +1,51 @@
 "use client";
 
 import React from "react";
-import { FileText, Download, Calendar, Briefcase, CheckCircle2, Clock } from "lucide-react";
+import Image from "next/image";
+import {
+  Download,
+  Calendar,
+  Briefcase,
+  CheckCircle2,
+  Clock,
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const SectionHeader = ({ icon: Icon, title, subtitle }) => (
-  // Updated with brand color: ppf-purple
   <div className="mb-10 border-l-4 border-ppf-purple pl-4">
     <div className="flex items-center gap-3 mb-2">
       <div className="bg-ppf-purple/10 p-2 rounded-lg">
         <Icon className="text-ppf-purple w-6 h-6" />
       </div>
+
       <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase">
         {title}
       </h2>
     </div>
+
     {subtitle && (
-      <p className="text-base text-slate-600 max-w-2xl leading-relaxed">{subtitle}</p>
+      <p className="text-base text-slate-600 max-w-2xl leading-relaxed">
+        {subtitle}
+      </p>
     )}
   </div>
 );
 
 export default function ProjectReport({ projectData = [] }) {
-  // Enhanced internal data if props are minimal
-  const displayData = projectData.length > 0 ? projectData : [
-    {
-      title: "Water Resource Management in the Himalayas",
-      source: "Himalayan Basin Project",
-      date: "March 2026",
-      link: "#",
-      status: "Completed",
-      description: "Research study analyzing water sustainability and glacial melt trends in the Himalayan region."
-    },
-    {
-      title: "Urban Sustainability & Smart City Implementation",
-      source: "Urban Future Initiative",
-      date: "Nov 2025",
-      link: "#",
-      status: "Ongoing",
-      description: "Assessment framework for smart cities focusing on public policy and resource distribution."
-    },
-    {
-      title: "Maritime Security & Port Resilience Analysis",
-      source: "Indo-Pacific Blue Project",
-      date: "Feb 2026",
-      link: "#",
-      status: "Completed",
-      description: "Analyzing maritime trade corridor vulnerabilities and policy recommendations for regional stability."
-    },
-    {
-      title: "AI Ethics in Public Policy Frameworks",
-      source: "Digital Governance Lab",
-      date: "Jan 2026",
-      link: "#",
-      status: "Ongoing",
-      description: "Exploring governance structures and ethical guidelines for implementing machine learning in public sectors."
-    }
-  ];
+  const displayData = projectData || [];
 
+  if (!displayData.length) return null;
+
+  // SINGLE PROJECT VIEW
   if (displayData.length === 1) {
     const item = displayData[0];
+
     return (
-      <section id="projects" className="w-full py-20 px-6 bg-white border-t border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
+      <section
+        id="projects"
+        className="w-full py-16 px-6 bg-white border-t border-slate-100"
+      >
+        <div className="max-w-7xl mx-auto">
           <SectionHeader
             icon={Briefcase}
             title="Project Reports"
@@ -74,54 +57,80 @@ export default function ProjectReport({ projectData = [] }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="group relative bg-slate-50 border border-ppf-purple/15 rounded-3xl p-8 md:p-12 shadow-sm hover:shadow-xl hover:border-ppf-purple/30 transition-all duration-500 max-w-4xl mx-auto"
+            className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm hover:shadow-lg transition-all"
           >
-            {/* Top Bar: Status and Date */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-200/60">
-              <span className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest ${
-                item.status === "Completed"
-                  ? "bg-ppf-teal/10 text-ppf-teal border border-ppf-teal/20"
-                  : "bg-ppf-orange/10 text-ppf-orange border border-ppf-orange/20"
-              }`}>
-                {item.status === "Completed" ? <CheckCircle2 size={14} /> : <Clock size={14} />}
-                {item.status}
-              </span>
+            <div className="flex flex-col lg:flex-row">
+              {/* IMAGE */}
+              {item.img && (
+                <div className="relative lg:w-[40%] w-full h-64 lg:h-auto min-h-[320px]">
+                  <Image
+                    src={item.img}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width:1024px) 100vw, 40vw"
+                  />
+                </div>
+              )}
 
-              <span className="text-xs font-bold text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
-                <Calendar size={14} /> {item.date}
-              </span>
-            </div>
+              {/* CONTENT */}
+              <div className="flex-1 p-6 lg:p-8">
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+                  <span
+                    className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest ${
+                      item.status === "Completed"
+                        ? "bg-ppf-teal/10 text-ppf-teal border border-ppf-teal/20"
+                        : "bg-ppf-orange/10 text-ppf-orange border border-ppf-orange/20"
+                    }`}
+                  >
+                    {item.status === "Completed" ? (
+                      <CheckCircle2 size={14} />
+                    ) : (
+                      <Clock size={14} />
+                    )}
+                    {item.status}
+                  </span>
 
-            {/* Content */}
-            <div className="space-y-4">
-              <span className="text-[11px] font-black text-ppf-purple uppercase tracking-[0.2em]">
-                Featured Project
-              </span>
-              
-              <h3 className="text-2xl md:text-3.5xl font-lora font-bold text-slate-900 group-hover:text-ppf-purple transition-colors leading-tight">
-                {item.title}
-              </h3>
-              
-              <p className="text-sm font-semibold text-slate-500 flex items-center gap-2">
-                <span className="w-6 h-[2px] bg-ppf-purple/30" />
-                {item.source}
-              </p>
+                  <span className="flex items-center gap-1 text-xs font-bold text-slate-500 uppercase">
+                    <Calendar size={14} />
+                    {item.date}
+                  </span>
+                </div>
 
-              <p className="text-slate-600 text-base md:text-lg font-lato leading-relaxed pt-2">
-                {item.description}
-              </p>
-            </div>
+                <h3 className="text-2xl lg:text-3xl font-bold text-slate-900 mb-3">
+                  {item.title}
+                </h3>
 
-            {/* Bottom Bar / CTA */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mt-8 pt-8 border-t border-slate-200/60">
-              <span className="text-xs font-bold text-slate-400">Reference: PRJ-PROTSAHAN</span>
-              
-              <a
-                href={item.link}
-                className="flex items-center gap-2 bg-slate-900 hover:bg-ppf-purple text-white px-8 py-3.5 rounded-full font-black text-sm transition-all shadow-md hover:shadow-lg hover:shadow-ppf-purple/20 active:scale-95"
-              >
-                ACCESS REPORT <Download size={16} />
-              </a>
+                {item.source && (
+                  <p className="text-sm font-semibold text-slate-500 mb-4">
+                    {item.source}
+                  </p>
+                )}
+
+                {item.description && (
+                  <p className="text-slate-600 leading-relaxed mb-6">
+                    {item.description}
+                  </p>
+                )}
+
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-slate-100">
+                  <span className="text-xs font-semibold text-slate-400">
+                    Reference: {item._id?.slice(-6) || "PROJECT"}
+                  </span>
+
+                  {(item.file || item.link) && (
+                    <a
+                      href={item.file || item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-slate-900 hover:bg-ppf-purple text-white px-6 py-3 rounded-xl font-bold text-sm transition-all"
+                    >
+                      ACCESS REPORT
+                      <Download size={16} />
+                    </a>
+                  )}
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -129,67 +138,97 @@ export default function ProjectReport({ projectData = [] }) {
     );
   }
 
+  // MULTIPLE PROJECTS VIEW
   return (
-    <section id="projects" className="w-full py-12 px-6 bg-white border-t border-slate-100">
-      <div className="max-w-7xl mx-auto px-6">
+    <section
+      id="projects"
+      className="w-full py-12 px-6 bg-white border-t border-slate-100"
+    >
+      <div className="max-w-7xl mx-auto">
         <SectionHeader
           icon={Briefcase}
           title="Project Reports"
           subtitle="In-depth documentation of our ongoing and completed research initiatives across various policy domains."
         />
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
           {displayData.map((item, i) => (
             <motion.div
-              key={i}
+              key={item._id || i}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="group relative flex flex-col p-6 bg-white border-2 border-slate-100 rounded-2xl hover:border-ppf-purple hover:shadow-xl transition-all duration-300"
+              className="overflow-hidden flex flex-col bg-white border border-slate-200 rounded-2xl hover:border-ppf-purple hover:shadow-lg transition-all"
             >
-              {/* Status Badge */}
-              <div className="flex justify-between items-start mb-4">
-                <span className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${
-                  item.status === "Completed"
-                    ? "bg-ppf-teal/10 text-ppf-teal border border-ppf-teal/20"
-                    : "bg-ppf-orange/10 text-ppf-orange border border-ppf-orange/20"
-                }`}>
-                  {item.status === "Completed" ? <CheckCircle2 size={12} /> : <Clock size={12} />}
-                  {item.status}
-                </span>
+              {item.img && (
+                <div className="relative w-full h-48">
+                  <Image
+                    src={item.img}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                    sizes="100vw"
+                  />
+                </div>
+              )}
 
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1">
-                  <Calendar size={12} /> {item.date}
-                </span>
-              </div>
+              <div className="p-5 flex flex-col flex-grow">
+                <div className="flex justify-between items-start mb-4">
+                  <span
+                    className={`flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-black uppercase ${
+                      item.status === "Completed"
+                        ? "bg-ppf-teal/10 text-ppf-teal"
+                        : "bg-ppf-orange/10 text-ppf-orange"
+                    }`}
+                  >
+                    {item.status === "Completed" ? (
+                      <CheckCircle2 size={12} />
+                    ) : (
+                      <Clock size={12} />
+                    )}
+                    {item.status}
+                  </span>
 
-              {/* Title & Source */}
-              <div className="flex-grow">
-                <h3 className="text-xl font-bold text-slate-900 group-hover:text-ppf-purple leading-tight transition-colors mb-2">
+                  <span className="text-[10px] text-slate-500 flex items-center gap-1">
+                    <Calendar size={12} />
+                    {item.date}
+                  </span>
+                </div>
+
+                <h3 className="text-lg font-bold text-slate-900 mb-2">
                   {item.title}
                 </h3>
-                <p className="text-xs font-semibold text-slate-500 mb-4 flex items-center gap-2">
-                  <span className="w-4 h-[2px] bg-ppf-purple/30" />
-                  {item.source}
-                </p>
+
+                {item.source && (
+                  <p className="text-xs text-slate-500 mb-3">
+                    {item.source}
+                  </p>
+                )}
+
                 {item.description && (
-                  <p className="text-sm text-slate-600 font-lato leading-relaxed mb-6 line-clamp-3">
+                  <p className="text-sm text-slate-600 line-clamp-3 flex-grow">
                     {item.description}
                   </p>
                 )}
-              </div>
 
-              {/* CTA / Footer */}
-              <div className="flex items-center justify-between pt-4 border-t border-slate-50">
-                <span className="text-xs font-bold text-slate-400">Reference: PRJ-{2025 + i}</span>
+                <div className="flex justify-between items-center mt-5 pt-4 border-t border-slate-100">
+                  <span className="text-xs text-slate-400">
+                    {item._id?.slice(-6) || `PRJ-${i + 1}`}
+                  </span>
 
-                <a
-                  href={item.link}
-                  className="flex items-center gap-2 bg-slate-900 text-white px-5 py-2 rounded-lg font-black text-xs hover:bg-ppf-purple transition-all shadow-md active:scale-95"
-                >
-                  ACCESS REPORT <Download size={14} />
-                </a>
+                  {(item.file || item.link) && (
+                    <a
+                      href={item.file || item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-slate-900 text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-ppf-purple transition-all"
+                    >
+                      REPORT
+                      <Download size={12} />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
