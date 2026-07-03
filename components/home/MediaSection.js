@@ -422,33 +422,31 @@ export default function MediaSection({ sectionWidth }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12"
+            className="flex flex-col md:flex-row justify-between gap-8 mb-12"
           >
             <div>
-              <div className="flex items-center gap-3 mb-3">
+              <div className="flex items-center gap-3 mb-4">
                 <span className="h-px w-8 bg-ppf-purple" />
                 <span className="text-ppf-purple font-lora font-black uppercase text-[10px] tracking-wider">
                   Media &amp; Socials
                 </span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-lora font-bold text-slate-800">
-                Stay Connected &amp; <span className="text-ppf-purple">Informed</span>
-              </h2>
-              <p className="mt-3 text-slate-500 font-lato text-sm md:text-base max-w-xl">
+              
+              <motion.button
+                id="open-media-modal-btn"
+                whileHover={{ scale: 1.02, x: 5 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => handleOpenModal()}
+                className="flex items-center gap-3 text-3xl md:text-4xl font-lora font-bold text-slate-800 hover:text-ppf-purple transition-all text-left"
+              >
+                Explore Our <span className="text-ppf-purple">Media</span>
+                <MdOutlineVideoLibrary className="text-ppf-purple text-2xl md:text-3xl" />
+              </motion.button>
+              
+              <p className="mt-4 text-slate-500 font-lato text-sm md:text-base max-w-xl">
                 Follow our latest video briefings, policy discussions, and social media conversations across platforms.
               </p>
             </div>
-
-            <motion.button
-              id="open-media-modal-btn"
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              onClick={() => handleOpenModal()}
-              className="flex-shrink-0 flex items-center gap-3 bg-ppf-purple text-white px-8 py-4 font-lato font-extrabold uppercase tracking-widest hover:bg-ppf-purple/90 transition-all shadow-xl shadow-ppf-purple/20 text-sm rounded-full"
-            >
-              <MdOutlineVideoLibrary className="text-lg" />
-              Explore Our Media
-            </motion.button>
           </motion.div>
 
           {/* Platform Badges */}

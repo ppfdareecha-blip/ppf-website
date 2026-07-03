@@ -70,17 +70,17 @@ export default function ImpactStats({ sectionWidth }) {
           <motion.h2 
              initial={{ opacity: 0, y: 10 }}
              whileInView={{ opacity: 1, y: 0 }}
-             className="text-3xl font-lora md:text-4xl font-black text-white leading-tight"
+             className="flex items-center gap-3 justify-center lg:justify-start text-3xl font-lora md:text-4xl font-black text-white leading-tight mb-2"
           >
-            Impact <span className="text-ppf-teal">Expanding.</span>
+            <FaChartLine className="text-ppf-teal text-3xl md:text-4xl font-thin" />
+            Growth <span className="text-ppf-teal">Trajectory</span>
           </motion.h2>
           <motion.div 
              initial={{ opacity: 0, x: -20 }}
              whileInView={{ opacity: 1, x: 0 }}
-             className="flex items-center gap-2 justify-center lg:justify-start mb-1 text-vibrant-violet font-bold uppercase tracking-[0.1em] text-md"
+             className="text-vibrant-violet font-bold uppercase tracking-[0.1em] text-md font-lato"
           >
-            <FaChartLine />
-            <span className="font-lato">Growth Trajectory</span>
+            Impact Expanding.
           </motion.div>
         </div>
 
