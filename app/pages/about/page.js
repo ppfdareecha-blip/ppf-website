@@ -140,17 +140,17 @@ export default function AboutPage() {
               
               {/* Medium Circle (Left Overlap) */}
               <div className="gsap-circle absolute top-[50%] left-0 w-[45%] aspect-square rounded-full overflow-hidden border-[6px] border-white shadow-xl z-30">
-                <img src="/hero_imgs/1.jpeg" alt="PPF Event" className="w-full h-full object-cover" />
+                <img src="/about_page/1.jpeg" alt="PPF Event" className="w-full h-full object-cover" />
               </div>
               
               {/* Small Circle (Top Left) */}
               <div className="gsap-circle absolute top-[15%] left-[20%] w-[35%] aspect-square rounded-full overflow-hidden border-[6px] border-white shadow-lg z-10">
-                <img src="/about_imgs/3.JPG" alt="PPF Discussion" className="w-full h-full object-cover" />
+                <img src="/about_page/2.jpg" alt="PPF Discussion" className="w-full h-full object-cover" />
               </div>
               
               {/* Small Circle (Bottom Right Overlap) */}
               <div className="gsap-circle absolute bottom-[5%] left-[25%] w-[38%] aspect-square rounded-full overflow-hidden border-[6px] border-white shadow-2xl z-40">
-                <img src="/about_imgs/4.jpeg" alt="PPF Community" className="w-full h-full object-cover" />
+                <img src="/about_page/3.jpg" alt="PPF Community" className="w-full h-full object-cover" />
               </div>
 
               {/* Accent callout (Moved to RHS top, No Overlap) */}

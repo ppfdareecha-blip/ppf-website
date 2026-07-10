@@ -1,66 +1,14 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { FaRegCalendarAlt, FaMapMarkerAlt, FaUser, FaArrowLeft } from "react-icons/fa";
-
-const centersData = [
-  {
-    name: 'Centre for Women and Child Welfare',
-    abbr: 'PPF-CWCW',
-    slug: 'ppf-cwcw',
-    img: 'https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/centers/1.jpg',
-    description: 'Empowering communities through rigorous research on maternal health, child protection frameworks, and inclusive gender equitable policies.'
-  },
-  {
-    name: 'Centre for New Technologies',
-    abbr: 'PPF-CNT',
-    slug: 'ppf-cnt',
-    img: 'https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/centers/2.jpg',
-    description: 'Analyzing the societal, legal, and economic implications of emerging tech, artificial intelligence, and digital transformation landscapes.'
-  },
-  {
-    name: 'Centre for Neighbourhood Studies',
-    abbr: 'PPF-CNS',
-    slug: 'ppf-cns',
-    img: 'https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/centers/3.jpg',
-    description: 'Fostering strategic regional cooperation, geopolitical analysis, and cross-border connectivity frameworks across South Asia.'
-  },
-  {
-    name: 'Centre for Disaster Risk Reduction and Management',
-    abbr: 'PPF-CDRRM',
-    slug: 'ppf-cdrrm',
-    img: 'https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/centers/4.jpg',
-    description: 'Developing climate resilience models, early warning policy integration, and disaster response preparedness matrixes.'
-  },
-  {
-    name: 'Centre for Cohesive Society Studies',
-    abbr: 'PPF-CCSS',
-    slug: 'ppf-ccss',
-    img: 'https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/centers/5.jpg',
-    description: 'Studying multiculturalism, interfaith dialogue, social harmony metrics, and policy interventions for a pluralistic society.'
-  },
-  {
-    name: 'Centre for Radicalisation and Security Studies',
-    abbr: 'PPF-CRSS',
-    slug: 'ppf-crss',
-    img: 'https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/centers/6.jpg',
-    description: 'Mapping internal security threats, counter-terrorism doctrines, and strategic de-radicalization pathways.'
-  },
-  {
-    name: 'Centre for Equity and Diversity Studies',
-    abbr: 'PPF-CEDS',
-    slug: 'ppf-ceds',
-    img: 'https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/centers/7.jpg',
-    description: 'Advocating for marginalized groups, inclusive governance, socioeconomic representation, and legal literacy programs.'
-  }
-];
+import { centersData } from "@/components/home/centers";
 
 const stripHtml = (html) => {
   if (!html) return "";
-
   const temp = document.createElement("div");
   temp.innerHTML = html;
   return temp.textContent || temp.innerText || "";
@@ -71,18 +19,41 @@ export default function CenterPage() {
   const [centerEvents, setCenterEvents] = useState([]);
   const [centerOpinions, setCenterOpinions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const timerRef = useRef(null);
 
-  // Find targeted center based on URL slug
   const center = centersData.find(c => c.slug === (slug || "").toLowerCase()) || {
     name: "Specialized Policy Division",
     abbr: slug ? `PPF-${slug.toUpperCase()}` : "PPF-CENTER",
     slug: slug || "center",
-    img: "https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/centers/1.jpg",
-    description: "An elite strategic policy wing focusing on core governance, empirical data research, and sustainable development metrics."
+    img: "/CentersPictures/WomenWelfare.jpg",
+    description: "An elite strategic policy wing focusing on core governance, empirical data research, and sustainable development metrics.",
+    innerImgs: []
   };
+
+  const slides = useMemo(() => [center.img, ...(center.innerImgs || [])], [center.img, center.innerImgs]);
+
+  const startTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+  }, [slides.length]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    startTimer();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [startTimer]);
+
+  const goToSlide = (index) => {
+    setActiveSlide(index);
+    startTimer();
+  };
+
+  useEffect(() => {
     const fetchCenterData = async () => {
       setIsLoading(true);
       try {
@@ -117,42 +88,51 @@ export default function CenterPage() {
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-lora">
       <Navbar />
 
-      {/* Stunning Cover Banner */}
-      <section className="relative w-full pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-slate-900">
-        <div className="absolute inset-0 z-0">
+      {/* Banner Slideshow */}
+      <section className="relative w-full h-[60vh] md:h-[70vh] overflow-hidden bg-slate-900">
+        {slides.map((src, idx) => (
           <img
-            src={center.img}
-            alt={center.name}
-            className="w-full h-full object-cover opacity-30 scale-105 filter blur-sm"
+            key={idx}
+            src={src}
+            alt={`${center.name} slide ${idx + 1}`}
+            className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-[1250ms] ease-in-out ${idx === activeSlide ? "opacity-100" : "opacity-0"}`}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-slate-900/40" />
-        </div>
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/50 to-slate-900/30" />
 
-        <div className="container mx-auto px-6 max-w-7xl relative z-10">
-          <Link
-            href="/#centers"
-            className="inline-flex items-center gap-2 text-xs font-lato font-bold text-ppf-orange uppercase tracking-widest hover:text-white transition-colors mb-8 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10"
-          >
-            <FaArrowLeft size={10} /> Back to Divisions
-          </Link>
-
-          <div className="flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12">
-            <div className="w-24 h-24 md:w-32 md:h-32 rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl flex-shrink-0 relative">
-              <img src={center.img} alt={center.name} className="w-full h-full object-cover" />
-            </div>
+        <div className="absolute inset-0 flex items-center">
+          <div className="container mx-auto px-6 max-w-7xl relative z-10">
+            <Link
+              href="/#centers"
+              className="inline-flex items-center gap-2 text-xs font-lato font-bold text-ppf-orange uppercase tracking-widest hover:text-white transition-colors mb-6 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/10"
+            >
+              <FaArrowLeft size={10} /> Back to Divisions
+            </Link>
 
             <div className="max-w-3xl">
-              <span className="inline-block px-3 py-1 bg-ppf-purple text-white font-lato font-black text-[10px] tracking-[0.2em] uppercase rounded-md mb-3 shadow-sm border border-white/10">
+              <span className="inline-block px-3 py-1 bg-ppf-purple text-white font-lato font-black text-[10px] tracking-[0.2em] uppercase rounded-md mb-4 shadow-sm border border-white/10">
                 {center.abbr}
               </span>
-              <h1 className="text-3xl md:text-5xl font-black text-white leading-tight mb-4 tracking-tight">
+              <h1 className="text-4xl md:text-6xl font-black text-white leading-tight mb-4 tracking-tight">
                 {center.name}
               </h1>
-              <p className="text-slate-300 font-lato text-base md:text-lg leading-relaxed max-w-2xl font-medium">
+              <p className="text-slate-200 font-lato text-base md:text-lg leading-relaxed max-w-2xl font-medium">
                 {center.description}
               </p>
             </div>
           </div>
+        </div>
+
+        {/* Slideshow Indicators */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => goToSlide(idx)}
+              className={`rounded-full transition-all duration-300 ${idx === activeSlide ? "w-8 h-2 bg-white" : "w-2 h-2 bg-white/40 hover:bg-white/70"}`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
         </div>
       </section>
 
@@ -191,7 +171,6 @@ export default function CenterPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {centerEvents.map((ev) => (
                     <div key={`ev-${ev.id}`} className="bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 rounded-2xl flex flex-col overflow-hidden group">
-                      {/* Image Top Half */}
                       <div className="relative h-48 w-full overflow-hidden flex-shrink-0 bg-slate-50">
                         <img
                           src={ev.image || center.img}
@@ -203,7 +182,6 @@ export default function CenterPage() {
                         </div>
                       </div>
 
-                      {/* Content Bottom Half */}
                       <div className="p-6 flex flex-col flex-grow justify-between">
                         <div>
                           <div className="flex items-center gap-2 text-xs font-lato font-bold text-ppf-purple mb-3 uppercase tracking-wide">
@@ -265,7 +243,6 @@ export default function CenterPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {centerOpinions.map((op) => (
                     <div key={`op-${op._id}`} className="bg-white border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 rounded-2xl flex flex-col overflow-hidden group">
-                      {/* Image Top Half */}
                       <div className="relative h-48 w-full overflow-hidden flex-shrink-0 bg-slate-50">
                         <img
                           src={op.image || center.img}
@@ -277,7 +254,6 @@ export default function CenterPage() {
                         </div>
                       </div>
 
-                      {/* Content Bottom Half */}
                       <div className="p-6 flex flex-col flex-grow justify-between">
                         <div>
                           <div className="flex items-center gap-2 text-xs font-lato font-bold text-ppf-teal mb-3 uppercase tracking-wide">

@@ -67,14 +67,22 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-[90vh] md:h-screen w-full flex flex-col bg-gradient-to-r from-[#f9ecff] via-white to-white overflow-hidden">
-      
+
       {/* --- UPPER HERO CONTENT (SPLIT LAYOUT TO PREVENT OVERLAPPING) --- */}
       <div className="flex-grow flex flex-col lg:flex-row w-full relative z-10">
-        
+
         {/* Left Column: Main Content */}
         <div className="w-full lg:w-[44%] flex flex-col justify-center pl-6 md:pl-10 lg:pl-16 pt-32 lg:pt-32 pb-12">
           <div className="max-w-xl">
-            <motion.div 
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-block bg-ppf-orange/10 border border-ppf-orange/50 text-ppf-orange px-3 py-1 lg:px-4 lg:py-1.5 text-[10px] md:text-xs font-bold rounded-full uppercase tracking-wider mb-6"
+            >
+              20+ Years of Policy Excellence
+            </motion.div>
+
+            <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center gap-3 mb-4"
@@ -85,7 +93,7 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
@@ -96,22 +104,22 @@ export default function HeroSection() {
               <span className="text-mono-deep">Promoting Resilience</span>
             </motion.h1>
 
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-slate-600 font-lato text-base md:text-lg max-w-lg mb-8 leading-relaxed"
             >
-              Policy Perspectives Foundation (PPF) is an independent think-tank 
-              shaping the 21st century through <span className="text-ppf-orange font-semibold border-b-2 border-ppf-orange/20">deep-dive analysis</span> and 
+              Policy Perspectives Foundation (PPF) is an independent think-tank
+              shaping the 21st century through <span className="text-ppf-orange font-semibold border-b-2 border-ppf-orange/20">deep-dive analysis</span> and
               socio-economic insights.
             </motion.p>
 
             <motion.div
-               initial={{ opacity: 0, y: 15 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ duration: 0.5, delay: 0.4 }}
-               className="flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-wrap gap-4"
             >
               <Link href="/pages/publications">
                 <button className="group flex items-center gap-3 bg-ppf-teal hover:bg-ppf-teal/90 text-ppf-purple px-8 py-3.5 text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-lg shadow-ppf-purple/20 rounded-full active:scale-95">
@@ -124,7 +132,7 @@ export default function HeroSection() {
         </div>
 
         {/* Right Column: Hero Image Slider */}
-        <div 
+        <div
           className="w-full lg:w-[56%] h-[40vh] sm:h-[50vh] lg:h-auto min-h-[350px] lg:min-h-0 relative overflow-hidden group cursor-pointer"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -144,9 +152,8 @@ export default function HeroSection() {
             return (
               <div
                 key={index}
-                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                  isActive ? "opacity-100 z-0" : "opacity-0 -z-10"
-                }`}
+                className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${isActive ? "opacity-100 z-0" : "opacity-0 -z-10"
+                  }`}
               >
                 <img
                   src={image.src}
@@ -174,9 +181,8 @@ export default function HeroSection() {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`h-2.5 rounded-full transition-all duration-300 relative overflow-hidden cursor-pointer ${
-                    isActive ? "w-10 bg-white/30" : "w-2.5 bg-white/40 hover:bg-white/70"
-                  }`}
+                  className={`h-2.5 rounded-full transition-all duration-300 relative overflow-hidden cursor-pointer ${isActive ? "w-10 bg-white/30" : "w-2.5 bg-white/40 hover:bg-white/70"
+                    }`}
                   aria-label={`Go to slide ${index + 1}`}
                 >
                   {isActive && (
@@ -200,7 +206,7 @@ export default function HeroSection() {
       </div>
 
       {/* --- QUICK LINKS BAR --- */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
@@ -232,7 +238,8 @@ export default function HeroSection() {
       </motion.div>
 
       {/* --- CORE STYLES --- */}
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes fillProgress {
           from { width: 0%; }
           to { width: 100%; }

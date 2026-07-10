@@ -109,7 +109,7 @@ export default function SupportQueries({ sectionWidth }) {
             // NORMAL FORM UI
             <>
               <div className="mb-6">
-                <h3 className="text-2xl font-lora font-bold text-slate-900 leading-tight">Drop a question ?</h3>
+                <h3 className="text-2xl font-lora font-bold text-slate-900 leading-tight">Drop a question</h3>
                 <p className="text-sm text-slate-500 font-lato font-medium">Our team will get back to you shortly.</p>
               </div>
 

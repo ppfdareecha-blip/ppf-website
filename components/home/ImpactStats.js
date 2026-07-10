@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import { motion, useSpring, useTransform, useInView, useScroll } from "framer-motion";
-import { FaBookOpen, FaGlobeAmericas, FaUsers, FaChartLine, FaAward } from "react-icons/fa";
+import { FaBookOpen, FaGlobeAmericas, FaUsers, FaChartLine, FaAward, FaArrowRight } from "react-icons/fa";
 
 const stats = [
   { label: "Years of Policy Excellence", val: 20, suffix: "+", icon: FaAward, growth: "Est. 2005" },
@@ -33,31 +33,31 @@ function Counter({ value, suffix }) {
 
 export default function ImpactStats({ sectionWidth }) {
   const containerRef = useRef(null);
-  
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
-  
+
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   return (
-    <section 
-      id="impact" 
+    <section
+      id="impact"
       ref={containerRef}
       /* Removed relative z-10 to prevent creating a high stacking context */
       className="relative py-12 overflow-hidden bg-slate-200"
     >
       {/* Background Layer - Removed z-0 */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
+        <motion.div
           style={{ y: backgroundY }}
           className="relative w-full h-[120%] -top-[10%]"
         >
-          <img 
-            src="https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/Home/3.jpg"
+          <img
+            src="/bg.jpeg"
             alt="Background"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[center_80%]"
           />
           <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]" />
         </motion.div>
@@ -65,22 +65,29 @@ export default function ImpactStats({ sectionWidth }) {
 
       {/* Content Layer - Removed z-10 */}
       <div className={`${sectionWidth || 'max-w-6xl mx-auto'} relative px-6`}>
-        
+
         <div className="mb-8 text-center lg:text-left">
-          <motion.h2 
-             initial={{ opacity: 0, y: 10 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             className="flex items-center gap-3 justify-center lg:justify-start text-3xl font-lora md:text-4xl font-black text-white leading-tight mb-2"
+          <motion.h2
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-3 justify-center lg:justify-start text-3xl font-lora md:text-4xl font-black text-white leading-tight mb-2"
           >
             <FaChartLine className="text-ppf-teal text-3xl md:text-4xl font-thin" />
-            Growth <span className="text-ppf-teal">Trajectory</span>
+            Policy and Research <span className="text-ppf-teal">Initiatives</span>
           </motion.h2>
-          <motion.div 
-             initial={{ opacity: 0, x: -20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             className="text-vibrant-violet font-bold uppercase tracking-[0.1em] text-md font-lato"
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-4 mt-4 lg:mt-0"
           >
-            Impact Expanding.
+            <div className="text-vibrant-violet font-bold uppercase tracking-[0.1em] text-md font-lato">
+              Impact Expanding.
+            </div>
+
+            <a href="/pages/publications" className="group inline-flex items-center gap-2 bg-white/10 hover:bg-white text-white hover:text-ppf-purple border border-white/40 hover:border-white px-6 py-2 rounded-full font-bold uppercase tracking-widest text-xs transition-all duration-300">
+              View Publications
+              <FaArrowRight className="group-hover:translate-x-1 transition-transform duration-300" />
+            </a>
           </motion.div>
         </div>
 
@@ -115,13 +122,13 @@ export default function ImpactStats({ sectionWidth }) {
                 </div>
 
                 <div className="mt-4 h-1 w-full bg-slate-200/40 rounded-full overflow-hidden">
-                   <motion.div 
-                      initial={{ width: 0 }}
-                      whileInView={{ width: "100%" }}
-                      viewport={{ once: false }}
-                      transition={{ duration: 1.2, delay: i * 0.15 }}
-                      className="h-full bg-gradient-to-r from-ppf-purple to-ppf-teal" 
-                   />
+                  <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "100%" }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 1.2, delay: i * 0.15 }}
+                    className="h-full bg-gradient-to-r from-ppf-purple to-ppf-teal"
+                  />
                 </div>
               </div>
             </motion.div>

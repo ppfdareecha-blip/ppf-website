@@ -10,8 +10,8 @@ export default function About({ sectionWidth }) {
   const images = [
     "/about_imgs/1.jpeg",
     "/about_imgs/2.jpeg",
-    "/about_imgs/3.JPG",
-    "/about_imgs/4.jpeg"
+    "/about_imgs/3.jpg",
+    "/about_imgs/4.jpg"
   ];
 
   useEffect(() => {

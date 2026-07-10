@@ -3,13 +3,15 @@ import React, { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/home/Hero";
-import About from "@/components/home/About";
+// import About from "@/components/home/About";
 import Centers from "@/components/home/centers";
 import ImpactStats from "@/components/home/ImpactStats";
 import Activities from "@/components/home/Activites";
 import Footer from "@/components/Footer";
 import SupportQueries from "@/components/home/questions";
 import MediaSection from "@/components/home/MediaSection";
+import PodcastSection from "@/components/home/PodcastSection";
+import CommunityOutreach from "@/components/home/CommunityOutreach";
 
 export default function HomePage() {
   const [isNavHidden, setIsNavHidden] = useState(false);
@@ -39,11 +41,13 @@ export default function HomePage() {
 
       <main className=" bg-[#F8FAFC]">
         <Hero sectionWidth={sectionWidth} />
-        <About sectionWidth={sectionWidth} />
+        {/* <About sectionWidth={sectionWidth} /> */}
         <ImpactStats sectionWidth={sectionWidth} />
+        <CommunityOutreach sectionWidth={sectionWidth} />
         <Centers sectionWidth={sectionWidth} />
         <Activities sectionWidth={sectionWidth} />
-        <SupportQueries sectionWidth={sectionWidth}/>
+        <SupportQueries sectionWidth={sectionWidth} />
+        <PodcastSection sectionWidth={sectionWidth} />
         <MediaSection sectionWidth={sectionWidth} />
       </main>
 
