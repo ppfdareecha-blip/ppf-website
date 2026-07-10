@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
 import { FaArrowRight, FaPlus } from "react-icons/fa";
 import Link from "next/link";
 
@@ -63,10 +62,7 @@ export default function Centers({ sectionWidth }) {
       <div className={sectionWidth || "max-w-7xl mx-auto px-6"}>
 
         {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+        <div
           className="max-w-3xl mb-16"
         >
           <div className="flex items-center gap-3 mb-4">
@@ -82,7 +78,7 @@ export default function Centers({ sectionWidth }) {
             Independent research wings focused on shaping policy through
             <span className="text-ppf-orange font-semibold"> data-driven analysis</span> and strategic foresight.
           </p>
-        </motion.div>
+        </div>
 
         {/* Two-Part Card Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -92,13 +88,8 @@ export default function Centers({ sectionWidth }) {
               href={`/pages/centers/${center.abbr.toLowerCase()}`}
               className="block h-full"
             >
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.03, y: -5, transition: { duration: 0.3 } }}
-                className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-slate-100 cursor-pointer"
+                <div
+                className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100 cursor-pointer border-t-4 border-t-ppf-purple"
               >
                 {/* TOP PART: IMAGE */}
                 <div className="relative h-44 overflow-hidden flex-shrink-0 bg-slate-50">
@@ -125,8 +116,8 @@ export default function Centers({ sectionWidth }) {
                   </div>
 
                   {/* Abbreviation Badge */}
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full shadow-sm z-20">
-                    <span className="text-ppf-purple font-lato font-bold text-[10px] tracking-widest uppercase">
+                  <div className="absolute top-4 left-4 bg-ppf-purple/90 backdrop-blur-md px-3 py-1 rounded-full shadow-sm z-20">
+                    <span className="text-white font-lato font-bold text-[10px] tracking-widest uppercase">
                       {center.abbr.split('-')[1]}
                     </span>
                   </div>
@@ -150,7 +141,7 @@ export default function Centers({ sectionWidth }) {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </Link>
           ))}
 

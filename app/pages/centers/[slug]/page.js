@@ -191,7 +191,7 @@ export default function CenterPage() {
                             {ev.title}
                           </h3>
                           {ev.speaker && (
-                            <span className="inline-block text-[11px] font-lato font-bold text-ppf-teal bg-teal-50 px-2 py-0.5 rounded mb-3">
+                            <span className="inline-block text-[11px] font-lato font-bold text-ppf-orange bg-ppf-orange-50 px-2 py-0.5 rounded mb-3">
                               Speaker: {ev.speaker}
                             </span>
                           )}
