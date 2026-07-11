@@ -46,9 +46,9 @@ export default function HomePage() {
         <CommunityOutreach sectionWidth={sectionWidth} />
         <Centers sectionWidth={sectionWidth} />
         <Activities sectionWidth={sectionWidth} />
-        <SupportQueries sectionWidth={sectionWidth} />
         <PodcastSection sectionWidth={sectionWidth} />
         <MediaSection sectionWidth={sectionWidth} />
+        <SupportQueries sectionWidth={sectionWidth} />
       </main>
 
       <Footer sectionWidth={sectionWidth} />
