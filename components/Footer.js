@@ -22,7 +22,7 @@ const Footer = ({ sectionWidth }) => {
           </div>
           <div className="flex items-center gap-2.5">
             <FaPhoneAlt className="text-vibrant-teal flex-shrink-0" />
-            <p className="font-bold font-helvetica">+91 11 4105 8454</p>
+            <p className="font-bold font-helvetica">011-42638454</p>
           </div>
           <div className="flex items-center gap-2.5">
             <FaEnvelope className="text-vibrant-teal flex-shrink-0" />

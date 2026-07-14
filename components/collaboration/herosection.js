@@ -4,14 +4,14 @@ import React from "react";
 export default function HeroSection() {
   return (
     /* 1. Maintaining the reduced height as requested */
-    <section className="relative py-8 flex items-center justify-center overflow-hidden selection:bg-ppf-orange selection:text-white">
+    <section className="relative py-12 flex items-center justify-center overflow-hidden selection:bg-ppf-orange selection:text-white">
 
       {/* Parallax Background */}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
         style={{
           backgroundImage:
-            "url('https://raw.githubusercontent.com/Khushi-bhaskar01/PPF_Blob/main/colab.jpg')",
+            "url('/partners_banner.jpeg')",
         }}
       ></div>
 

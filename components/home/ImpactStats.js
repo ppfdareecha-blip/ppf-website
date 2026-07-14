@@ -55,9 +55,9 @@ export default function ImpactStats({ sectionWidth }) {
           className="relative w-full h-[120%] -top-[10%]"
         >
           <img
-            src="/bg.jpeg"
+            src="/stats_bg.jpeg"
             alt="Background"
-            className="w-full h-full object-cover object-[center_80%]"
+            className="w-full h-full object-cover object-[center_60%]"
           />
           <div className="absolute inset-0 bg-black/50 backdrop-blur-[1px]" />
         </motion.div>
