@@ -277,10 +277,10 @@ export default function OpinionDetail() {
           </div>
 
           {/* Core Structured Article Canvas */}
-          <article className="prose prose-slate max-w-3xl mx-auto break-words w-full overflow-hidden">
+          <article className="w-full">
             {opinion.excerpt && (
               <p 
-                className="text-lg sm:text-xl md:text-2xl text-slate-600 font-medium leading-relaxed italic mb-12 border-l-4 border-ppf-purple pl-5 sm:pl-6 break-words bg-purple-50/30 py-3 pr-4 rounded-r-2xl"
+                className="text-lg sm:text-xl md:text-2xl text-slate-600 font-medium leading-relaxed italic mb-12 border-l-4 border-ppf-purple pl-5 sm:pl-6 break-normal bg-purple-50/30 py-3 pr-4 rounded-r-2xl"
                 dangerouslySetInnerHTML={{ __html: opinion.excerpt }}
               />
             )}
@@ -288,14 +288,36 @@ export default function OpinionDetail() {
             {opinion.content && (
               <>
                 <div
-                  className="opinion-detail-content text-slate-700 font-lato leading-relaxed text-base sm:text-lg max-w-full overflow-hidden"
-                  dangerouslySetInnerHTML={{ __html: opinion.content }}
+                  className="opinion-detail-content text-slate-700 font-lato leading-relaxed text-base sm:text-lg max-w-full"
+                  dangerouslySetInnerHTML={{ __html: opinion.content ? opinion.content.replace(/&nbsp;/g, ' ').replace(/\u00A0/g, ' ').replace(/[\u200B-\u200D\uFEFF]/g, '') : '' }}
                 />
                 <style>{`
+                  /* ── Quill class overrides (quill.snow.css is NOT loaded on this page) ── */
+                  .opinion-detail-content .ql-align-justify,
+                  .opinion-detail-content .ql-align-center,
+                  .opinion-detail-content .ql-align-right,
+                  .opinion-detail-content .ql-align-left {
+                    text-align: left !important;
+                  }
+                  /* ── Base container ── */
                   .opinion-detail-content {
-                    word-wrap: break-word;
-                    word-break: break-word;
+                    word-break: normal;
                     overflow-wrap: break-word;
+                    word-wrap: break-word;
+                    white-space: normal;
+                    hyphens: manual;
+                    text-align: left;
+                  }
+                  /* ── Override all child elements ── */
+                  .opinion-detail-content p,
+                  .opinion-detail-content span,
+                  .opinion-detail-content div,
+                  .opinion-detail-content li {
+                    word-break: normal !important;
+                    overflow-wrap: break-word !important;
+                    white-space: normal !important;
+                    text-align: left !important;
+                    hyphens: manual !important;
                   }
                   .opinion-detail-content h1 { font-size: 2rem; font-weight: 800; margin: 2.5rem 0 1.25rem; color: #0f172a; line-height: 1.25; font-family: inherit; }
                   .opinion-detail-content h2 { font-size: 1.6rem; font-weight: 700; margin: 2.25rem 0 1rem; color: #1e293b; font-family: inherit; }

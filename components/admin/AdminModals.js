@@ -99,8 +99,17 @@ export function OpinionViewModal({ opinion, onClose }) {
           </div>
           <div>
             <p className="text-xs font-black uppercase tracking-[0.2em] text-vibrant-charcoal/50 mb-3">Description</p>
-            <div className="bg-[#F8F9FA] p-8 rounded-[2rem] border-2 border-vibrant-gray text-vibrant-charcoal/80 leading-relaxed shadow-inner opinion-rich-content" dangerouslySetInnerHTML={{ __html: opinion.description }} />
+            <div className="bg-[#F8F9FA] p-8 rounded-[2rem] border-2 border-vibrant-gray text-vibrant-charcoal/80 leading-relaxed shadow-inner opinion-rich-content" dangerouslySetInnerHTML={{ __html: opinion.description ? opinion.description.replace(/[\u200B-\u200D\uFEFF]/g, '') : '' }} />
             <style>{`
+              .opinion-rich-content, .opinion-rich-content * {
+                word-break: normal !important;
+                overflow-wrap: break-word !important;
+                word-wrap: break-word !important;
+                white-space: normal !important;
+                line-break: auto !important;
+                hyphens: manual !important;
+                text-align: left !important;
+              }
               .opinion-rich-content h1{font-size:1.5rem;font-weight:800;margin:.75rem 0;color:#1a1a2e}
               .opinion-rich-content h2{font-size:1.25rem;font-weight:700;margin:.75rem 0;color:#1a1a2e}
               .opinion-rich-content h3{font-size:1.1rem;font-weight:700;margin:.5rem 0;color:#1a1a2e}

@@ -137,7 +137,7 @@ export default function AuthorDetail() {
 
               {author.about ? (
                 <p className="text-slate-600 leading-relaxed text-base sm:text-lg whitespace-pre-wrap font-normal">
-                  {author.about}
+                  {author.about.replace(/&nbsp;/g, ' ').replace(/\u00A0/g, ' ')}
                 </p>
               ) : (
                 <p className="text-slate-400 italic text-sm">
@@ -205,7 +205,7 @@ export default function AuthorDetail() {
                         {op.title}
                       </h4>
                       <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed font-normal">
-                        {op.description ? op.description.replace(/<[^>]*>/g, "") : ""}
+                        {op.description ? op.description.replace(/&nbsp;/g, ' ').replace(/\u00A0/g, ' ').replace(/<[^>]*>/g, "") : ""}
                       </p>
                       <div className="flex items-center gap-2 text-[10px] text-slate-400 font-semibold uppercase tracking-wider pt-2 border-t border-slate-50 mt-auto">
                         <FaRegCalendarAlt size={10} className="text-ppf-orange shrink-0" />

@@ -36,7 +36,7 @@ export async function GET(req, { params }) {
         _id: op._id.toString(),
         id: op.opinionId,
         title: op.title,
-        description: op.description || "",
+        description: op.description ? op.description.replace(/&nbsp;/g, ' ').replace(/\u00A0/g, ' ') : "",
         category: op.tag || "Opinion",
         centerTag: op.center || "",
         date: dateStr,
@@ -52,7 +52,7 @@ export async function GET(req, { params }) {
       name: author.authorName,
       position: author.authorPosition,
       image: author.authorImage || "",
-      about: author.about || "",
+      about: author.about ? author.about.replace(/&nbsp;/g, ' ').replace(/\u00A0/g, ' ') : "",
       socialLinks: author.socialLinks || [],
       opinions: formattedOpinions
     };
