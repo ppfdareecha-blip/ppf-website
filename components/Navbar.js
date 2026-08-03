@@ -98,6 +98,7 @@ export default function Navbar() {
       dropdown: [
         { name: "About us", href: "/pages/about" },
         { name: "Centers", href: "/#centers" },
+        { name: "Community Outreach", href: "/#community-outreach" },
         { name: "Recent Activities", href: "/#activities" },
         { name: "Have a Question ?", href: "/#queries" },
       ]
@@ -125,7 +126,7 @@ export default function Navbar() {
       href: "/pages/collaboration",
       dropdown: [
         { name: "Career", href: "/pages/collaboration/#internships" },
-        { name: "Courses", href: "/pages/collaboration/#courses" },
+        // { name: "Courses", href: "/pages/collaboration/#courses" },
         { name: "Donate", href: "/pages/collaboration/#donate" },
       ]
     },

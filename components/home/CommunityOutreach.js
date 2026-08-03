@@ -36,7 +36,7 @@ const CommunityOutreach = ({ sectionWidth }) => {
     ];
 
     return (
-        <section className={`py-10 ${sectionWidth}`}>
+        <section id="community-outreach" className={`py-10 ${sectionWidth}`}>
             <div className="mb-6 text-center">
                 <h2 className="text-2xl md:text-3xl font-bold text-ppf-purple mb-3">Community Outreach</h2>
                 <div className="w-24 h-1 bg-ppf-orange mx-auto rounded-full"></div>

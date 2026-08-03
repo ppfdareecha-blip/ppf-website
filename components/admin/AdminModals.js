@@ -258,7 +258,11 @@ export function OpinionEditModal({ opinion, authors = [], onClose, onSaved }) {
               <label className="block text-xs font-black uppercase tracking-[0.2em] text-vibrant-charcoal/50 mb-2">Description (Rich Text)</label>
               <RichTextEditor value={form.description} onChange={html => setForm({ ...form, description: html })} placeholder="Edit the description..." />
             </div>
-            <input type="text" placeholder="Date & Time" value={form.dateAndTime} onChange={e => setForm({ ...form, dateAndTime: e.target.value })} className="w-full p-4 bg-vibrant-offwhite rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-black font-semibold" />
+            <div>
+              <label className="block text-xs font-black uppercase tracking-[0.2em] text-vibrant-charcoal/50 mb-1">Published Date</label>
+              <input type="text" placeholder="e.g. May 22, 2026" value={form.dateAndTime} onChange={e => setForm({ ...form, dateAndTime: e.target.value })} className="w-full p-4 bg-vibrant-offwhite rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-black font-semibold" />
+              <p className="text-[10px] text-vibrant-charcoal/40 mt-1 font-semibold">Format: Month Day, Year &mdash; e.g. &ldquo;May 22, 2026&rdquo;</p>
+            </div>
             <select value={form.centerTag} onChange={e => setForm({ ...form, centerTag: e.target.value })} className="w-full p-4 bg-vibrant-offwhite rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none appearance-none font-semibold">
               <option value="">No Center</option>
               {PREDEFINED_CENTERS.map(c => <option key={c} value={c}>{c}</option>)}

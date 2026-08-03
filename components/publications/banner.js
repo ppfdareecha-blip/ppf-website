@@ -25,16 +25,7 @@ export default function ParallaxBanner() {
       {/* --- CONTENT LAYER --- */}
       <div className="relative z-20 max-w-7xl mx-auto w-full">
         <div className="max-w-3xl">
-          {/* Breadcrumb / Label */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center gap-3 mb-3"
-          >
-            <span className="h-[1px] w-6 bg-mono-silver" />
-            <span className="text-mono-silver font-bold uppercase tracking-[0.3em] text-[9px]">Knowledge Hub</span>
-          </motion.div>
+          
 
           {/* Main Typography */}
           <motion.div
@@ -52,8 +43,7 @@ export default function ParallaxBanner() {
             {/* Border using brand teal for a sophisticated accent */}
             <div className="border-l-[1.5px] border-ppf-teal/40 pl-5">
               <p className="text-slate-200/80 text-sm md:text-base max-w-lg leading-relaxed font-light">
-                Bridging the gap between <span className="text-white font-medium">strategic analysis</span> and
-                evidence-based policy through rigorous scrutiny.
+                Bridging the gap between policy and practice.
               </p>
             </div>
           </motion.div>

@@ -15,8 +15,42 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const formatDateHuman = (dateInput) => {
+  if (!dateInput) return null;
+  const parsed = new Date(dateInput);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return parsed.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+const getDisplayDate = (op) => {
+  // Priority: publishedAt string (human-readable) > dateAndTime > createdAt
+  // Always format to human-readable — never return raw ISO timestamps
+  const raw = op?.publishedAt || op?.dateAndTime || op?.createdAt;
+  if (!raw) return "Recent";
+  // If it's already a nice human-readable string (not parseable as ISO), return it
+  const asDate = new Date(raw);
+  if (Number.isNaN(asDate.getTime())) {
+    // Not a valid date — return the raw string (e.g. "April 18, 2026")
+    return String(raw);
+  }
+  // Valid date — format it nicely
+  return asDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
 export async function GET() {
   try {
+    if (!process.env.MONGODB_URI) {
+      return NextResponse.json({ success: true, data: [] });
+    }
+
     await dbConnect();
     // Fetch approved opinions and populate author information
     const opinions = await Opinion.find({})
@@ -33,14 +67,7 @@ export async function GET() {
       const primaryAuthor = resolvedAuthors[0] || {};
       const primaryAuthorImage = primaryAuthor.authorImage || primaryAuthor.authorPictureLink || primaryAuthor.authorImageLink || primaryAuthor.profilePictureUrl || "";
 
-      // Static formatted date fallback
-      const dateStr = op.createdAt
-        ? new Date(op.createdAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        : "Recent";
+      const dateStr = getDisplayDate(op);
 
       return {
         _id: op._id.toString(),

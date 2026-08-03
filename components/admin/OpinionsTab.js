@@ -99,7 +99,11 @@ function CreateOpinionForm({ authors = [], onSwitchToAuthorsTab, onCreated }) {
           <label className="block text-xs font-black uppercase tracking-[0.2em] text-vibrant-charcoal/50 mb-2">Description (Rich Text)</label>
           <RichTextEditor value={form.description} onChange={html => setForm({ ...form, description: html })} placeholder="Write the opinion description here..." />
         </div>
-        <input type="text" placeholder="Date & Time (e.g. April 18, 2026)" value={form.dateAndTime} onChange={e => setForm({ ...form, dateAndTime: e.target.value })} className="w-full p-4 bg-vibrant-offwhite rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-black font-semibold" />
+        <div>
+          <label className="block text-xs font-black uppercase tracking-[0.2em] text-vibrant-charcoal/50 mb-1">Published Date</label>
+          <input type="text" placeholder="e.g. April 18, 2026" value={form.dateAndTime} onChange={e => setForm({ ...form, dateAndTime: e.target.value })} className="w-full p-4 bg-vibrant-offwhite rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-black font-semibold" />
+          <p className="text-[10px] text-vibrant-charcoal/40 mt-1 font-semibold">Format: Month Day, Year &mdash; e.g. &ldquo;April 18, 2026&rdquo;</p>
+        </div>
         <select value={form.centerTag} onChange={e => setForm({ ...form, centerTag: e.target.value })} className="w-full p-4 bg-vibrant-offwhite rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none appearance-none font-semibold text-vibrant-charcoal">
           <option value="" disabled>Select a Center (Optional)</option>
           {PREDEFINED_CENTERS.map(c => <option key={c} value={c}>{c}</option>)}

@@ -11,6 +11,18 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const getDisplayDate = (op) => {
+  const raw = op?.publishedAt || op?.dateAndTime || op?.createdAt;
+  if (!raw) return "Recent";
+  const asDate = new Date(raw);
+  if (Number.isNaN(asDate.getTime())) return String(raw);
+  return asDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
 export async function DELETE(req, { params }) {
   const authError = requireAdmin(req);
   if (authError) return authError;
@@ -184,6 +196,7 @@ export async function PUT(req, { params }) {
     if (description !== undefined) existing.description = description;
     if (tag !== undefined) existing.tag = tag;
     if (centerTag !== undefined) existing.center = centerTag;
+    if (dateAndTime !== undefined) existing.publishedAt = dateAndTime;
     if (downloadableLink !== undefined) existing.downloadableLink = downloadableLink;
     existing.attachedPoster = imageUrl;
 
@@ -205,13 +218,7 @@ export async function PUT(req, { params }) {
     const populated = await Opinion.findById(existing._id).populate("authors");
 
     // Map response format to match frontend expectation
-    const dateStr = populated.createdAt
-      ? new Date(populated.createdAt).toLocaleDateString("en-US", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })
-      : "Recent";
+    const dateStr = getDisplayDate(populated);
 
     // Resolve multiple authors
     const resolvedAuthors = populated.authors || [];

@@ -11,6 +11,18 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const getDisplayDate = (op) => {
+  const raw = op?.publishedAt || op?.dateAndTime || op?.createdAt;
+  if (!raw) return "Recent";
+  const asDate = new Date(raw);
+  if (Number.isNaN(asDate.getTime())) return String(raw);
+  return asDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
 export async function GET(req) {
   const authError = requireAdmin(req);
   if (authError) return authError;
@@ -20,13 +32,7 @@ export async function GET(req) {
     
     // Format response to match nested author structure expected by the admin dashboard
     const formatted = opinions.map((op) => {
-      const dateStr = op.createdAt
-        ? new Date(op.createdAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        : "Recent";
+      const dateStr = getDisplayDate(op);
 
       // Resolve multiple authors
       const resolvedAuthors = op.authors || [];
@@ -198,6 +204,7 @@ export async function POST(req) {
       authors: authorIds,
       tag,
       center: centerTag || "",
+      publishedAt: dateAndTime || "",
       attachedPoster: imageUrl,
       downloadableLink: "",
     });
@@ -239,6 +246,7 @@ export async function POST(req) {
     };
 
     // Format output matching dashboard expectation
+    const postDateStr = getDisplayDate(populatedNewOp);
     const resultData = {
       _id: newOpinion._id.toString(),
       title: newOpinion.title,
@@ -247,6 +255,7 @@ export async function POST(req) {
       centerTag: newOpinion.center,
       imageUrl: newOpinion.attachedPoster,
       slug: newOpinion.opinionId,
+      dateAndTime: postDateStr,
       author: primaryAuthor,
       authors: authorList,
       createdAt: newOpinion.createdAt,

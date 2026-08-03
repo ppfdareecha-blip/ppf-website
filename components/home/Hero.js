@@ -110,9 +110,8 @@ export default function HeroSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-slate-600 font-lato text-base md:text-lg max-w-lg mb-8 leading-relaxed"
             >
-              Policy Perspectives Foundation (PPF) is an independent think-tank
-              shaping the 21st century through <span className="text-ppf-orange font-semibold border-b-2 border-ppf-orange/20">deep-dive analysis</span> and
-              socio-economic insights.
+             Policy Perspectives Foundation (PPF) is an independent public policy think tank that advances <span className="text-ppf-orange font-semibold border-b-2 border-ppf-orange/20">evidence-based research</span>
+             , community outreach, capacity building, and policy advocacy to promote inclusive and sustainable development
             </motion.p>
 
             <motion.div

@@ -47,7 +47,7 @@ export default function DonateSection() {
               <div className="space-y-6">
                 {impactMetrics.map((item, idx) => (
                   <div key={idx} className="flex gap-4 items-start group">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-ppf-teal shadow-sm group-hover:bg-ppf-teal group-hover:text-white transition-all duration-300">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-ppf-teal shadow-sm group-hover:bg-ppf-teal group-hover:text-ppf-orange transition-all duration-300">
                       {item.icon}
                     </div>
                     <div>
