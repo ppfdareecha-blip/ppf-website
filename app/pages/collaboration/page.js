@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/collaboration/herosection';
 import WorkWithUsSection from '@/components/collaboration/workWithusSection';
 import Courses from '@/components/collaboration/courses';
-import Internship from '@/components/collaboration/Internships';
 import Donate from '@/components/collaboration/donate';
 import ComingSoon from '@/components/collaboration/comingSoon';
 
@@ -50,7 +49,6 @@ const CollaborationPage = async () => {
     console.error("Failed to fetch careers from database:", error);
   }
 
-  const hasNoOpportunities = jobs.length === 0 && internships.length === 0 && courses.length === 0;
 
   return (
     <div className="relative min-h-screen bg-slate-50 text-slate-900 font-lato [&_h1]:font-lora [&_h2]:font-lora [&_h3]:font-lora [&_h4]:font-lora [&_h5]:font-lora [&_h6]:font-lora overflow-x-hidden selection:bg-ppf-orange/30 selection:text-ppf-purple">
@@ -65,14 +63,8 @@ const CollaborationPage = async () => {
         <Navbar/>
         <HeroSection/>
         <WorkWithUsSection/>
-        {hasNoOpportunities ? (
-          <ComingSoon jobs={jobs} internships={internships} />
-        ) : (
-          <>
-            <Courses courses={courses} />
-            <Internship jobs={jobs} internships={internships} />
-          </>
-        )}
+        <ComingSoon jobs={jobs} internships={internships} />
+        {courses.length > 0 && <Courses courses={courses} />}
         <Donate/>
         <Footer/>
       </div>
