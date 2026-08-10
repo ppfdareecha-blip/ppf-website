@@ -58,30 +58,30 @@ export const centersData = centers;
 
 export default function Centers({ sectionWidth }) {
   return (
-    <section id="centers" className="py-20 bg-[#f8f7ff]">
-      <div className={sectionWidth || "max-w-7xl mx-auto px-6"}>
+    <section id="centers" className="min-h-screen lg:h-screen w-full py-10 bg-[#f8f7ff] flex flex-col lg:overflow-hidden">
+      <div className={`${sectionWidth || "max-w-7xl mx-auto"} px-6 flex flex-col flex-grow min-h-0 lg:overflow-hidden`}>
 
         {/* Header Section */}
         <div
-          className="max-w-3xl mb-16"
+          className="max-w-3xl mb-4 lg:mb-8 shrink-0"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-[2px] w-10 bg-ppf-purple" />
-            <span className="text-ppf-purple font-lato font-bold uppercase text-[10px]">
+          <div className="flex items-center gap-2 mb-2 lg:mb-3">
+            <div className="h-[2px] w-8 lg:w-10 bg-ppf-purple" />
+            <span className="text-ppf-purple font-lato font-bold uppercase text-[9px] lg:text-[10px]">
               Specialized Divisions
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-lora font-bold text-vibrant-charcoal mb-6 leading-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-lora font-bold text-vibrant-charcoal mb-2 lg:mb-4 leading-tight">
             Centers of Excellence
           </h2>
-          <p className="text-slate-600 text-lg font-lato max-w-2xl leading-relaxed">
+          <p className="text-slate-600 text-sm lg:text-base font-lato max-w-2xl leading-relaxed">
             Independent research wings focused on shaping policy through
             <span className="text-ppf-orange font-semibold"> data-driven analysis</span> and strategic foresight.
           </p>
         </div>
 
         {/* Two-Part Card Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4 flex-grow min-h-0 lg:overflow-y-auto pb-4">
           {centers.map((center, i) => (
             <Link
               key={i}
@@ -92,7 +92,7 @@ export default function Centers({ sectionWidth }) {
                 className="group flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 border border-slate-100 cursor-pointer border-t-4 border-t-ppf-purple"
               >
                 {/* TOP PART: IMAGE */}
-                <div className="relative h-44 overflow-hidden flex-shrink-0 bg-slate-50">
+                <div className="relative h-28 lg:h-32 xl:h-36 overflow-hidden flex-shrink-0 bg-slate-50">
                   {/* Main Front Image */}
                   <img
                     src={center.img}
@@ -124,20 +124,20 @@ export default function Centers({ sectionWidth }) {
                 </div>
 
                 {/* BOTTOM PART: CONTENT */}
-                <div className="p-6 flex flex-col flex-grow bg-white">
-                  <p className="text-ppf-purple font-lato font-bold text-[9px] uppercase tracking-[0.2em] mb-2 opacity-70">
+                <div className="p-4 lg:p-5 flex flex-col flex-grow bg-white min-h-0">
+                  <p className="text-ppf-purple font-lato font-bold text-[8px] lg:text-[9px] uppercase tracking-[0.2em] mb-1 lg:mb-2 opacity-70 shrink-0">
                     {center.abbr}
                   </p>
-                  <h3 className="text-slate-800 text-lg font-lora font-bold leading-snug mb-4 group-hover:text-ppf-purple transition-colors flex-grow">
+                  <h3 className="text-slate-800 text-sm lg:text-base font-lora font-bold leading-snug mb-2 lg:mb-3 group-hover:text-ppf-purple transition-colors flex-grow">
                     {center.name}
                   </h3>
 
-                  <div className="pt-4 border-t border-slate-50 flex items-center justify-between">
-                    <span className="text-[10px] font-lato font-bold text-slate-400 uppercase tracking-widest group-hover:text-ppf-purple transition-colors">
+                  <div className="pt-2 lg:pt-3 border-t border-slate-100 flex items-center justify-between shrink-0">
+                    <span className="text-[9px] lg:text-[10px] font-lato font-bold text-slate-400 uppercase tracking-widest group-hover:text-ppf-purple transition-colors">
                       Explore Research
                     </span>
-                    <div className="w-8 h-8 rounded-full bg-slate-50 group-hover:bg-ppf-purple flex items-center justify-center transition-all duration-300">
-                      <FaArrowRight className="text-slate-800 group-hover:text-white text-[10px] group-hover:translate-x-0.5 transition-all" />
+                    <div className="w-6 h-6 lg:w-8 lg:h-8 rounded-full bg-slate-50 group-hover:bg-ppf-purple flex items-center justify-center transition-all duration-300">
+                      <FaArrowRight className="text-slate-800 group-hover:text-white text-[9px] lg:text-[10px] group-hover:translate-x-0.5 transition-all" />
                     </div>
                   </div>
                 </div>

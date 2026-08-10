@@ -66,18 +66,18 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-[90vh] md:h-screen w-full flex flex-col bg-gradient-to-r from-[#f9ecff] via-white to-white overflow-hidden">
+    <section className="relative min-h-screen lg:h-screen w-full flex flex-col bg-gradient-to-r from-[#f9ecff] via-white to-white overflow-hidden">
 
       {/* --- UPPER HERO CONTENT (SPLIT LAYOUT TO PREVENT OVERLAPPING) --- */}
-      <div className="flex-grow flex flex-col lg:flex-row w-full relative z-10">
+      <div className="flex-grow flex flex-col lg:flex-row w-full relative z-10 min-h-0">
 
         {/* Left Column: Main Content */}
-        <div className="w-full lg:w-[44%] flex flex-col justify-center pl-6 md:pl-10 lg:pl-16 pt-32 lg:pt-32 pb-12">
-          <div className="max-w-xl">
+        <div className="w-full lg:w-[44%] flex flex-col justify-start pl-6 md:pl-10 lg:pl-16 pt-32 pb-8 lg:pb-6 overflow-visible lg:overflow-y-auto no-scrollbar">
+          <div className="max-w-xl my-auto lg:my-0 lg:mt-4">
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-block bg-ppf-orange/10 border border-ppf-orange/50 text-ppf-orange px-3 py-1 lg:px-4 lg:py-1.5 text-[10px] md:text-xs font-bold rounded-full uppercase tracking-wider mb-6"
+              className="inline-block bg-ppf-orange/10 border border-ppf-orange/50 text-ppf-orange px-3 py-1 lg:px-4 lg:py-1.5 text-[9px] md:text-xs font-bold rounded-full uppercase tracking-wider mb-3 lg:mb-5"
             >
               20+ Years of Policy Excellence
             </motion.div>
@@ -85,10 +85,10 @@ export default function HeroSection() {
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="flex items-center gap-3 mb-4"
+              className="flex items-center justify-center md:justify-start gap-2 lg:gap-3 mb-3"
             >
-              <div className="h-[2px] w-8 bg-ppf-purple" />
-              <span className="text-ppf-purple font-helvetica font-bold text-[10px] uppercase tracking-[0.4em]">
+              <div className="h-[2px] w-6 lg:w-8 bg-ppf-purple" />
+              <span className="text-ppf-purple font-helvetica font-bold text-[9px] lg:text-[10px] uppercase tracking-[0.4em]">
                 Think Tank & Research
               </span>
             </motion.div>
@@ -97,7 +97,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center md:text-left text-black text-2xl md:text-5xl font-helvetica font-bold mb-5 leading-tight"
+              className="text-center md:text-left text-black text-[22px] sm:text-3xl md:text-4xl xl:text-5xl font-helvetica font-bold mb-3 lg:mb-4 leading-tight"
             >
               Spreading Awareness<br />
               Building Capacity<br />
@@ -108,7 +108,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-slate-600 font-lato text-base md:text-lg max-w-lg mb-8 leading-relaxed"
+              className="text-center md:text-left text-slate-600 font-lato text-xs sm:text-sm lg:text-base xl:text-lg max-w-lg mb-4 lg:mb-6 leading-relaxed mx-auto md:mx-0"
             >
              Policy Perspectives Foundation (PPF) is an independent public policy think tank that advances <span className="text-ppf-orange font-semibold border-b-2 border-ppf-orange/20">evidence-based research</span>
              , community outreach, capacity building, and policy advocacy to promote inclusive and sustainable development
@@ -118,12 +118,12 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap gap-4"
+              className="flex flex-wrap gap-4 justify-center md:justify-start"
             >
               <Link href="/pages/publications">
-                <button className="group flex items-center gap-3 bg-ppf-teal hover:bg-ppf-teal/90 text-ppf-purple px-8 py-3.5 text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-lg shadow-ppf-purple/20 rounded-full active:scale-95">
+                <button className="group flex items-center gap-2 lg:gap-3 bg-ppf-teal hover:bg-ppf-teal/90 text-ppf-purple px-6 py-2.5 lg:px-8 lg:py-3.5 text-[10px] lg:text-xs font-bold uppercase tracking-widest transition-all duration-300 shadow-lg shadow-ppf-purple/20 rounded-full active:scale-95">
                   View Publications
-                  <FaArrowRight className="text-[10px] group-hover:translate-x-1.5 transition-transform duration-300" />
+                  <FaArrowRight className="text-[9px] lg:text-[10px] group-hover:translate-x-1.5 transition-transform duration-300" />
                 </button>
               </Link>
             </motion.div>
@@ -132,7 +132,7 @@ export default function HeroSection() {
 
         {/* Right Column: Hero Image Slider */}
         <div
-          className="w-full lg:w-[56%] h-[40vh] sm:h-[50vh] lg:h-auto min-h-[350px] lg:min-h-0 relative overflow-hidden group cursor-pointer"
+          className="w-full lg:w-[56%] flex-1 lg:h-auto min-h-[300px] lg:min-h-0 relative overflow-hidden group cursor-pointer"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onClick={(e) => {
@@ -173,7 +173,7 @@ export default function HeroSection() {
 
 
           {/* Capsule Indicator Dots */}
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 bg-black/35 backdrop-blur-md px-4 py-2.5 rounded-full border border-white/10 flex items-center gap-2 shadow-lg">
+          <div className="absolute bottom-3 lg:bottom-6 left-1/2 -translate-x-1/2 z-30 bg-black/35 backdrop-blur-md px-3 py-1.5 lg:px-4 lg:py-2.5 rounded-full border border-white/10 flex items-center gap-1.5 lg:gap-2 shadow-lg">
             {carouselImages.map((_, index) => {
               const isActive = index === currentIndex;
               return (
@@ -209,7 +209,7 @@ export default function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
-        className="relative z-20 w-full bg-white/50 backdrop-blur-xl border-t border-ppf-purple/10 py-6"
+        className="relative z-20 w-full bg-white/50 backdrop-blur-xl border-t border-ppf-purple/10 py-3 lg:py-6"
       >
         <div className="container mx-auto pl-6 md:pl-10 lg:pl-16 pr-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
@@ -250,6 +250,13 @@ export default function HeroSection() {
           100% {
             transform: scale(1.06);
           }
+        }
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
         }
       `}} />
     </section>

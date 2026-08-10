@@ -9,11 +9,11 @@ const SectionHeader = ({ icon: Icon, title, subtitle }) => (
   <div className="mb-12 border-l-4 border-ppf-purple pl-6">
     <div className="flex items-center gap-4 mb-3">
       <Icon className="text-ppf-purple w-8 h-8" />
-      <h2 className="text-3xl md:text-4xl font-black text-slate-800 uppercase tracking-tight">
+      <h2 className="text-2xl md:text-3xl font-black text-slate-800 uppercase tracking-tight">
         {title}
       </h2>
     </div>
-    <p className="text-base md:text-lg text-slate-600 max-w-2xl leading-relaxed font-futura">
+    <p className="text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed font-futura">
       {subtitle}
     </p>
   </div>
@@ -95,7 +95,7 @@ export default function AnnualReportSection({ data = [] }) {
         </div>
 
         {/* --- REPORT GRID --- */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6">
           {filteredData.map((item, i) => (
             <motion.div
               key={item.id || i}
@@ -103,16 +103,16 @@ export default function AnnualReportSection({ data = [] }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
-              className="group flex flex-col sm:flex-row bg-white rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-ppf-purple/10 transition-all duration-500"
+              className="group flex flex-col sm:flex-row bg-white rounded-2xl overflow-hidden border border-slate-100 hover:shadow-2xl hover:shadow-ppf-purple/10 transition-all duration-500"
             >
               {/* Image Container */}
-              <div className="relative w-full sm:w-48 h-56 sm:h-auto flex-shrink-0 bg-slate-50 border-r border-slate-100 flex items-center justify-center p-6">
+              <div className="relative w-full sm:w-36 h-48 sm:h-auto flex-shrink-0 bg-slate-50 border-r border-slate-100 flex items-center justify-center p-4">
                 <Image
                   src={item.img}
                   alt={item.title}
                   fill
-                  sizes="(max-width: 640px) 100vw, 192px"
-                  className="object-contain p-6 transition duration-700 group-hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, 144px"
+                  className="object-contain p-4 transition duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-ppf-purple/5 group-hover:bg-transparent transition-colors" />
                 <div className="absolute top-4 left-4 bg-ppf-orange text-white px-3 py-1 text-[9px] font-black uppercase rounded-full shadow-lg">
@@ -121,17 +121,17 @@ export default function AnnualReportSection({ data = [] }) {
               </div>
 
               {/* Content Area */}
-              <div className="p-8 flex flex-col justify-between flex-1">
+              <div className="p-5 md:p-6 flex flex-col justify-between flex-1">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-800 leading-snug group-hover:text-ppf-purple transition-colors duration-300">
+                  <h3 className="text-lg font-bold text-slate-800 leading-snug group-hover:text-ppf-purple transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-ppf-teal mt-3 font-bold uppercase tracking-widest">
+                  <p className="text-xs text-ppf-teal mt-2 font-bold uppercase tracking-widest">
                     {item.version}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between mt-8 pt-6 border-t border-slate-50">
+                <div className="flex items-center justify-between mt-5 pt-4 border-t border-slate-50">
                   <div className="flex items-center gap-3 text-xs font-bold text-slate-400">
                     <span className="flex items-center gap-1.5">
                       <Calendar size={14} className="text-ppf-purple" /> {item.date}

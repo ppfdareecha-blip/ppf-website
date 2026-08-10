@@ -437,10 +437,10 @@ export default function MediaSection({ sectionWidth }) {
                 whileHover={{ scale: 1.02, x: 5 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleOpenModal()}
-                className="flex items-center gap-3 text-3xl md:text-4xl font-lora font-bold text-slate-800 hover:text-ppf-purple transition-all text-left"
+                className="flex flex-wrap items-center gap-2 sm:gap-3 text-2xl sm:text-3xl md:text-4xl font-lora font-bold text-slate-800 hover:text-ppf-purple transition-all text-left"
               >
-                Explore Our <span className="text-ppf-purple">Media</span>
-                <MdOutlineVideoLibrary className="text-ppf-purple text-2xl md:text-3xl" />
+                <span>Explore Our <span className="text-ppf-purple">Media</span></span>
+                <MdOutlineVideoLibrary className="text-ppf-purple text-2xl md:text-3xl shrink-0" />
               </motion.button>
               
               <p className="mt-4 text-slate-500 font-lato text-sm md:text-base max-w-xl">
@@ -455,7 +455,7 @@ export default function MediaSection({ sectionWidth }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+            className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4"
           >
             {SOCIAL_PLATFORMS.map(({ icon: Icon, label, bg, text, id }) => (
               <motion.button
@@ -463,12 +463,12 @@ export default function MediaSection({ sectionWidth }) {
                 whileHover={{ y: -4, scale: 1.02 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={() => handleOpenModal(id)}
-                className={`flex items-center gap-3 p-4 rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer w-full`}
+                className={`flex items-center justify-start gap-2 sm:gap-3 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-slate-100 bg-white shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer w-full overflow-hidden`}
               >
-                <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center flex-shrink-0`}>
-                  <Icon className={`${text} text-xl`} />
+                <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl ${bg} flex items-center justify-center flex-shrink-0`}>
+                  <Icon className={`${text} text-base sm:text-xl`} />
                 </div>
-                <span className="text-sm font-lato font-bold text-slate-700">{label}</span>
+                <span className="text-xs sm:text-sm font-lato font-bold text-slate-700 truncate leading-tight">{label}</span>
               </motion.button>
             ))}
           </motion.div>

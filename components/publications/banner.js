@@ -33,7 +33,7 @@ export default function ParallaxBanner() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            <h1 className="text-3xl md:text-5xl font-black text-white mb-3 uppercase">
+            <h1 className="text-2xl md:text-4xl font-black text-white mb-3 uppercase">
               Research &
               <span className="text-vibrant-offwhite tracking-wide uppercase">
                 {" "} Publications
@@ -42,7 +42,7 @@ export default function ParallaxBanner() {
 
             {/* Border using brand teal for a sophisticated accent */}
             <div className="border-l-[1.5px] border-ppf-teal/40 pl-5">
-              <p className="text-slate-200/80 text-sm md:text-base max-w-lg leading-relaxed font-light">
+              <p className="text-slate-200/80 text-xs md:text-sm max-w-lg leading-relaxed font-light">
                 Bridging the gap between policy and practice.
               </p>
             </div>

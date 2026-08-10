@@ -8,11 +8,11 @@ const SectionHeader = ({ icon: Icon, title, subtitle }) => (
   // Updated with brand color: ppf-purple
   <div className="mb-10 border-l-4 border-ppf-purple pl-5">
     <div className="flex items-center gap-3 mb-2">
-      <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight uppercase">
+      <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight uppercase">
         {title}
       </h2>
     </div>
-    <p className="text-base text-slate-600 max-w-2xl leading-relaxed">
+    <p className="text-sm md:text-base text-slate-600 max-w-2xl leading-relaxed">
       {subtitle}
     </p>
   </div>
@@ -24,19 +24,19 @@ const ScholarCard = ({ item, index }) => (
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ once: true }}
     transition={{ delay: index * 0.05 }}
-    className="group relative flex flex-col sm:flex-row gap-6 p-6 bg-white border border-slate-200 rounded-xl hover:shadow-xl hover:border-ppf-purple/30 transition-all duration-500 overflow-hidden"
+    className="group relative flex flex-col sm:flex-row gap-4 p-4 md:p-5 bg-white border border-slate-200 rounded-xl hover:shadow-xl hover:border-ppf-purple/30 transition-all duration-500 overflow-hidden"
   >
     {/* Hover Accent Strip using ppf-purple */}
     <div className="absolute left-0 top-0 bottom-0 w-1 bg-ppf-purple transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
 
     {/* Image Container */}
-    <div className="relative w-full sm:w-40 h-40 sm:h-auto shrink-0 overflow-hidden rounded-lg shadow-inner bg-slate-100">
+    <div className="relative w-full sm:w-32 h-32 sm:h-auto shrink-0 overflow-hidden rounded-lg shadow-inner bg-slate-100">
       <Image
         src={item.img}
         alt={item.title}
         fill
-        sizes="(max-width: 640px) 100vw, 160px"
-        className="object-contain p-6 transition duration-700 group-hover:scale-105"
+        sizes="(max-width: 640px) 100vw, 128px"
+        className="object-contain p-4 transition duration-700 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors duration-300" />
 
@@ -49,15 +49,15 @@ const ScholarCard = ({ item, index }) => (
     {/* Content Area */}
     <div className="flex flex-col justify-between flex-1 py-1">
       <div>
-        <h3 className="text-xl font-bold text-slate-800 group-hover:text-ppf-purple leading-snug transition-colors line-clamp-2">
+        <h3 className="text-lg font-bold text-slate-800 group-hover:text-ppf-purple leading-snug transition-colors line-clamp-2">
           {item.title}
         </h3>
-        <p className="mt-3 text-base text-slate-500 leading-relaxed line-clamp-2">
+        <p className="mt-2 text-sm text-slate-500 leading-relaxed line-clamp-2">
           {item.description || "In-depth research and policy analysis addressing contemporary global challenges."}
         </p>
       </div>
 
-      <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">
+      <div className="flex items-center justify-between mt-4 pt-3 border-t border-slate-100">
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2">
             {/* Icon background using ppf-teal for a soft professional touch */}
@@ -95,7 +95,7 @@ export default function ScholarsSection({ data = [] }) {
         subtitle="Access high-impact policy research and strategic insights authored by our leading scholars and domain experts."
       />
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 md:gap-6">
         {data.map((item, i) => (
           <ScholarCard key={i} item={item} index={i} />
         ))}
