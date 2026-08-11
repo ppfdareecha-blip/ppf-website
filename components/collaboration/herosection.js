@@ -30,9 +30,8 @@ export default function HeroSection() {
         </h1>
 
         {/* 3. Subtext with high contrast */}
-        <p className="text-xs md:text-base max-w-xl mx-auto mb-4 leading-relaxed text-slate-100 font-medium">
-          Join the <span className="text-ppf-orange">Policy Perspective Foundation</span> in shaping a more informed and equitable world.
-          From research to grassroots action, your collaboration drives real impact.
+        <p className="text-sm md:text-lg max-w-xl mx-auto mb-4 leading-relaxed text-slate-100 font-medium">
+         &quot; Ideas. Partnerships.<span className="text-ppf-orange"> Lasting Impact </span> &quot;
         </p>
 
         {/* Optional: Subtle accent line */}

@@ -21,7 +21,7 @@ const carouselImages = [
     description: "Analyzing emerging security landscapes and advisory",
   },
   {
-    src: "/hero_imgs/4.JPG",
+    src: "/hero_imgs/4.jpeg",
     title: "Strategic Advisory Roundtable",
     description: "Delivering research-backed socio-economic insights",
   },
@@ -89,7 +89,7 @@ export default function HeroSection() {
             >
               <div className="h-[2px] w-6 lg:w-8 bg-ppf-purple" />
               <span className="text-ppf-purple font-helvetica font-bold text-[9px] lg:text-[10px] uppercase tracking-[0.4em]">
-                Think Tank & Research
+                Think tank, Research and community outreach
               </span>
             </motion.div>
 

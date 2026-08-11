@@ -92,6 +92,34 @@ export default function Navbar() {
     }
   };
 
+  const handleLinkClick = (e, href) => {
+    if (!href) return;
+    if (href.includes('#')) {
+      const [path, hash] = href.split('#');
+      
+      let currentPath = window.location.pathname;
+      let targetPath = path;
+      
+      // Normalize trailing slashes for accurate comparison
+      if (currentPath.endsWith('/') && currentPath.length > 1) currentPath = currentPath.slice(0, -1);
+      if (targetPath.endsWith('/') && targetPath.length > 1) targetPath = targetPath.slice(0, -1);
+      
+      const isSamePage = targetPath === currentPath || targetPath === "";
+      
+      if (isSamePage && hash) {
+        e.preventDefault();
+        const element = document.getElementById(hash);
+        if (element) {
+          const y = element.getBoundingClientRect().top + window.scrollY - 80; // offset for sticky header
+          window.scrollTo({ top: y, behavior: 'smooth' });
+          window.history.pushState(null, '', href);
+        } else {
+          window.location.href = href;
+        }
+      }
+    }
+  };
+
   const navLinks = [
     {
       name: "Home", href: "/",
@@ -128,6 +156,7 @@ export default function Navbar() {
         { name: "Career", href: "/pages/collaboration/#internships" },
         // { name: "Courses", href: "/pages/collaboration/#courses" },
         { name: "Donate", href: "/pages/collaboration/#donate" },
+        { name: "Partner with us", href: "/pages/collaboration/#partner" },
       ]
     },
     { name: "Media", href: "/#media", isMediaTrigger: true },
@@ -156,6 +185,7 @@ export default function Navbar() {
 
           <Link
             href="/pages/collaboration/#donate"
+            onClick={(e) => handleLinkClick(e, "/pages/collaboration/#donate")}
             className="bg-white text-ppf-purple hover:bg-purple-100 px-4 md:px-6 py-1 rounded-full font-extrabold text-[10px] md:text-[13px] transition-all uppercase tracking-widest shadow-sm whitespace-nowrap"
           >
             Donate
@@ -207,6 +237,7 @@ export default function Navbar() {
                   ) : (
                     <Link
                       href={link.href}
+                      onClick={(e) => handleLinkClick(e, link.href)}
                       className={`relative z-10 px-3 py-1.5 text-sm font-extrabold transition-colors flex items-center gap-2 ${hoveredIndex === index ? 'text-ppf-purple' : 'text-gray-700'}`}
                     >
                       <span className="relative flex items-center gap-2">
@@ -234,7 +265,7 @@ export default function Navbar() {
                         className="absolute top-full left-0 w-56 bg-white shadow-2xl border-t-4 border-ppf-purple py-3 mt-1 z-[110] rounded-b-md"
                       >
                         {link.dropdown.map((sub) => (
-                          <Link key={sub.name} href={sub.href} className="block px-5 py-3 text-[13px] text-gray-700 hover:bg-purple-50 hover:text-ppf-purple font-bold transition-colors">{sub.name}</Link>
+                          <Link key={sub.name} href={sub.href} onClick={(e) => handleLinkClick(e, sub.href)} className="block px-5 py-3 text-[13px] text-gray-700 hover:bg-purple-50 hover:text-ppf-purple font-bold transition-colors">{sub.name}</Link>
                         ))}
                       </motion.div>
                     )}
@@ -435,7 +466,10 @@ export default function Navbar() {
                       <Link
                         href={link.href}
                         className="text-gray-800 text-sm font-lora py-4 uppercase tracking-wide"
-                        onClick={() => !link.dropdown && setIsMobileMenuOpen(false)}
+                        onClick={(e) => {
+                          if (!link.dropdown) setIsMobileMenuOpen(false);
+                          handleLinkClick(e, link.href);
+                        }}
                       >
                         {link.name}
                       </Link>
@@ -460,7 +494,10 @@ export default function Navbar() {
                               key={sub.name}
                               href={sub.href}
                               className="px-6 py-3 text-xs text-gray-700 font-bold active:text-ppf-purple"
-                              onClick={() => setIsMobileMenuOpen(false)}
+                              onClick={(e) => {
+                                setIsMobileMenuOpen(false);
+                                handleLinkClick(e, sub.href);
+                              }}
                             >
                               {sub.name}
                             </Link>

@@ -36,7 +36,7 @@ export default function HomePage() {
         transition={{ duration: 0.35, ease: "easeInOut" }}
         className="fixed top-0 left-0 right-0 z-[100]"
       >
-        <Navbar />
+        <Navbar/>
       </motion.div>
 
       <main className=" bg-[#F8FAFC]">

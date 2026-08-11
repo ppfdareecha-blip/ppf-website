@@ -28,7 +28,7 @@ export default function WorkWithUsSection() {
     },
     {
       title: "Community Outreach & Capacity Building",
-      desc: "Awareness programmes, field interventions, training, and citizen engagement initiatives.",
+      desc: "Awareness programmes, field interventions, training and CSR oriented community engagement Initiatives.",
       icon: Award
     },
     {
@@ -135,7 +135,7 @@ export default function WorkWithUsSection() {
           </div>
 
           {/* Closing Section */}
-          <div className="max-w-4xl mx-auto text-center space-y-8 bg-gradient-to-br from-ppf-purple/5 to-ppf-teal/5 rounded-3xl p-8 md:p-12 border border-ppf-purple/10">
+          <div id="partner" className="max-w-4xl mx-auto text-center space-y-8 bg-gradient-to-br from-ppf-purple/5 to-ppf-teal/5 rounded-3xl p-8 md:p-12 border border-ppf-purple/10">
             <p className="text-slate-700 text-lg md:text-xl font-medium leading-relaxed">
               Whether you are an organisation seeking a knowledge partner, a researcher exploring collaborative opportunities, or an institution looking to create evidence-based impact, PPF offers a credible platform backed by multidisciplinary expertise, institutional experience, and a strong commitment to public policy and social development.
             </p>
@@ -146,7 +146,7 @@ export default function WorkWithUsSection() {
 
             <div className="pt-2">
               <a 
-                href="https://mail.google.com/mail/?view=cm&fs=1&to=ppf.dareecha@gmail.com&su=Partnership%20Inquiry%20-%20Policy%20Perspectives%20Foundation"
+                href="mailto:admin@ppf.org.in?subject=Partnership%20Inquiry%20-%20Policy%20Perspectives%20Foundation"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-xl text-sm font-black uppercase tracking-widest transition-all hover:bg-ppf-purple hover:shadow-lg hover:shadow-ppf-purple/20 active:scale-95"
