@@ -74,9 +74,9 @@ export default function PublicationsPage() {
               data={data.annualReports || []}
             />
 
-            {/* <ProjectReport
+            <ProjectReport
               projectData={data.projectReports || []}
-            /> */}
+            />
           </>
               )}
          </main>

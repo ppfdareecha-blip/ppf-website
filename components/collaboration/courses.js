@@ -1,10 +1,16 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { BookOpen, Award, Users, ArrowUpRight, PlayCircle } from "lucide-react";
 
 export default function CoursesSection({ courses = [] }) {
+  const [expandedCourseId, setExpandedCourseId] = useState(null);
+
+  const toggleExpand = (id) => {
+    setExpandedCourseId(prev => prev === id ? null : id);
+  };
+
   // Use DB courses if available, otherwise fall back to static default courses
   const displayCourses = courses.length > 0 ? courses : [
     {
@@ -55,11 +61,6 @@ export default function CoursesSection({ courses = [] }) {
               <span className="text-ppf-purple">PPF</span> Courses
             </h2>
           </div>
-
-          <button className="flex items-center gap-1.5 text-xs font-black uppercase tracking-widest text-ppf-purple hover:text-ppf-purple/80 transition-all">
-            View All
-            <ArrowUpRight className="w-3.5 h-3.5" />
-          </button>
         </div>
 
         {/* Horizontal Cards */}
@@ -110,9 +111,17 @@ export default function CoursesSection({ courses = [] }) {
                   </div>
                 </div>
 
-                <p className="text-sm text-slate-600 mt-2 line-clamp-2 font-medium">
-                  {course.description || "Analytical tools to evaluate complex legislative frameworks and lead with data-driven insights."}
-                </p>
+                <div className="mt-2">
+                  <p className={`text-sm text-slate-600 font-medium ${expandedCourseId === (course._id || course.id) ? "" : "line-clamp-2"}`}>
+                    {course.description || "Analytical tools to evaluate complex legislative frameworks and lead with data-driven insights."}
+                  </p>
+                  <button 
+                    onClick={() => toggleExpand(course._id || course.id)}
+                    className="text-[10px] font-black text-ppf-purple uppercase tracking-widest mt-1 hover:text-ppf-teal transition-colors"
+                  >
+                    {expandedCourseId === (course._id || course.id) ? "Read Less" : "Read More"}
+                  </button>
+                </div>
 
                 <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-50">
                   <span className="flex items-center gap-1.5 text-[11px] font-black uppercase tracking-wider text-slate-400">

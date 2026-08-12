@@ -26,7 +26,7 @@ const Footer = ({ sectionWidth }) => {
           </div>
           <div className="flex items-center gap-2.5">
             <FaEnvelope className="text-vibrant-teal flex-shrink-0" />
-            <p className="hover:text-vibrant-teal transition-colors cursor-pointer"><a href="mailto:policyperspective@gmail.com">policyperspective@gmail.com</a></p>
+            <p className="hover:text-vibrant-teal transition-colors cursor-pointer"><a href="https://mail.google.com/mail/?view=cm&to=policyperspective@gmail.com" target="_blank" rel="noopener noreferrer">policyperspective@gmail.com</a></p>
           </div>
         </div>
       ),

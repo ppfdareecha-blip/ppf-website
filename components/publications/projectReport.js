@@ -113,12 +113,7 @@ export default function ProjectReport({ projectData = [] }) {
                   </p>
                 )}
 
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-slate-100">
-                  <span className="text-xs font-semibold text-slate-400">
-                    Reference: {item._id?.slice(-6) || "PROJECT"}
-                  </span>
-
-                  {(item.file || item.link) && (
+                <div className="flex flex-wrap items-center justify-end gap-4 pt-5 border-t border-slate-100">                  {(item.file || item.link) && (
                     <a
                       href={item.file || item.link}
                       target="_blank"
@@ -212,12 +207,7 @@ export default function ProjectReport({ projectData = [] }) {
                   </p>
                 )}
 
-                <div className="flex justify-between items-center mt-5 pt-4 border-t border-slate-100">
-                  <span className="text-xs text-slate-400">
-                    {item._id?.slice(-6) || `PRJ-${i + 1}`}
-                  </span>
-
-                  {(item.file || item.link) && (
+                <div className="flex justify-end items-center mt-5 pt-4 border-t border-slate-100">                  {(item.file || item.link) && (
                     <a
                       href={item.file || item.link}
                       target="_blank"

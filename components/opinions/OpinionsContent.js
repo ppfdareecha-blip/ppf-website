@@ -94,7 +94,7 @@ function OpinionsContent() {
   // Filtering states
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedCenter, setSelectedCenter] = useState("All");
-  
+
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -137,7 +137,7 @@ function OpinionsContent() {
         setIsLoading(false);
       }
     };
-    
+
     fetchOpinions();
   }, []);
 
@@ -272,7 +272,7 @@ function OpinionsContent() {
                 <h1 className="text-3xl md:text-5xl font-lora font-black text-mono-deep uppercase tracking-tighter shrink-0">
                   Opinions
                 </h1>
-                
+
                 {/* Dynamic Selection Dropdown Controls */}
                 <div className="flex flex-wrap items-center gap-3 w-full">
                   <div className="flex flex-col">
@@ -326,7 +326,7 @@ function OpinionsContent() {
             <div className="max-w-md mx-auto bg-slate-50 rounded-3xl p-8 border border-slate-100">
               <h3 className="text-xl font-lora font-black text-slate-800 mb-2">No Matching Insights</h3>
               <p className="text-sm font-lato text-slate-500 mb-6"> We couldn&apos;t find any opinions matching your exact filter selection settings.</p>
-              <button 
+              <button
                 onClick={() => { setSelectedCategory("All"); setSelectedCenter("All"); }}
                 className="bg-ppf-purple text-white font-lato font-black text-[10px] tracking-widest uppercase px-6 py-3 rounded-xl hover:bg-ppf-purple/90 transition-colors"
               >
@@ -342,42 +342,55 @@ function OpinionsContent() {
                 {recentOpinion && (
                   <div className={featuredOpinions.length > 0 ? "lg:col-span-8" : "lg:col-span-12"}>
                     <Link href={`/pages/opinions/${recentOpinion.id}`} className="group block h-full">
-                      <div className="relative h-[400px] rounded-[2rem] overflow-hidden shadow-2xl border border-slate-100 bg-slate-50">
-                        <Image
-                          src={recentOpinion.image}
-                          alt={recentOpinion.title}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 66vw"
-                          className="object-contain transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                        <div className="absolute bottom-0 left-0 p-6 md:p-8 w-full">
-                          <div className="flex items-center gap-4 text-[9px] font-lato font-black text-white/70 uppercase tracking-widest mb-3">
-                            <span className="flex items-center gap-2 font-bold"><FaRegCalendarAlt /> {recentOpinion.date}</span>
-                            <span className="w-1 h-1 rounded-full bg-white/30" />
-                            <span className="text-ppf-purple font-bold">{recentOpinion.category}</span>
+                      <div className="h-[400px] rounded-[2rem] overflow-hidden shadow-2xl border border-slate-100 flex flex-col relative">
+                        {/* Blurred bg image */}
+                        <div className="absolute inset-0 z-0">
+                          <Image src={recentOpinion.image} alt="" fill sizes="66vw" className="object-cover scale-125" />
+                          <div className="absolute inset-0 backdrop-blur-3xl bg-white/10" />
+                          {/* Bottom gradient for depth */}
+                          <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+                        </div>
+                        {/* Image — fully visible, no overlay */}
+                        <div className="relative z-10 w-full h-[230px] flex-shrink-0 overflow-hidden">
+                          <Image
+                            src={recentOpinion.image}
+                            alt={recentOpinion.title}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 66vw"
+                            className="object-contain transition-transform duration-700 group-hover:scale-105"
+                          />
+                          {/* Latest badge — top left corner on image */}
+                          <div className="absolute top-5 left-5">
+                            <span className="bg-ppf-purple text-white text-[10px] font-lora font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl">
+                              LATEST INSIGHT
+                            </span>
                           </div>
-                          <h2 className="text-2xl md:text-4xl font-lora font-black text-white leading-[1.1] mb-4 group-hover:text-ppf-lilac transition-colors duration-300">
+                        </div>
+
+                        {/* Info strip — premium glassmorphism */}
+                        <div className="relative z-10 bg-white/20 backdrop-blur-xl px-6 md:px-8 py-5 flex flex-col gap-2 flex-1 justify-between border-t border-white/20">
+                          {/* Date & category meta */}
+                          <div className="flex items-center gap-4 text-[9px] font-lato font-black text-white/70 uppercase tracking-widest">
+                            <span className="flex items-center gap-2"><FaRegCalendarAlt /> {recentOpinion.date}</span>
+                            <span className="w-1 h-1 rounded-full bg-white/40" />
+                            <span className="text-ppf-purple bg-white/80 px-2 py-0.5 rounded-full font-bold">{recentOpinion.category}</span>
+                          </div>
+
+                          {/* Title */}
+                          <h2 className="text-base md:text-lg font-lora font-black text-white leading-[1.3] transition-colors duration-300 line-clamp-2 drop-shadow-md">
                             {recentOpinion.title}
                           </h2>
-                          <p 
-                            className="text-white/80 font-lato text-sm leading-relaxed line-clamp-2 max-w-2xl mb-6"
-                            dangerouslySetInnerHTML={{ __html: recentOpinion.excerpt }}
-                          />
-                          <div className="flex items-center justify-between pt-4 border-t border-white/10">
+
+                          {/* Author + Read link */}
+                          <div className="flex items-center justify-between pt-2 border-t border-white/20">
                             <div className="flex flex-col">
                               <span className="text-[8px] text-white/50 font-lato font-bold uppercase tracking-[0.2em] mb-0.5">Author</span>
-                              <span className="text-sm font-lato font-black text-white">{recentOpinion.author}</span>
+                              <span className="text-sm font-lato font-black text-white drop-shadow-sm">{recentOpinion.author}</span>
                             </div>
-                            <div className="flex items-center gap-2 text-white font-lora font-black text-xs">
+                            <div className="flex items-center gap-2 bg-white/15 hover:bg-white/25 border border-white/30 text-white font-lora font-black text-xs px-3 py-1.5 rounded-full backdrop-blur-sm transition-all">
                               READ ARTICLE <FaChevronRight className="text-ppf-teal" />
                             </div>
                           </div>
-                        </div>
-                        <div className="absolute top-8 left-8">
-                          <span className="bg-ppf-purple text-white text-[10px] font-lora font-black px-4 py-2 rounded-full uppercase tracking-widest shadow-xl">
-                            LATEST INSIGHT
-                          </span>
                         </div>
                       </div>
                     </Link>
@@ -445,14 +458,11 @@ function OpinionsContent() {
             <p className="text-white/80 font-lato text-lg font-medium max-w-2xl mb-8">
               Our publications aim to foster evidence-based discussions and provide strategic clarity for decision-makers.
             </p>
-            <div className="grid sm:grid-cols-2 gap-6 w-full max-w-xl">
-              <button className="bg-white text-ppf-purple font-lato font-black py-4 rounded-2xl uppercase tracking-widest text-xs hover:bg-slate-100 transition-colors shadow-2xl">
-                Browse Archives
-              </button>
-              <button className="bg-transparent border border-white/20 text-white font-lato font-black py-4 rounded-2xl uppercase tracking-widest text-xs hover:bg-white/10 transition-colors">
+            <a href="/Submission_guide.pdf" target="_blank" rel="noopener noreferrer">
+              <button className="bg-transparent border border-white/20 text-white font-lato font-black py-4 px-8 rounded-2xl uppercase tracking-widest text-xs hover:bg-white/10 transition-colors">
                 Submission Guidelines
               </button>
-            </div>
+            </a>
           </div>
         </section>
       </main>
@@ -499,17 +509,17 @@ function OpinionsContent() {
                   <div className="grid md:grid-cols-2 gap-5">
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-lato font-black text-slate-400 uppercase tracking-widest ml-1">Full Name</label>
-                      <input required type="text" value={formData.fullName} onChange={(e) => setFormData({...formData, fullName: e.target.value})} className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-ppf-purple/30 transition-colors font-lato" placeholder="John Doe" />
+                      <input required type="text" value={formData.fullName} onChange={(e) => setFormData({ ...formData, fullName: e.target.value })} className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-ppf-purple/30 transition-colors font-lato" placeholder="John Doe" />
                     </div>
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-lato font-black text-slate-400 uppercase tracking-widest ml-1">Email Address</label>
-                      <input required type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-ppf-purple/30 transition-colors font-lato" placeholder="john@example.com" />
+                      <input required type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-ppf-purple/30 transition-colors font-lato" placeholder="john@example.com" />
                     </div>
                   </div>
 
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-lato font-black text-slate-400 uppercase tracking-widest ml-1">Opinion Title</label>
-                    <input required type="text" value={formData.title} onChange={(e) => setFormData({...formData, title: e.target.value})} className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-ppf-purple/30 transition-colors font-lato" placeholder="The future of digital infrastructure..." />
+                    <input required type="text" value={formData.title} onChange={(e) => setFormData({ ...formData, title: e.target.value })} className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-ppf-purple/30 transition-colors font-lato" placeholder="The future of digital infrastructure..." />
                   </div>
 
                   {/* Image Attachment Section */}
@@ -538,7 +548,7 @@ function OpinionsContent() {
 
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-lato font-black text-slate-400 uppercase tracking-widest ml-1">Your Analysis</label>
-                    <textarea required rows={4} value={formData.analysis} onChange={(e) => setFormData({...formData, analysis: e.target.value})} className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-ppf-purple/30 transition-colors font-lato resize-none" placeholder="Write your thoughts here..."></textarea>
+                    <textarea required rows={4} value={formData.analysis} onChange={(e) => setFormData({ ...formData, analysis: e.target.value })} className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-ppf-purple/30 transition-colors font-lato resize-none" placeholder="Write your thoughts here..."></textarea>
                   </div>
 
                   <button disabled={isSubmitting} type="submit" className="w-full bg-ppf-purple text-white font-lato font-black py-4 rounded-2xl uppercase tracking-widest text-xs hover:bg-ppf-purple/90 transition-all shadow-xl mt-4 disabled:opacity-50">
