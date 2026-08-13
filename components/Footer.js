@@ -6,6 +6,8 @@ import {
   FaMapMarkerAlt, FaPhoneAlt, FaEnvelope, FaPaperPlane, FaArrowRight
 } from 'react-icons/fa';
 
+//simple
+
 const Footer = ({ sectionWidth }) => {
   const footerSections = [
     {
