@@ -278,12 +278,12 @@ export default function OpinionDetail() {
 
           {/* Core Structured Article Canvas */}
           <article className="w-full">
-            {opinion.excerpt && (
+            {/* {opinion.excerpt && (
               <p 
                 className="text-lg sm:text-xl md:text-2xl text-slate-600 font-medium leading-relaxed italic mb-12 border-l-4 border-ppf-purple pl-5 sm:pl-6 break-normal bg-purple-50/30 py-3 pr-4 rounded-r-2xl"
                 dangerouslySetInnerHTML={{ __html: opinion.excerpt }}
               />
-            )}
+            )} */}
 
             {opinion.content && (
               <>
