@@ -199,7 +199,7 @@ export default function Navbar() {
 
           {/* BRANDING */}
           <Link href="/" className="flex items-center gap-2 sm:gap-4 group shrink">
-            <div className="relative h-8 w-8 sm:h-14 sm:w-14 shrink-0">
+            <div className="relative h-12 w-12 sm:h-16 sm:w-16 shrink-0">
               <Image
                 src="/image.png"
                 alt="PPF Logo"

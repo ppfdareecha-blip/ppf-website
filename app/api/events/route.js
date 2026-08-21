@@ -44,6 +44,7 @@ export async function GET() {
         speaker: primarySpeaker,
         speakers: ev.speakers || [],
         pdfLink: ev.pdfLink || "",
+        reportPdf: ev.reportPdf || "",
         centerTag: ev.centers || ev.center || "",
         centers: ev.centers || ev.center || "",
         mode: ev.mode || "In-Person",

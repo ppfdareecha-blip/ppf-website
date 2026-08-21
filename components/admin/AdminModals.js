@@ -69,6 +69,14 @@ export function EventModal({ event, onClose }) {
             <p className="text-xs font-black uppercase tracking-[0.2em] text-vibrant-charcoal/50 mb-3">About the Event</p>
             <div className="bg-white p-8 rounded-[2rem] border-2 border-vibrant-gray whitespace-pre-wrap text-vibrant-charcoal/80 leading-relaxed">{event.about}</div>
           </div>
+          {(event.reportPdf || event.pdfLink) && (
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.2em] text-vibrant-charcoal/50 mb-3">Event Report</p>
+              <a href={event.reportPdf || event.pdfLink} target="_blank" rel="noopener noreferrer" className="inline-block bg-vibrant-violet/10 text-vibrant-violet px-5 py-3 rounded-2xl text-sm font-black uppercase tracking-widest hover:bg-vibrant-violet hover:text-white transition-all">
+                View Report PDF
+              </a>
+            </div>
+          )}
         </div>
       </div>
     </div>

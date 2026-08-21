@@ -39,6 +39,8 @@ export async function PUT(req, { params }) {
       mode: modeInput,
       speakers: speakersInput,
       pdfLink,
+      reportPdfBase64,
+      clearReportPdf,
     } = await req.json();
 
     const existingEvent = await Event.findById(id);
@@ -54,6 +56,46 @@ export async function PUT(req, { params }) {
       imageUrl = uploadResponse.secure_url;
     }
 
+    let reportPdfUrl = existingEvent.reportPdf;
+    if (clearReportPdf) {
+      reportPdfUrl = "";
+      if (existingEvent.reportPdf) {
+        try {
+          const urlParts = existingEvent.reportPdf.split('/');
+          const versionIndex = urlParts.findIndex(p => p.startsWith('v') && !isNaN(p.substring(1)));
+          if (versionIndex !== -1) {
+            const publicIdWithExt = urlParts.slice(versionIndex + 1).join('/');
+            const publicId = publicIdWithExt.substring(0, publicIdWithExt.lastIndexOf('.'));
+            await cloudinary.uploader.destroy(publicId);
+          }
+        } catch (err) {
+          console.error("Failed to delete old PDF:", err);
+        }
+      }
+    } else if (reportPdfBase64) {
+      const uploadResponse = await cloudinary.uploader.upload(reportPdfBase64, {
+        folder: "ppf-event-reports",
+        resource_type: "auto",
+      });
+      console.log("Cloudinary Upload Response:", uploadResponse);
+      reportPdfUrl = uploadResponse.secure_url;
+
+      // Delete old PDF from cloudinary
+      if (existingEvent.reportPdf) {
+        try {
+          const urlParts = existingEvent.reportPdf.split('/');
+          const versionIndex = urlParts.findIndex(p => p.startsWith('v') && !isNaN(p.substring(1)));
+          if (versionIndex !== -1) {
+            const publicIdWithExt = urlParts.slice(versionIndex + 1).join('/');
+            const publicId = publicIdWithExt.substring(0, publicIdWithExt.lastIndexOf('.'));
+            await cloudinary.uploader.destroy(publicId);
+          }
+        } catch (err) {
+          console.error("Failed to delete old PDF:", err);
+        }
+      }
+    }
+
     let speakersArray = existingEvent.speakers || [];
     if (speakersInput && Array.isArray(speakersInput)) {
       speakersArray = speakersInput;
@@ -61,27 +103,29 @@ export async function PUT(req, { params }) {
       speakersArray = speaker.split(",").map((s) => s.trim()).filter(Boolean);
     }
 
-    const updatedEvent = await Event.findByIdAndUpdate(
-      id,
-      {
-        mode: modeInput || existingEvent.mode || "In-Person",
-        title: title !== undefined ? title : existingEvent.title,
-        venue: venue !== undefined ? venue : existingEvent.venue,
-        date: date !== undefined ? date : existingEvent.date,
-        fromTime: fromTime !== undefined ? fromTime : existingEvent.fromTime,
-        endTime: toTime !== undefined ? toTime : existingEvent.endTime,
-        speakers: speakersArray,
-        about: about !== undefined ? about : existingEvent.about,
-        center: centerTag !== undefined ? centerTag : existingEvent.center,
-        // centers field removed – using single 'center'
-        tag: centerTag !== undefined ? centerTag : existingEvent.tag,
-        eventPoster: imageUrl,
-        pdfLink: pdfLink !== undefined ? pdfLink : existingEvent.pdfLink,
-      },
+    const updateData = {
+      mode: modeInput || existingEvent.mode || "In-Person",
+      title: title !== undefined ? title : existingEvent.title,
+      venue: venue !== undefined ? venue : existingEvent.venue,
+      date: date !== undefined ? date : existingEvent.date,
+      fromTime: fromTime !== undefined ? fromTime : existingEvent.fromTime,
+      endTime: toTime !== undefined ? toTime : existingEvent.endTime,
+      speakers: speakersArray,
+      about: about !== undefined ? about : existingEvent.about,
+      center: centerTag !== undefined ? centerTag : existingEvent.center,
+      tag: centerTag !== undefined ? centerTag : existingEvent.tag,
+      eventPoster: imageUrl,
+      pdfLink: pdfLink !== undefined ? pdfLink : existingEvent.pdfLink,
+      reportPdf: reportPdfUrl,
+    };
+
+    const updatedEvent = await Event.collection.findOneAndUpdate(
+      { _id: existingEvent._id },
+      { $set: updateData },
       { returnDocument: "after" }
     );
 
-    return NextResponse.json({ success: true, data: updatedEvent });
+    return NextResponse.json({ success: true, data: updatedEvent.value || updatedEvent });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }

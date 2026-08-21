@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Plus, X, Send, Image as ImageIcon, Eye, Trash2, Pencil, Search } from "lucide-react";
+import { Plus, X, Send, Image as ImageIcon, Eye, Trash2, Pencil, Search, FileText } from "lucide-react";
 import TimeSelector from "./TimeSelector";
 import { PREDEFINED_CENTERS } from "./constants";
 
@@ -8,6 +8,10 @@ export default function EventsTab({ events, onDelete, onView, onRefetch }) {
   const [form, setForm] = useState({ title: "", venue: "", date: "", fromTime: "10:00 AM", toTime: "11:00 AM", about: "", speaker: "", mode: "", centerTag: "", pdfLink: "" });
   const [imagePreview, setImagePreview] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
+  const [reportPdfBase64, setReportPdfBase64] = useState("");
+  const [reportPdfFileName, setReportPdfFileName] = useState("");
+  const [existingReportPdfUrl, setExistingReportPdfUrl] = useState("");
+  const [clearReportPdf, setClearReportPdf] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [editingEventId, setEditingEventId] = useState(null);
   const [eventToDelete, setEventToDelete] = useState(null);
@@ -28,6 +32,16 @@ export default function EventsTab({ events, onDelete, onView, onRefetch }) {
     reader.readAsDataURL(file);
   };
 
+  const handlePdfUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setReportPdfFileName(file.name);
+    setClearReportPdf(false);
+    const reader = new FileReader();
+    reader.onloadend = () => setReportPdfBase64(reader.result);
+    reader.readAsDataURL(file);
+  };
+
   const handleSave = async () => {
     setIsSubmitting(true);
     try {
@@ -37,16 +51,26 @@ export default function EventsTab({ events, onDelete, onView, onRefetch }) {
       const res = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, modeInput: form.mode, imageBase64 }),
+        body: JSON.stringify({ ...form, modeInput: form.mode, imageBase64, reportPdfBase64, clearReportPdf }),
       });
       if (res.ok) {
         setForm({ title: "", venue: "", date: "", fromTime: "10:00 AM", toTime: "11:00 AM", about: "", speaker: "", mode: "", centerTag: "", pdfLink: "" });
         setImagePreview(null);
         setImageBase64("");
+        setReportPdfBase64("");
+        setReportPdfFileName("");
+        setExistingReportPdfUrl("");
+        setClearReportPdf(false);
         setEditingEventId(null);
         if (onRefetch) onRefetch(); // triggers parent refetch
+      } else {
+        const errorData = await res.json();
+        alert(`Failed to save event: ${errorData.error || res.statusText}`);
       }
-    } catch (e) { console.error(e); }
+    } catch (e) { 
+      console.error(e); 
+      alert(`Error saving event: ${e.message}`);
+    }
     setIsSubmitting(false);
   };
 
@@ -65,6 +89,10 @@ export default function EventsTab({ events, onDelete, onView, onRefetch }) {
     });
     setImagePreview(event.eventPoster || event.imageUrl || null);
     setImageBase64("");
+    setReportPdfBase64("");
+    setReportPdfFileName(event.reportPdf ? "Existing Report PDF" : "");
+    setExistingReportPdfUrl(event.reportPdf || "");
+    setClearReportPdf(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -73,6 +101,10 @@ export default function EventsTab({ events, onDelete, onView, onRefetch }) {
     setForm({ title: "", venue: "", date: "", fromTime: "10:00 AM", toTime: "11:00 AM", about: "", speaker: "", mode: "", centerTag: "", pdfLink: "" });
     setImagePreview(null);
     setImageBase64("");
+    setReportPdfBase64("");
+    setReportPdfFileName("");
+    setExistingReportPdfUrl("");
+    setClearReportPdf(false);
   };
 
   const latestEvent = events.length > 0 ? events.reduce((a, b) => new Date(a.date) > new Date(b.date) ? a : b) : null;
@@ -140,10 +172,39 @@ export default function EventsTab({ events, onDelete, onView, onRefetch }) {
         )}
 
         <div className="flex flex-col gap-3 sm:gap-6 mt-5 sm:mt-10">
-          <label className="w-full flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-vibrant-offwhite text-mono-plum rounded-xl sm:rounded-2xl cursor-pointer hover:bg-vibrant-gray transition-all font-black text-xs sm:text-sm uppercase tracking-widest border-2 border-vibrant-gray">
-            <ImageIcon className="w-4 sm:w-5 h-4 sm:h-5" /> Attach Event Poster
-            <input type="file" className="hidden" onChange={handleImageUpload} />
-          </label>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
+            <label className="flex-1 flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-vibrant-offwhite text-mono-plum rounded-xl sm:rounded-2xl cursor-pointer hover:bg-vibrant-gray transition-all font-black text-xs sm:text-sm uppercase tracking-widest border-2 border-vibrant-gray">
+              <ImageIcon className="w-4 sm:w-5 h-4 sm:h-5" /> Attach Event Poster
+              <input type="file" className="hidden" onChange={handleImageUpload} />
+            </label>
+            <div className="flex-1 flex flex-col gap-2 relative">
+              <label className="w-full flex items-center justify-center gap-2 sm:gap-3 px-5 sm:px-8 py-3 sm:py-4 bg-vibrant-offwhite text-mono-plum rounded-xl sm:rounded-2xl cursor-pointer hover:bg-vibrant-gray transition-all font-black text-xs sm:text-sm uppercase tracking-widest border-2 border-vibrant-gray relative">
+                <FileText className="w-4 sm:w-5 h-4 sm:h-5" />
+                <span className="truncate max-w-[200px]">{reportPdfFileName ? reportPdfFileName : "Upload PDF Report"}</span>
+                <input type="file" accept="application/pdf" className="hidden" onChange={handlePdfUpload} />
+              </label>
+              {(existingReportPdfUrl || reportPdfBase64) && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setReportPdfBase64("");
+                    setReportPdfFileName("");
+                    setExistingReportPdfUrl("");
+                    setClearReportPdf(true);
+                  }}
+                  className="absolute -top-2 -right-2 p-1.5 bg-red-500 text-white rounded-full hover:bg-red-600 shadow-md border-2 border-white z-10"
+                  title="Clear PDF"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              )}
+              {existingReportPdfUrl && !reportPdfBase64 && (
+                <a href={existingReportPdfUrl} target="_blank" rel="noopener noreferrer" className="text-center text-xs font-black uppercase text-vibrant-teal hover:underline flex items-center justify-center gap-1 mt-1">
+                  <Eye className="w-3 h-3" /> View Current PDF
+                </a>
+              )}
+            </div>
+          </div>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             {editingEventId && (
               <button onClick={handleCancelEdit} className="flex items-center justify-center px-5 sm:px-8 py-3 sm:py-5 bg-white border-2 border-mono-plum text-mono-plum rounded-xl sm:rounded-2xl font-black uppercase tracking-widest text-xs sm:text-base hover:bg-vibrant-gray transition-all shadow-md">

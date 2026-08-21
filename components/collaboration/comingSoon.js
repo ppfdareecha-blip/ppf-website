@@ -125,16 +125,14 @@ function ApplyModal({ jobs = [], internships = [], onClose }) {
                   </div>
                   
                   <div className="mt-10 pt-6 border-t border-slate-100">
-                    {selectedItem.applyLink && (
                       <a
-                        href={selectedItem.applyLink}
+                        href={selectedItem.applyLink || `https://mail.google.com/mail/?view=cm&to=admin@ppf.org.in&su=Application%20for%20${encodeURIComponent(selectedItem.title)}&body=Dear%20PPF%20Team%2C%0A%0AI%20am%20writing%20to%20express%20my%20interest%20in%20the%20${encodeURIComponent(selectedItem.title)}%20role.%0A%0AName%3A%0AQualification%3A%0AArea%20of%20Interest%3A%0A%0ARegards%2C`}
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-2 bg-ppf-purple text-white px-8 py-3 rounded-xl text-sm font-black uppercase tracking-wider hover:bg-ppf-purple/90 transition-all active:scale-95 shadow-lg shadow-ppf-purple/25"
                       >
                         Apply Now <Send className="w-4 h-4" />
                       </a>
-                    )}
                   </div>
                 </motion.div>
               ) : (
@@ -210,7 +208,7 @@ function ApplyModal({ jobs = [], internships = [], onClose }) {
                             We regularly open internship cohorts. Check back soon or follow our channels for updates.
                           </p>
                           <a
-                            href="https://mail.google.com/mail/?view=cm&to=ppfdareecha@gmail.com&su=Internship%20Application%20%E2%80%93%20PPF&body=Dear%20PPF%20Team%2C%0A%0AI%20am%20writing%20to%20express%20my%20interest%20in%20interning%20with%20Policy%20Perspectives%20Foundation.%0A%0AName%3A%0AQualification%3A%0AArea%20of%20Interest%3A%0A%0ARegards%2C"
+                            href="https://mail.google.com/mail/?view=cm&to=admin@ppf.org.in&su=Internship%20Application%20%E2%80%93%20PPF&body=Dear%20PPF%20Team%2C%0A%0AI%20am%20writing%20to%20express%20my%20interest%20in%20interning%20with%20Policy%20Perspectives%20Foundation.%0A%0AName%3A%0AQualification%3A%0AArea%20of%20Interest%3A%0A%0ARegards%2C"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 mt-3 bg-ppf-purple text-white px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-wider hover:bg-ppf-purple/80 transition-colors active:scale-95"

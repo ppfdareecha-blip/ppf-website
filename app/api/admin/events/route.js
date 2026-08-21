@@ -40,6 +40,7 @@ export async function POST(req) {
       mode: modeInput,
       speakers: speakersInput,
       pdfLink,
+      reportPdfBase64,
     } = await req.json();
 
     let imageUrl = "";
@@ -48,6 +49,15 @@ export async function POST(req) {
         folder: "ppf-events",
       });
       imageUrl = uploadResponse.secure_url;
+    }
+
+    let reportPdfUrl = "";
+    if (reportPdfBase64) {
+      const uploadResponse = await cloudinary.uploader.upload(reportPdfBase64, {
+        folder: "ppf-event-reports",
+        resource_type: "auto",
+      });
+      reportPdfUrl = uploadResponse.secure_url;
     }
 
     // Generate unique eventId
@@ -61,7 +71,7 @@ export async function POST(req) {
       speakersArray = speaker.split(",").map((s) => s.trim()).filter(Boolean);
     }
 
-    const newEvent = await Event.create({
+    const newEventData = {
       eventId,
       mode: modeInput || "In-Person",
       title: title || "PPF Discussion",
@@ -71,13 +81,18 @@ export async function POST(req) {
       endTime: toTime || "12:00 PM",
       speakers: speakersArray,
       center: centerTag || "",
-      // centers field removed – using single 'center'
       about: about || "",
       tag: centerTag || "Engagement",
       eventPoster: imageUrl || "",
       pdfLink: pdfLink || "",
+      reportPdf: reportPdfUrl || "",
       subEvents: [],
-    });
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+
+    const newEventResult = await Event.collection.insertOne(newEventData);
+    const newEvent = { ...newEventData, _id: newEventResult.insertedId };
 
     return NextResponse.json({ success: true, data: newEvent }, { status: 201 });
   } catch (error) {

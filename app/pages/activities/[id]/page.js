@@ -110,15 +110,15 @@ export default function EventDetail() {
                   <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
                   <span className="flex items-center gap-2"><FaMapMarkerAlt className="text-ppf-teal" size={16} /> {event.location}</span>
                 </div>
-                {event.pdfLink && (
+                {(event.reportPdf || event.pdfLink) && (
                   <div className="mt-8">
                     <a
-                      href={event.pdfLink}
+                      href={event.reportPdf || event.pdfLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-3 bg-ppf-purple hover:bg-ppf-purple/90 text-white font-lato font-black text-sm tracking-widest uppercase py-4 px-8 rounded-2xl transition-all shadow-xl shadow-ppf-purple/20 group"
                     >
-                      Download PDF
+                      View PDF Report
                       <svg className="w-4 h-4 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                     </a>
                   </div>

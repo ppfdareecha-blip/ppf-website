@@ -146,7 +146,7 @@ export default function WorkWithUsSection() {
 
             <div className="pt-2">
               <a 
-                href="https://mail.google.com/mail/?view=cm&to=ppf.dareecha@gmail.com.in&su=Partnership%20Inquiry%20-%20Policy%20Perspectives%20Foundation"
+                href="https://mail.google.com/mail/?view=cm&to=admin@ppf.org.in&su=Partnership%20Inquiry%20-%20Policy%20Perspectives%20Foundation"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-3 bg-slate-900 text-white px-8 py-4 rounded-xl text-sm font-black uppercase tracking-widest transition-all hover:bg-ppf-purple hover:shadow-lg hover:shadow-ppf-purple/20 active:scale-95"

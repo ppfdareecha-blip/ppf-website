@@ -74,16 +74,14 @@ export default function CareerSection({ jobs = [], internships = [] }) {
                             )}
                           </div>
                         </div>
-                        {intern.applyLink && (
                           <a
-                            href={intern.applyLink}
+                            href={intern.applyLink || `https://mail.google.com/mail/?view=cm&to=admin@ppf.org.in&su=Application%20for%20${encodeURIComponent(intern.title)}&body=Dear%20PPF%20Team%2C%0A%0AI%20am%20writing%20to%20express%20my%20interest%20in%20the%20${encodeURIComponent(intern.title)}%20role.%0A%0AName%3A%0AQualification%3A%0AArea%20of%20Interest%3A%0A%0ARegards%2C`}
                             target="_blank"
                             rel="noreferrer"
                             className="flex items-center gap-1 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider hover:bg-ppf-purple transition-colors shrink-0 active:scale-95"
                           >
                             Apply <Send className="w-2.5 h-2.5" />
                           </a>
-                        )}
                       </div>
                     </div>
                   ))}
@@ -157,16 +155,14 @@ export default function CareerSection({ jobs = [], internships = [] }) {
                             )}
                           </div>
                         </div>
-                        {job.applyLink && (
                           <a
-                            href={job.applyLink}
+                            href={job.applyLink || `https://mail.google.com/mail/?view=cm&to=admin@ppf.org.in&su=Application%20for%20${encodeURIComponent(job.title)}&body=Dear%20PPF%20Team%2C%0A%0AI%20am%20writing%20to%20express%20my%20interest%20in%20the%20${encodeURIComponent(job.title)}%20role.%0A%0AName%3A%0AQualification%3A%0AArea%20of%20Interest%3A%0A%0ARegards%2C`}
                             target="_blank"
                             rel="noreferrer"
                             className="flex items-center gap-1 bg-slate-900 text-white px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider hover:bg-ppf-teal transition-colors shrink-0 active:scale-95"
                           >
                             Apply <Send className="w-2.5 h-2.5" />
                           </a>
-                        )}
                       </div>
                     </div>
                   ))}

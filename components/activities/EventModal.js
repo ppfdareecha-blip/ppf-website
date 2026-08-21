@@ -65,14 +65,14 @@ export default function EventModal({ isOpen, onClose, event }) {
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4">
-                  {event.pdfLink && (
+                  {(event.reportPdf || event.pdfLink) && (
                     <a
-                      href={event.pdfLink}
+                      href={event.reportPdf || event.pdfLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full flex-1 flex items-center justify-center gap-3 bg-white text-ppf-purple border-2 border-ppf-purple hover:bg-ppf-purple/5 font-lato font-black text-sm tracking-widest uppercase py-4 px-8 rounded-2xl transition-all shadow-md group"
                     >
-                      Download PDF
+                      View Report
                     </a>
                   )}
                   <Link
