@@ -26,9 +26,12 @@ const Footer = ({ sectionWidth }) => {
             <FaPhoneAlt className="text-vibrant-teal flex-shrink-0" />
             <p className="font-bold font-helvetica">011-42638454</p>
           </div>
-          <div className="flex items-center gap-2.5">
-            <FaEnvelope className="text-vibrant-teal flex-shrink-0" />
-            <p className="hover:text-vibrant-teal transition-colors cursor-pointer"><a href="https://mail.google.com/mail/?view=cm&to=policyperspective@gmail.com" target="_blank" rel="noopener noreferrer">policyperspective@gmail.com</a></p>
+          <div className="flex items-start gap-2.5">
+            <FaEnvelope className="text-vibrant-teal mt-1 flex-shrink-0" />
+            <div className="flex flex-col gap-1">
+              <p className="hover:text-vibrant-teal transition-colors cursor-pointer"><a href="https://mail.google.com/mail/?view=cm&to=policyperspective@gmail.com" target="_blank" rel="noopener noreferrer">policyperspective@gmail.com</a></p>
+              <p className="hover:text-vibrant-teal transition-colors cursor-pointer"><a href="https://mail.google.com/mail/?view=cm&to=admin@ppf.org.in" target="_blank" rel="noopener noreferrer">admin@ppf.org.in</a></p>
+            </div>
           </div>
         </div>
       ),

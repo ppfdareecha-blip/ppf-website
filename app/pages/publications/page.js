@@ -56,6 +56,27 @@ export default function PublicationsPage() {
 
         <main className="flex-grow">
         <ParallaxBanner />
+        
+        {/* Dialogues Banner */}
+        <div className="bg-gradient-to-r from-ppf-purple to-ppf-teal text-white py-12 px-6 sm:px-12 relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/10 mix-blend-multiply pointer-events-none" />
+          <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="max-w-2xl text-center md:text-left">
+              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-3 text-white">
+                Dialogues
+              </h2>
+              <p className="text-sm md:text-base text-white/90 leading-relaxed font-lato">
+                Explore our series of expert dialogues and critical conversations addressing key national and regional policy frameworks.
+              </p>
+            </div>
+            <a 
+              href="/pages/publications/dialogues"
+              className="shrink-0 bg-white text-ppf-purple px-8 py-3.5 rounded-full font-black uppercase tracking-widest text-sm hover:bg-slate-100 hover:scale-105 transition-all shadow-xl"
+            >
+              Explore Dialogues
+            </a>
+          </div>
+        </div>
 
         {loading ? (
           <div className="py-32 flex flex-col items-center justify-center">

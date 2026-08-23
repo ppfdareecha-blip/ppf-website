@@ -228,6 +228,7 @@ export default function AdminLayout({ children }) {
             <Link href="/jkl/events" className={TAB_LINK("/jkl/events")}>Manage Events</Link>
             <Link href="/jkl/careers" className={TAB_LINK("/jkl/careers")}>Manage Careers</Link>
             <Link href="/jkl/publications" className={TAB_LINK("/jkl/publications")}>Manage Publications</Link>
+            <Link href="/jkl/dialogues" className={TAB_LINK("/jkl/dialogues")}>Manage Dialogues</Link>
             <Link href="/jkl/media" className={TAB_LINK("/jkl/media")}>Manage Media</Link>
             <Link href="/jkl/newsletters" className={TAB_LINK("/jkl/newsletters")}>Newsletters</Link>
             <Link href="/jkl/settings" className={TAB_LINK("/jkl/settings")}>Settings</Link>

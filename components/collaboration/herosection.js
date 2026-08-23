@@ -31,7 +31,7 @@ export default function HeroSection() {
 
         {/* 3. Subtext with high contrast */}
         <p className="text-sm md:text-lg max-w-xl mx-auto mb-4 leading-relaxed text-slate-100 font-medium">
-         &quot; Ideas. Partnerships.<span className="text-ppf-orange"> Lasting Impact </span> &quot;
+         &quot; Ideas. <span className="text-ppf-orange"> Partnerships. </span> Lasting Impact &quot;
         </p>
 
         {/* Optional: Subtle accent line */}

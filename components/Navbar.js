@@ -153,10 +153,10 @@ export default function Navbar() {
       name: "Collaboration",
       href: "/pages/collaboration",
       dropdown: [
+        { name: "Partner with us", href: "/pages/collaboration/#partner" },
         { name: "Career", href: "/pages/collaboration/#internships" },
         // { name: "Courses", href: "/pages/collaboration/#courses" },
         { name: "Donate", href: "/pages/collaboration/#donate" },
-        { name: "Partner with us", href: "/pages/collaboration/#partner" },
       ]
     },
     { name: "Media", href: "/#media", isMediaTrigger: true },
