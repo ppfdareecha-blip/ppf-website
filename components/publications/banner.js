@@ -41,10 +41,38 @@ export default function ParallaxBanner() {
             </h1>
 
             {/* Border using brand teal for a sophisticated accent */}
-            <div className="border-l-[1.5px] border-ppf-teal/40 pl-5">
+            <div className="border-l-[1.5px] border-ppf-teal/40 pl-5 mb-6">
               <p className="text-slate-200/80 text-xs md:text-sm max-w-lg leading-relaxed font-light">
                 Bridging the gap between policy and practice.
               </p>
+            </div>
+
+            {/* Quick Link Buttons */}
+            <div className="flex flex-wrap gap-3 mt-4">
+              <a 
+                href="#scholars"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
+              >
+                Research Reports
+              </a>
+              <a 
+                href="#annualReport"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
+              >
+                Annual Review
+              </a>
+              <a 
+                href="#projects"
+                className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all"
+              >
+                Project Reports
+              </a>
+              <a 
+                href="/pages/publications/dialogues"
+                className="bg-ppf-purple hover:bg-ppf-purple/80 text-white border border-ppf-purple px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-lg"
+              >
+                Dialogues
+              </a>
             </div>
           </motion.div>
         </div>
