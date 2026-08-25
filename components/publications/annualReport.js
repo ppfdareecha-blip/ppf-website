@@ -34,8 +34,8 @@ export default function AnnualReportSection({ data = [] }) {
   });
 
   return (
-    <section id="annualReport" className="w-full px-6 py-20 bg-slate-50">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="annualReport" className="w-full px-8 md:px-16 lg:px-24 xl:px-32 py-20 bg-slate-50">
+      <div className="max-w-7xl mx-auto">
         <SectionHeader
           icon={FileText}
           title="Annual Review"

@@ -6,12 +6,14 @@ import ParallaxBanner from "@/components/publications/banner";
 import ScholarsSection from "@/components/publications/researchReports";
 import AnnualReportSection from "@/components/publications/annualReport";
 import ProjectReport from "@/components/publications/projectReport";
+import DialoguesSection from "@/components/publications/dialoguesSection";
 
 export default function PublicationsPage() {
   const [data, setData] = useState({
     researchReports: [],
     annualReports: [],
     projectReports: [],
+    dialogues: [],
   });
 
   const [loading, setLoading] = useState(true);
@@ -19,15 +21,22 @@ export default function PublicationsPage() {
   useEffect(() => {
     const loadPublications = async () => {
       try {
-        const res = await fetch("/api/publications", {
-          cache: "no-store",
+        const [pubsRes, dialoguesRes] = await Promise.all([
+          fetch("/api/publications", { cache: "no-store" }),
+          fetch("/api/dialogues", { cache: "no-store" })
+        ]);
+
+        const pubsJson = await pubsRes.json();
+        const dialoguesJson = await dialoguesRes.json();
+
+        setData({
+          ...(pubsJson.success ? pubsJson.data : {
+            researchReports: [],
+            annualReports: [],
+            projectReports: [],
+          }),
+          dialogues: dialoguesJson.success ? dialoguesJson.data : [],
         });
-
-        const json = await res.json();
-
-        if (json.success) {
-          setData(json.data);
-        }
       } catch (err) {
         console.error("Failed to load publications:", err);
       } finally {
@@ -67,6 +76,10 @@ export default function PublicationsPage() {
           </div>
          ) : (
           <>
+            <DialoguesSection
+              data={data.dialogues || []}
+            />
+
             <ScholarsSection
               data={data.researchReports || []}
             />

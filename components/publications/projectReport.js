@@ -43,7 +43,7 @@ export default function ProjectReport({ projectData = [] }) {
     return (
       <section
         id="projects"
-        className="w-full py-16 px-6 bg-white border-t border-slate-100"
+        className="w-full py-16 px-8 md:px-16 lg:px-24 xl:px-32 bg-white border-t border-slate-100"
       >
         <div className="max-w-7xl mx-auto">
           <SectionHeader
@@ -137,7 +137,7 @@ export default function ProjectReport({ projectData = [] }) {
   return (
     <section
       id="projects"
-      className="w-full py-12 px-6 bg-white border-t border-slate-100"
+      className="w-full py-12 px-8 md:px-16 lg:px-24 xl:px-32 bg-white border-t border-slate-100"
     >
       <div className="max-w-7xl mx-auto">
         <SectionHeader

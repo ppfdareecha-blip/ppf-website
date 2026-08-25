@@ -88,7 +88,7 @@ const ScholarCard = ({ item, index }) => (
 
 export default function ScholarsSection({ data = [] }) {
   return (
-    <section id="scholars" className="w-full py-16 px-6 bg-white">
+    <section id="scholars" className="w-full py-16 px-8 md:px-16 lg:px-24 xl:px-32 bg-white">
       <SectionHeader
         icon={ScrollText}
         title="Research Reports"
