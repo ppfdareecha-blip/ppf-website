@@ -72,12 +72,13 @@ export default function EditorialProjectLayout({
                     >
                         {subtitle}
                     </motion.p>
-                    {reportLink && (
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.5, duration: 0.6 }}
-                        >
+                    <motion.div
+                        className="flex flex-wrap items-center gap-4 mt-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.5, duration: 0.6 }}
+                    >
+                        {reportLink && (
                             <a
                                 href={reportLink}
                                 target="_blank"
@@ -87,8 +88,15 @@ export default function EditorialProjectLayout({
                                 Access Report
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
                             </a>
-                        </motion.div>
-                    )}
+                        )}
+                        <a
+                            href="/pages/publications#projects"
+                            className="inline-flex items-center gap-2 bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30 text-white px-6 py-3 rounded-full font-medium transition-colors shadow-lg"
+                        >
+                            Project Reports
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </motion.div>
                 </div>
             </div>
 

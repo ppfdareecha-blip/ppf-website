@@ -47,6 +47,19 @@ export default function PublicationsPage() {
     loadPublications();
   }, []);
 
+  // Handle scrolling to hash after data has loaded
+  useEffect(() => {
+    if (!loading && typeof window !== 'undefined' && window.location.hash) {
+      const id = window.location.hash.substring(1);
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, [loading]);
+
 
   return (
     <div className="relative flex flex-col min-h-screen bg-slate-50 text-slate-900 font-lato [&_h1]:font-lora [&_h2]:font-lora [&_h3]:font-lora [&_h4]:font-lora [&_h5]:font-lora [&_h6]:font-lora overflow-x-hidden selection:bg-ppf-teal/30 selection:text-slate-900">

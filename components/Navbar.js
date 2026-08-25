@@ -138,7 +138,7 @@ export default function Navbar() {
         { name: "Research Reports", href: "/pages/publications/#scholars" },
         { name: "Annual Review", href: "/pages/publications/#annualReport" },
         // { name: "Project Reports", href: "/pages/publications/#projects" },
-        { name: "Dialogues", href: "/pages/publications/dialogues" },
+        { name: "Research Journal - Dialogue", href: "/pages/publications/dialogues" },
       ]
     },
     {
