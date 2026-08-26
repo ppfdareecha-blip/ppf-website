@@ -161,7 +161,7 @@ export default function DialoguesTab() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
           <input type="text" placeholder="Dialogue Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base sm:col-span-2" />
-          <input type="date" value={form.date} onChange={e => setForm({ ...form, date: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base" />
+          <input type="text" placeholder="Date (e.g., January - June 2022)" value={form.date} onChange={e => setForm({ ...form, date: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base" />
           <input type="text" placeholder="PDF Link (Optional)" value={form.pdfLink} onChange={e => setForm({ ...form, pdfLink: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base" />
           <textarea placeholder="Brief description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} className="w-full min-h-[100px] sm:min-h-[120px] p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base sm:col-span-2" />
         </div>
