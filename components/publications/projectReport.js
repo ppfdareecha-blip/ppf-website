@@ -107,13 +107,7 @@ export default function ProjectReport({ projectData = [] }) {
                   </p>
                 )}
 
-                {item.description && (
-                  <p className="text-slate-600 leading-relaxed mb-6">
-                    {item.description}
-                  </p>
-                )}
-
-                <div className="flex flex-wrap items-center justify-end gap-4 pt-5 border-t border-slate-100">                  {(item.file || item.link) && (
+                <div className="flex flex-wrap items-center justify-end gap-4 pt-5 border-t border-slate-100 mt-6">                  {(item.file || item.link) && (
                     <a
                       href={item.file || item.link}
                       target="_blank"
@@ -201,13 +195,7 @@ export default function ProjectReport({ projectData = [] }) {
                   </p>
                 )}
 
-                {item.description && (
-                  <p className="text-sm text-slate-600 line-clamp-3 flex-grow">
-                    {item.description}
-                  </p>
-                )}
-
-                <div className="flex justify-end items-center mt-5 pt-4 border-t border-slate-100">                  {(item.file || item.link) && (
+                <div className="flex justify-end items-center mt-auto pt-4 border-t border-slate-100">                  {(item.file || item.link) && (
                     <a
                       href={item.file || item.link}
                       target="_blank"

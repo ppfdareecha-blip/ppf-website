@@ -71,7 +71,7 @@ export default function ParallaxBanner() {
                 href="/pages/publications/dialogues"
                 className="bg-ppf-purple hover:bg-ppf-purple/80 text-white border border-ppf-purple px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all shadow-lg"
               >
-                Dialogues
+                Dialogue
               </a>
             </div>
           </motion.div>

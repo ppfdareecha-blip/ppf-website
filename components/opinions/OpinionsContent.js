@@ -452,12 +452,9 @@ function OpinionsContent() {
         <section className="bg-ppf-purple text-white py-20 overflow-hidden relative">
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
           <div className="max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-            <h2 className="text-4xl md:text-5xl font-lora font-black uppercase mb-6 max-w-4xl">
+            <h2 className="text-3xl md:text-4xl font-lora font-black uppercase mb-6 max-w-4xl">
               Contributing to India&apos;s <span className="text-slate-200 underline decoration-ppf-orange decoration-4 underline-offset-8">Policy Dialogue</span>
             </h2>
-            <p className="text-white/80 font-lato text-lg font-medium max-w-2xl mb-8">
-              Our publications aim to foster evidence-based discussions and provide strategic clarity for decision-makers.
-            </p>
             <a href="/Submission_guide.pdf" target="_blank" rel="noopener noreferrer">
               <button className="bg-transparent border border-white/20 text-white font-lato font-black py-4 px-8 rounded-2xl uppercase tracking-widest text-xs hover:bg-white/10 transition-colors">
                 Submission Guidelines

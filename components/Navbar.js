@@ -135,10 +135,10 @@ export default function Navbar() {
       name: "Publications",
       href: "/pages/publications",
       dropdown: [
+        { name: "Research Journal - Dialogue", href: "/pages/publications/dialogues" },
         { name: "Research Reports", href: "/pages/publications/#scholars" },
         { name: "Annual Review", href: "/pages/publications/#annualReport" },
         // { name: "Project Reports", href: "/pages/publications/#projects" },
-        { name: "Research Journal - Dialogue", href: "/pages/publications/dialogues" },
       ]
     },
     {

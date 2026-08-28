@@ -40,7 +40,7 @@ export default function DialoguesSection({ data = [] }) {
   return (
     <section id="dialogues" className="w-full py-16 px-8 md:px-16 lg:px-24 xl:px-32 bg-slate-50">
       <SectionHeader
-        title="PPF Dialogues"
+        title="Research Journal - Dialogue"
         subtitle="Explore our recent series of expert dialogues and critical conversations addressing key policy frameworks."
         onAction={() => router.push("/pages/publications/dialogues")}
       />
