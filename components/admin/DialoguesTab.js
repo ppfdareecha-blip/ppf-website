@@ -41,6 +41,11 @@ export default function DialoguesTab() {
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    if (file.size > 3 * 1024 * 1024) {
+      alert("Image is too large. Please select an image under 3MB.");
+      e.target.value = "";
+      return;
+    }
     setClearImage(false);
     setImagePreview(URL.createObjectURL(file));
     const reader = new FileReader();
@@ -51,6 +56,11 @@ export default function DialoguesTab() {
   const handlePdfUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    if (file.size > 3 * 1024 * 1024) {
+      alert("PDF is too large. Please select a PDF under 3MB.");
+      e.target.value = "";
+      return;
+    }
     setReportPdfFileName(file.name);
     setClearReportPdf(false);
     const reader = new FileReader();
@@ -81,8 +91,21 @@ export default function DialoguesTab() {
         setEditingDialogueId(null);
         fetchDialogues();
       } else {
-        const errorData = await res.json();
-        alert(`Failed to save dialogue: ${errorData.error || res.statusText}`);
+        if (res.status === 413) {
+          alert("Error: The uploaded file is too large. Please use files under 3MB.");
+        } else {
+          try {
+            const errorData = await res.json();
+            alert(`Failed to save dialogue: ${errorData.error || res.statusText}`);
+          } catch (jsonError) {
+            const errorText = await res.text();
+            if (errorText.includes("Request Entity Too Large")) {
+              alert("Error: The uploaded file is too large. Please use files under 3MB.");
+            } else {
+              alert(`Failed to save dialogue (Status ${res.status}): ${res.statusText}`);
+            }
+          }
+        }
       }
     } catch (e) { 
       console.error(e); 
