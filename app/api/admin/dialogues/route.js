@@ -17,7 +17,7 @@ export async function GET(req) {
   if (authError) return authError;
   try {
     await dbConnect();
-    const dialogues = await Dialogue.find({}).sort({ date: -1, createdAt: -1 });
+    const dialogues = await Dialogue.find({}).sort({ sortDate: -1, createdAt: -1 });
     return NextResponse.json({ success: true, data: dialogues });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
@@ -33,6 +33,7 @@ export async function POST(req) {
       title,
       description,
       date,
+      sortDate,
       imageBase64,
       pdfLink,
       reportPdfBase64,
@@ -59,6 +60,7 @@ export async function POST(req) {
       title: title || "New Dialogue",
       description: description || "",
       date: date || new Date().toISOString().split("T")[0],
+      sortDate: sortDate ? new Date(sortDate) : new Date(),
       image: imageUrl || "",
       pdfLink: pdfLink || "",
       reportPdf: reportPdfUrl || "",

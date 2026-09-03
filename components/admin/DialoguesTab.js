@@ -4,7 +4,7 @@ import { Plus, X, Send, Image as ImageIcon, Eye, Trash2, Pencil, Search, FileTex
 
 export default function DialoguesTab() {
   const [dialogues, setDialogues] = useState([]);
-  const [form, setForm] = useState({ title: "", description: "", date: "", pdfLink: "" });
+  const [form, setForm] = useState({ title: "", description: "", date: "", sortDate: "", pdfLink: "" });
   const [imagePreview, setImagePreview] = useState(null);
   const [imageBase64, setImageBase64] = useState("");
   const [reportPdfBase64, setReportPdfBase64] = useState("");
@@ -80,7 +80,7 @@ export default function DialoguesTab() {
         body: JSON.stringify({ ...form, imageBase64, reportPdfBase64, clearReportPdf, clearImage }),
       });
       if (res.ok) {
-        setForm({ title: "", description: "", date: "", pdfLink: "" });
+        setForm({ title: "", description: "", date: "", sortDate: "", pdfLink: "" });
         setImagePreview(null);
         setImageBase64("");
         setReportPdfBase64("");
@@ -95,15 +95,20 @@ export default function DialoguesTab() {
           alert("Error: The uploaded file is too large. Please use files under 3MB.");
         } else {
           try {
-            const errorData = await res.json();
-            alert(`Failed to save dialogue: ${errorData.error || res.statusText}`);
-          } catch (jsonError) {
-            const errorText = await res.text();
-            if (errorText.includes("Request Entity Too Large")) {
-              alert("Error: The uploaded file is too large. Please use files under 3MB.");
-            } else {
-              alert(`Failed to save dialogue (Status ${res.status}): ${res.statusText}`);
+            const resClone = res.clone();
+            try {
+              const errorData = await res.json();
+              alert(`Failed to save dialogue: ${errorData.error || res.statusText}`);
+            } catch (jsonError) {
+              const errorText = await resClone.text();
+              if (errorText.includes("Request Entity Too Large")) {
+                alert("Error: The uploaded file is too large. Please use files under 3MB.");
+              } else {
+                alert(`Failed to save dialogue (Status ${res.status}): ${res.statusText}. Details: ${errorText.substring(0, 100)}`);
+              }
             }
+          } catch (e) {
+            alert(`Failed to save dialogue (Status ${res.status}): ${res.statusText}`);
           }
         }
       }
@@ -120,6 +125,7 @@ export default function DialoguesTab() {
       title: dialogue.title || "",
       description: dialogue.description || "",
       date: dialogue.date || "",
+      sortDate: dialogue.sortDate ? new Date(dialogue.sortDate).toISOString().slice(0, 7) : "",
       pdfLink: dialogue.pdfLink || ""
     });
     setImagePreview(dialogue.image || null);
@@ -134,7 +140,7 @@ export default function DialoguesTab() {
 
   const handleCancelEdit = () => {
     setEditingDialogueId(null);
-    setForm({ title: "", description: "", date: "", pdfLink: "" });
+    setForm({ title: "", description: "", date: "", sortDate: "", pdfLink: "" });
     setImagePreview(null);
     setImageBase64("");
     setReportPdfBase64("");
@@ -185,7 +191,8 @@ export default function DialoguesTab() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
           <input type="text" placeholder="Dialogue Title" value={form.title} onChange={e => setForm({ ...form, title: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base sm:col-span-2" />
           <input type="text" placeholder="Date (e.g., January - June 2022)" value={form.date} onChange={e => setForm({ ...form, date: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base" />
-          <input type="text" placeholder="PDF Link (Optional)" value={form.pdfLink} onChange={e => setForm({ ...form, pdfLink: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base" />
+          <input type="month" title="Sort Date (Month & Year)" value={form.sortDate} onChange={e => setForm({ ...form, sortDate: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base text-vibrant-charcoal" />
+          <input type="text" placeholder="PDF Link (Optional)" value={form.pdfLink} onChange={e => setForm({ ...form, pdfLink: e.target.value })} className="w-full p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base sm:col-span-2" />
           <textarea placeholder="Brief description" value={form.description} onChange={e => setForm({ ...form, description: e.target.value })} className="w-full min-h-[100px] sm:min-h-[120px] p-3 sm:p-4 bg-vibrant-offwhite rounded-xl sm:rounded-2xl border-2 border-transparent focus:border-vibrant-violet outline-none text-sm sm:text-base sm:col-span-2" />
         </div>
 
